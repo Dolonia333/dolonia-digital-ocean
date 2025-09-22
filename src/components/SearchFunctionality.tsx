@@ -156,11 +156,11 @@ const SearchFunctionality: React.FC = () => {
   return (
     <>
       {/* Search Trigger */}
-      <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40">
+      <div className="sticky top-6 left-1/2 transform -translate-x-1/2 z-40 flex justify-center">
         <Button
           onClick={() => setIsOpen(true)}
           variant="outline"
-          className="bg-ocean-surface/80 backdrop-blur-sm border-ocean-surface text-cyan-soft hover:text-cyan-bright hover:border-cyan-bright/30 transition-all duration-300 shadow-lg"
+          className="bg-ocean-surface/90 backdrop-blur-sm border-ocean-surface text-cyan-soft hover:text-cyan-bright hover:border-cyan-bright/30 transition-all duration-300 shadow-lg"
         >
           <Search className="w-4 h-4 mr-2" />
           Search
