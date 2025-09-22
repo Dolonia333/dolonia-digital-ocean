@@ -156,7 +156,7 @@ const SearchFunctionality: React.FC = () => {
   return (
     <>
       {/* Search Trigger */}
-      <div className="sticky top-6 left-1/2 transform -translate-x-1/2 z-40 flex justify-center">
+      <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-40">
         <Button
           onClick={() => setIsOpen(true)}
           variant="outline"

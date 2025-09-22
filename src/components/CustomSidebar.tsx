@@ -35,11 +35,34 @@ export function CustomSidebar({ isCollapsed, onToggle }: CustomSidebarProps) {
       {/* Logo Section */}
       <div className="p-6 border-b border-ocean-surface">
         <div className="flex items-center justify-center">
-          <img 
-            src={doloniaLogo} 
-            alt="Dolonia Logo" 
-            className={`${isCollapsed ? 'h-8 w-auto max-w-8' : 'h-16 w-auto max-w-16'} transition-all duration-300 object-contain`}
-          />
+          <div className="relative group">
+            <img 
+              src={doloniaLogo} 
+              alt="Dolonia Logo" 
+              className={`${isCollapsed ? 'h-8 w-auto max-w-8' : 'h-16 w-auto max-w-16'} transition-all duration-300 object-contain hover:animate-pulse`}
+            />
+            {/* Glitch effect overlay */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <img 
+                src={doloniaLogo} 
+                alt="" 
+                className={`${isCollapsed ? 'h-8 w-auto max-w-8' : 'h-16 w-auto max-w-16'} object-contain absolute inset-0 text-red-500 mix-blend-multiply animate-pulse`}
+                style={{ 
+                  filter: 'hue-rotate(180deg) contrast(200%)',
+                  transform: 'translate(-2px, 0px) scale(1.02)'
+                }}
+              />
+              <img 
+                src={doloniaLogo} 
+                alt="" 
+                className={`${isCollapsed ? 'h-8 w-auto max-w-8' : 'h-16 w-auto max-w-16'} object-contain absolute inset-0 text-cyan-500 mix-blend-multiply animate-pulse delay-75`}
+                style={{ 
+                  filter: 'hue-rotate(90deg) contrast(200%)',
+                  transform: 'translate(2px, 0px) scale(0.98)'
+                }}
+              />
+            </div>
+          </div>
           {!isCollapsed && (
             <div className="ml-3">
               <h2 className="text-cyan-bright font-bold text-lg">Dolonia</h2>
