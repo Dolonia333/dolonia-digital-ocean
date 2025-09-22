@@ -304,4 +304,35 @@ All colors MUST be HSL.
   .hover-scale:hover {
     transform: scale(1.05);
   }
+
+  /* Glitch effect animations */
+  @keyframes glitch-red {
+    0%, 90% { opacity: 0; }
+    91%, 94% { opacity: 0.8; }
+    95%, 100% { opacity: 0; }
+  }
+
+  @keyframes glitch-cyan {
+    0%, 85% { opacity: 0; }
+    86%, 89% { opacity: 0.7; }
+    90%, 100% { opacity: 0; }
+  }
+
+  @keyframes glitch-purple {
+    0%, 80% { opacity: 0; }
+    81%, 84% { opacity: 0.6; }
+    85%, 100% { opacity: 0; }
+  }
+
+  .glitch-red {
+    animation: glitch-red 4s infinite;
+  }
+
+  .glitch-cyan {
+    animation: glitch-cyan 4s infinite 1s;
+  }
+
+  .glitch-purple {
+    animation: glitch-purple 4s infinite 2s;
+  }
 }
