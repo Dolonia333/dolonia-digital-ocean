@@ -14,11 +14,8 @@ const Footer: React.FC = () => {
               <img 
                 src="/src/assets/dolonia-logo.png" 
                 alt="Dolonia Logo" 
-                className="w-10 h-10 cyber-glow"
+                className="w-10 h-10"
               />
-              <span className="text-2xl font-bold bg-gradient-cyber bg-clip-text text-transparent">
-                Dolonia.cloud
-              </span>
             </div>
             <p className="text-cyan-soft leading-relaxed mb-6 max-w-md">
               Empowering the next generation of digital transformation through 
