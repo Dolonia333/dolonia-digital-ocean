@@ -54,25 +54,25 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "hello@dolonia.cloud",
+      content: "zion@royalsocietymanagement.com",
       description: "Send us an email anytime"
     },
     {
       icon: Phone,
       title: "Call Us",
-      content: "+1 (555) 123-4567",
-      description: "Mon-Fri from 8am to 6pm EST"
+      content: "(405) 967-0503",
+      description: "Mon-Fri from 8am to 6pm CST"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      content: "123 Cloud Street, Tech City, TC 12345",
+      content: "600 N. Robinson Ave, 6th Floor, Office #680, Oklahoma City, OK 73102",
       description: "Our headquarters"
     },
     {
       icon: Clock,
       title: "Business Hours",
-      content: "Monday - Friday: 8am - 6pm EST",
+      content: "Monday - Friday: 8am - 6pm CST",
       description: "Weekend support available"
     }
   ];
