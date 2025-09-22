@@ -38,7 +38,7 @@ export function CustomSidebar({ isCollapsed, onToggle }: CustomSidebarProps) {
           <img 
             src={doloniaLogo} 
             alt="Dolonia Logo" 
-            className={`${isCollapsed ? 'w-8 h-8' : 'w-16 h-16'} transition-all duration-300`}
+            className={`${isCollapsed ? 'h-8 w-auto max-w-8' : 'h-16 w-auto max-w-16'} transition-all duration-300 object-contain`}
           />
           {!isCollapsed && (
             <div className="ml-3">
