@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ArrowRight, Cloud, Shield, Zap, X } from 'lucide-react';
+import doloniaLogo from '@/assets/dolonia-logo.png';
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -83,41 +84,41 @@ const HeroSection: React.FC = () => {
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <img 
-                src="/src/assets/dolonia-logo.png" 
-                alt="Dolonia Logo" 
-                className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 transition-all duration-100"
-              />
-              {/* Dramatic glitch effect overlay - timer based */}
-              <div className="absolute inset-0">
-                <img 
-                  src="/src/assets/dolonia-logo.png" 
-                  alt="" 
-                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply glitch-red"
-                  style={{ 
-                    filter: 'hue-rotate(180deg) contrast(300%) saturate(200%)',
-                    transform: 'translate(-8px, -2px) scale(1.05)'
-                  }}
-                />
-                <img 
-                  src="/src/assets/dolonia-logo.png" 
-                  alt="" 
-                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply glitch-cyan"
-                  style={{ 
-                    filter: 'hue-rotate(90deg) contrast(300%) saturate(200%)',
-                    transform: 'translate(8px, 2px) scale(0.95)'
-                  }}
-                />
-                <img 
-                  src="/src/assets/dolonia-logo.png" 
-                  alt="" 
-                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply glitch-purple"
-                  style={{ 
-                    filter: 'hue-rotate(270deg) contrast(300%) saturate(200%)',
-                    transform: 'translate(-4px, 6px) scale(1.02)'
-                  }}
-                />
-              </div>
+               <img 
+                 src={doloniaLogo} 
+                 alt="Dolonia Logo" 
+                 className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 transition-all duration-100"
+               />
+               {/* Dramatic glitch effect overlay - timer based */}
+               <div className="absolute inset-0">
+                 <img 
+                   src={doloniaLogo} 
+                   alt="" 
+                   className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply glitch-red"
+                   style={{ 
+                     filter: 'hue-rotate(180deg) contrast(300%) saturate(200%)',
+                     transform: 'translate(-8px, -2px) scale(1.05)'
+                   }}
+                 />
+                 <img 
+                   src={doloniaLogo} 
+                   alt="" 
+                   className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply glitch-cyan"
+                   style={{ 
+                     filter: 'hue-rotate(90deg) contrast(300%) saturate(200%)',
+                     transform: 'translate(8px, 2px) scale(0.95)'
+                   }}
+                 />
+                 <img 
+                   src={doloniaLogo} 
+                   alt="" 
+                   className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply glitch-purple"
+                   style={{ 
+                     filter: 'hue-rotate(270deg) contrast(300%) saturate(200%)',
+                     transform: 'translate(-4px, 6px) scale(1.02)'
+                   }}
+                 />
+               </div>
             </div>
           </div>
 
