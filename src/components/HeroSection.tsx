@@ -86,26 +86,40 @@ const HeroSection: React.FC = () => {
               <img 
                 src="/src/assets/dolonia-logo.png" 
                 alt="Dolonia Logo" 
-                className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 hover:animate-pulse transition-all duration-300"
+                className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 transition-all duration-100"
               />
-              {/* Glitch effect overlay */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {/* Dramatic glitch effect overlay */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
                 <img 
                   src="/src/assets/dolonia-logo.png" 
                   alt="" 
-                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 text-red-500 mix-blend-multiply animate-pulse"
+                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply animate-ping"
                   style={{ 
-                    filter: 'hue-rotate(180deg) contrast(200%)',
-                    transform: 'translate(-4px, 0px) scale(1.02)'
+                    filter: 'hue-rotate(180deg) contrast(300%) saturate(200%)',
+                    transform: 'translate(-8px, -2px) scale(1.05)',
+                    animationDuration: '0.3s'
                   }}
                 />
                 <img 
                   src="/src/assets/dolonia-logo.png" 
                   alt="" 
-                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 text-cyan-500 mix-blend-multiply animate-pulse delay-75"
+                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply animate-ping"
                   style={{ 
-                    filter: 'hue-rotate(90deg) contrast(200%)',
-                    transform: 'translate(4px, 0px) scale(0.98)'
+                    filter: 'hue-rotate(90deg) contrast(300%) saturate(200%)',
+                    transform: 'translate(8px, 2px) scale(0.95)',
+                    animationDuration: '0.4s',
+                    animationDelay: '0.1s'
+                  }}
+                />
+                <img 
+                  src="/src/assets/dolonia-logo.png" 
+                  alt="" 
+                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 mix-blend-multiply animate-ping"
+                  style={{ 
+                    filter: 'hue-rotate(270deg) contrast(300%) saturate(200%)',
+                    transform: 'translate(-4px, 6px) scale(1.02)',
+                    animationDuration: '0.2s',
+                    animationDelay: '0.2s'
                   }}
                 />
               </div>
