@@ -17,20 +17,14 @@ const HeroSection: React.FC = () => {
             <span className="text-cyan-soft text-sm font-medium">Next-Generation Cloud Infrastructure</span>
           </div>
 
-          {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-foreground">The Future of</span>
-            <br />
-            <span className="bg-gradient-cyber bg-clip-text text-transparent glow-pulse">
-              Cloud Computing
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-cyan-soft mb-8 leading-relaxed max-w-3xl mx-auto">
-            Enterprise-grade cloud solutions with unmatched security, 
-            lightning-fast performance, and intelligent automation that scales with your ambitions.
-          </p>
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/src/assets/dolonia-logo.png" 
+              alt="Dolonia Logo" 
+              className="w-32 h-32 md:w-48 md:h-48"
+            />
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
