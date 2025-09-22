@@ -45,7 +45,7 @@ const InteractiveDemo: React.FC = () => {
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     
-    if (isRunning && currentStep < steps.length) {
+    if (isRunning && currentStep < demoSteps.length) {
       setSteps(prev => prev.map((step, index) => 
         index === currentStep 
           ? { ...step, status: "running" }
@@ -61,13 +61,13 @@ const InteractiveDemo: React.FC = () => {
         
         setCompletedSteps(prev => [...prev, currentStep]);
         setCurrentStep(prev => prev + 1);
-      }, steps[currentStep].duration);
-    } else if (currentStep >= steps.length && isRunning) {
+      }, demoSteps[currentStep].duration);
+    } else if (currentStep >= demoSteps.length && isRunning) {
       setIsRunning(false);
     }
 
     return () => clearTimeout(timeout);
-  }, [isRunning, currentStep, steps]);
+  }, [isRunning, currentStep]);
 
   const startDemo = () => {
     setIsRunning(true);

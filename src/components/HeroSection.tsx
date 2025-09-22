@@ -37,8 +37,14 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, ben
 
       {/* Expanded Modal */}
       {isExpanded && (
-        <div className="fixed inset-0 z-50 bg-ocean-deep/80 backdrop-blur-sm flex items-center justify-center p-6">
-          <Card className="w-full max-w-md bg-ocean-surface/95 backdrop-blur-md border-ocean-surface shadow-2xl animate-scale-in">
+        <div 
+          className="fixed inset-0 z-[9999] bg-ocean-deep/80 backdrop-blur-sm flex items-center justify-center p-6"
+          onClick={handleClose}
+        >
+          <Card 
+            className="w-full max-w-md bg-ocean-surface/95 backdrop-blur-md border-ocean-surface shadow-2xl animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
@@ -49,7 +55,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, ben
                   variant="ghost"
                   size="sm"
                   onClick={handleClose}
-                  className="text-cyan-soft hover:text-cyan-bright"
+                  className="text-cyan-soft hover:text-cyan-bright hover:bg-cyan-soft/10"
                 >
                   <X className="w-4 h-4" />
                 </Button>
