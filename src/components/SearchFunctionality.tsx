@@ -156,11 +156,11 @@ const SearchFunctionality: React.FC = () => {
   return (
     <>
       {/* Search Trigger */}
-      <div className="fixed top-24 right-6 z-40">
+      <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40">
         <Button
           onClick={() => setIsOpen(true)}
           variant="outline"
-          className="bg-ocean-surface/80 backdrop-blur-sm border-ocean-surface text-cyan-soft hover:text-cyan-bright hover:border-cyan-bright/30 transition-all duration-300"
+          className="bg-ocean-surface/80 backdrop-blur-sm border-ocean-surface text-cyan-soft hover:text-cyan-bright hover:border-cyan-bright/30 transition-all duration-300 shadow-lg"
         >
           <Search className="w-4 h-4 mr-2" />
           Search
@@ -172,7 +172,7 @@ const SearchFunctionality: React.FC = () => {
 
       {/* Search Modal */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-ocean-deep/80 backdrop-blur-sm flex items-start justify-center pt-20">
+        <div className="fixed inset-0 z-50 bg-ocean-deep/80 backdrop-blur-sm flex items-start justify-center pt-16">
           <Card className="w-full max-w-2xl mx-6 bg-ocean-surface/95 backdrop-blur-md border-ocean-surface shadow-2xl animate-scale-in">
             <CardContent className="p-0">
               {/* Search Input */}
