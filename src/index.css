@@ -8,35 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Ocean depths theme */
+    --background: 210 50% 4%;
+    --foreground: 180 100% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 45% 6%;
+    --card-foreground: 180 100% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 45% 6%;
+    --popover-foreground: 180 100% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Cyan glow primary */
+    --primary: 180 100% 50%;
+    --primary-foreground: 210 50% 4%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Deep ocean secondary */
+    --secondary: 210 30% 12%;
+    --secondary-foreground: 180 100% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 25% 15%;
+    --muted-foreground: 180 30% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Bright cyan accent */
+    --accent: 175 100% 60%;
+    --accent-foreground: 210 50% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 30% 18%;
+    --input: 210 30% 12%;
+    --ring: 180 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom ocean theme colors */
+    --ocean-deep: 210 50% 4%;
+    --ocean-mid: 210 45% 8%;
+    --ocean-surface: 210 30% 15%;
+    --cyan-bright: 180 100% 50%;
+    --cyan-glow: 175 100% 60%;
+    --cyan-soft: 180 50% 75%;
+    
+    /* Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(210 50% 4%), hsl(210 45% 8%), hsl(210 30% 12%));
+    --gradient-cyber: linear-gradient(135deg, hsl(180 100% 50%), hsl(175 100% 60%));
+    --gradient-surface: linear-gradient(180deg, hsl(210 30% 15%), hsl(210 45% 8%));
+    
+    /* Shadows and glows */
+    --shadow-cyber: 0 0 30px hsl(180 100% 50% / 0.3);
+    --shadow-glow: 0 0 60px hsl(175 100% 60% / 0.4);
+    --shadow-deep: 0 10px 40px hsl(210 50% 2% / 0.8);
+    
+    /* Animation timing */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,41 +84,9 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Same theme - already dark ocean */
+    --background: 210 50% 4%;
+    --foreground: 180 100% 96%;
   }
 }
 
@@ -100,6 +96,78 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-['Inter',sans-serif] overflow-x-hidden;
+  }
+
+  .cyber-glow {
+    box-shadow: var(--shadow-cyber);
+  }
+
+  .cyber-glow-strong {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floating-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .binary-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .binary-digit {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: hsl(var(--cyan-bright));
+    text-shadow: 0 0 10px hsl(var(--cyan-bright));
+    animation: fall linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow-pulse {
+    from {
+      box-shadow: 0 0 20px hsl(var(--cyan-bright) / 0.5);
+    }
+    to {
+      box-shadow: 0 0 40px hsl(var(--cyan-bright) / 0.8);
+    }
   }
 }

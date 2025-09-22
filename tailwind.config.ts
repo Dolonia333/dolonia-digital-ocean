@@ -47,16 +47,37 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        // Ocean theme colors
+        ocean: {
+          deep: "hsl(var(--ocean-deep))",
+          mid: "hsl(var(--ocean-mid))",
+          surface: "hsl(var(--ocean-surface))",
         },
+        cyan: {
+          bright: "hsl(var(--cyan-bright))",
+          glow: "hsl(var(--cyan-glow))",
+          soft: "hsl(var(--cyan-soft))",
+        },
+      },
+      backgroundImage: {
+        'gradient-ocean': 'var(--gradient-ocean)',
+        'gradient-cyber': 'var(--gradient-cyber)',
+        'gradient-surface': 'var(--gradient-surface)',
+      },
+      boxShadow: {
+        'cyber': 'var(--shadow-cyber)',
+        'glow': 'var(--shadow-glow)',
+        'deep': 'var(--shadow-deep)',
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'float-slow': 'float 8s ease-in-out infinite',
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
+        'fall': 'fall linear infinite',
+      },
+      transitionTimingFunction: {
+        'smooth': 'var(--transition-smooth)',
+        'bounce': 'var(--transition-bounce)',
       },
       borderRadius: {
         lg: "var(--radius)",

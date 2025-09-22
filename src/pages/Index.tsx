@@ -1,12 +1,29 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import BinaryRain from '@/components/BinaryRain';
+import Navigation from '@/components/Navigation';
+import HeroSection from '@/components/HeroSection';
+import ServicesSection from '@/components/ServicesSection';
+import SecuritySection from '@/components/SecuritySection';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-ocean text-foreground">
+      {/* Binary rain background effect */}
+      <BinaryRain />
+      
+      {/* Navigation */}
+      <Navigation />
+      
+      {/* Main content */}
+      <main className="relative z-10">
+        <HeroSection />
+        <ServicesSection />
+        <SecuritySection />
+      </main>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
