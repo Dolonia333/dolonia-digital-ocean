@@ -82,11 +82,34 @@ const HeroSection: React.FC = () => {
 
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <img 
-              src="/src/assets/dolonia-logo.png" 
-              alt="Dolonia Logo" 
-              className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96"
-            />
+            <div className="relative group">
+              <img 
+                src="/src/assets/dolonia-logo.png" 
+                alt="Dolonia Logo" 
+                className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 hover:animate-pulse transition-all duration-300"
+              />
+              {/* Glitch effect overlay */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <img 
+                  src="/src/assets/dolonia-logo.png" 
+                  alt="" 
+                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 text-red-500 mix-blend-multiply animate-pulse"
+                  style={{ 
+                    filter: 'hue-rotate(180deg) contrast(200%)',
+                    transform: 'translate(-4px, 0px) scale(1.02)'
+                  }}
+                />
+                <img 
+                  src="/src/assets/dolonia-logo.png" 
+                  alt="" 
+                  className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 absolute inset-0 text-cyan-500 mix-blend-multiply animate-pulse delay-75"
+                  style={{ 
+                    filter: 'hue-rotate(90deg) contrast(200%)',
+                    transform: 'translate(4px, 0px) scale(0.98)'
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
 
