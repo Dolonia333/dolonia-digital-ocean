@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Navigation: React.FC = () => {
   return (
@@ -7,40 +8,40 @@ const Navigation: React.FC = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/src/assets/dolonia-logo.png" 
               alt="Dolonia Logo" 
               className="w-10 h-10"
             />
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#services" 
+            <Link 
+              to="/services" 
               className="text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium"
             >
               Services
-            </a>
-            <a 
-              href="#solutions" 
+            </Link>
+            <Link 
+              to="/solutions" 
               className="text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium"
             >
               Solutions
-            </a>
-            <a 
-              href="#security" 
+            </Link>
+            <Link 
+              to="/security" 
               className="text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium"
             >
               Security
-            </a>
-            <a 
-              href="#about" 
+            </Link>
+            <Link 
+              to="/about" 
               className="text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium"
             >
               About
-            </a>
+            </Link>
           </div>
 
           {/* CTA Button */}
