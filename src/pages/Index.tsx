@@ -3,6 +3,7 @@ import BinaryRain from '@/components/BinaryRain';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
+import PageTransition from '@/components/PageTransition';
 
 const Index = () => {
   return (
@@ -14,9 +15,11 @@ const Index = () => {
       <Navigation />
       
       {/* Main content */}
-      <main className="relative z-10">
-        <HeroSection />
-      </main>
+      <PageTransition>
+        <main className="relative z-10">
+          <HeroSection />
+        </main>
+      </PageTransition>
       
       {/* Footer */}
       <Footer />

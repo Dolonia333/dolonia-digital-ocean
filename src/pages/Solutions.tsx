@@ -2,6 +2,7 @@ import React from 'react';
 import BinaryRain from '@/components/BinaryRain';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import PageTransition from '@/components/PageTransition';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cloud, Database, Shield, Zap, Globe, Cpu } from 'lucide-react';
 
@@ -44,34 +45,36 @@ const Solutions = () => {
       <BinaryRain />
       <Navigation />
       
-      <main className="relative z-10 pt-20">
-        <div className="container mx-auto px-6 py-16">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-cyber bg-clip-text text-transparent">Enterprise Solutions</span>
-            </h1>
-            <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
-              Industry-leading solutions tailored for modern enterprises seeking digital excellence.
-            </p>
-          </div>
+      <PageTransition>
+        <main className="relative z-10 pt-20">
+          <div className="container mx-auto px-6 py-16">
+            <div className="text-center mb-16">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                <span className="bg-gradient-cyber bg-clip-text text-transparent">Enterprise Solutions</span>
+              </h1>
+              <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
+                Industry-leading solutions tailored for modern enterprises seeking digital excellence.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {solutions.map((solution, index) => (
-              <Card key={index} className="bg-ocean-surface/50 border-ocean-surface backdrop-blur-sm hover:bg-ocean-surface/70 transition-all duration-300 group">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-gradient-cyber rounded-lg flex items-center justify-center mb-4 group-hover:shadow-glow transition-all duration-300">
-                    <solution.icon className="w-6 h-6 text-ocean-deep" />
-                  </div>
-                  <CardTitle className="text-foreground">{solution.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-cyan-soft">{solution.description}</CardDescription>
-                </CardContent>
-              </Card>
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {solutions.map((solution, index) => (
+                <Card key={index} className="bg-ocean-surface/50 border-ocean-surface backdrop-blur-sm hover-lift group">
+                  <CardHeader>
+                    <div className="w-12 h-12 bg-gradient-cyber rounded-lg flex items-center justify-center mb-4 group-hover:shadow-glow transition-all duration-300">
+                      <solution.icon className="w-6 h-6 text-ocean-deep" />
+                    </div>
+                    <CardTitle className="text-foreground">{solution.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-cyan-soft">{solution.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </PageTransition>
       
       <Footer />
     </div>
