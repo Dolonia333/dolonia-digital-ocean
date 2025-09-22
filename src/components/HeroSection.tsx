@@ -22,7 +22,7 @@ const HeroSection: React.FC = () => {
             <img 
               src="/src/assets/dolonia-logo.png" 
               alt="Dolonia Logo" 
-              className="w-32 h-32 md:w-48 md:h-48"
+              className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96"
             />
           </div>
 
