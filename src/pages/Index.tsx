@@ -2,7 +2,7 @@ import React from 'react';
 import BinaryRain from '@/components/BinaryRain';
 import HeroSection from '@/components/HeroSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import BlogSection from '@/components/BlogSection';
+
 
 import CostCalculator from '@/components/CostCalculator';
 import Newsletter from '@/components/Newsletter';
@@ -23,7 +23,6 @@ const Index = () => {
           <HeroSection />
           <TestimonialsSection />
           <CostCalculator />
-          <BlogSection />
           <Newsletter />
         </main>
       </PageTransition>
