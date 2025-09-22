@@ -2,6 +2,7 @@ import React from 'react';
 import BinaryRain from '@/components/BinaryRain';
 import Navigation from '@/components/Navigation';
 import ServicesSection from '@/components/ServicesSection';
+import DetailedServicesSection from '@/components/DetailedServicesSection';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 
@@ -19,11 +20,12 @@ const Services = () => {
                 <span className="bg-gradient-cyber bg-clip-text text-transparent">Our Services</span>
               </h1>
               <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
-                Comprehensive cloud solutions designed to accelerate your digital transformation journey.
+                Modern technology, automation, and digital solutions to help your business scale securely and efficiently.
               </p>
             </div>
           </div>
           <ServicesSection />
+          <DetailedServicesSection />
         </main>
       </PageTransition>
       

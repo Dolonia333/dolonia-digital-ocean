@@ -10,59 +10,55 @@ import { Check, Zap, Crown, Building } from 'lucide-react';
 const Pricing = () => {
   const plans = [
     {
-      name: "Starter",
+      name: "Starter Retainer",
       icon: Zap,
-      price: "$99",
+      price: "$1,000 - $2,500",
       period: "/month",
-      description: "Perfect for small teams and startups",
+      description: "Perfect for small businesses getting started",
       badge: null,
       features: [
-        "Up to 5 team members",
-        "100GB cloud storage",
-        "Basic security features",
+        "Web hosting & maintenance",
+        "1 custom automation",
+        "2 hours monthly consulting",
         "Email support",
-        "99.9% uptime SLA",
-        "Standard backup",
-        "Community access"
+        "Basic security monitoring",
+        "Monthly reports"
       ]
     },
     {
-      name: "Professional",
+      name: "Business Growth",
       icon: Crown,
-      price: "$299",
+      price: "$3,500 - $5,000",
       period: "/month",
       description: "Ideal for growing businesses",
       badge: "Most Popular",
       features: [
-        "Up to 25 team members",
-        "1TB cloud storage",
-        "Advanced security suite",
-        "Priority support (24/7)",
-        "99.95% uptime SLA",
-        "Daily automated backups",
+        "Full website management",
+        "2-3 custom automations",
+        "Ongoing consulting support",
+        "Security monitoring",
+        "Priority support",
         "Advanced analytics",
-        "API access",
-        "Custom integrations"
+        "Monthly strategy sessions",
+        "Performance optimization"
       ]
     },
     {
-      name: "Enterprise",
+      name: "Premium Partnership",
       icon: Building,
-      price: "Custom",
-      period: "",
-      description: "Tailored solutions for large organizations",
-      badge: "Contact Us",
+      price: "$7,500 - $10,000+",
+      period: "/month",
+      description: "Full-service partnership for enterprise needs",
+      badge: "Premium",
       features: [
-        "Unlimited team members",
-        "Unlimited cloud storage",
-        "Military-grade security",
-        "Dedicated support manager",
-        "99.99% uptime SLA",
-        "Real-time backups",
-        "Advanced compliance tools",
-        "White-label solutions",
+        "Complete web management",
+        "Unlimited automations",
+        "Dedicated consulting",
+        "Advanced security suite",
+        "24/7 priority support",
         "Custom development",
-        "On-premise deployment"
+        "Strategic planning",
+        "Executive access"
       ]
     }
   ];
@@ -76,10 +72,11 @@ const Pricing = () => {
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-cyber bg-clip-text text-transparent">Simple, Transparent Pricing</span>
+              <span className="bg-gradient-cyber bg-clip-text text-transparent">Retainer Packages</span>
             </h1>
             <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
-              Choose the perfect plan for your business. All plans include our core features with no hidden fees.
+              Monthly partnerships for ongoing support, technology, and business growth. 
+              All packages include priority access and dedicated support.
             </p>
           </div>
 

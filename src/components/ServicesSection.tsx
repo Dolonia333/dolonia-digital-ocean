@@ -5,39 +5,33 @@ import { Cloud, Database, Shield, Cpu, Network, BarChart3 } from 'lucide-react';
 const services = [
   {
     icon: Cloud,
-    title: 'Cloud Infrastructure',
-    description: 'Scalable, resilient cloud architecture that grows with your business needs.',
-    features: ['Auto-scaling', 'Load balancing', 'Global CDN', '99.99% uptime']
-  },
-  {
-    icon: Database,
-    title: 'Data Management',
-    description: 'Advanced data solutions with real-time analytics and intelligent insights.',
-    features: ['Real-time sync', 'Advanced analytics', 'Data lakes', 'ML integration']
-  },
-  {
-    icon: Shield,
-    title: 'Security Suite',
-    description: 'Enterprise-grade security with zero-trust architecture and threat detection.',
-    features: ['Zero-trust model', 'AI threat detection', 'Compliance ready', 'Encrypted storage']
+    title: 'Web Development & Hosting',
+    description: 'Professional, responsive websites built for your brand with secure hosting solutions.',
+    features: ['Custom Website Design', 'UI/UX Design', 'Secure Hosting & Updates', 'Storage Solutions']
   },
   {
     icon: Cpu,
-    title: 'Edge Computing',
-    description: 'Ultra-low latency processing at the edge with intelligent workload distribution.',
-    features: ['Sub-10ms latency', 'Edge AI', 'Smart routing', 'Global presence']
+    title: 'AI & Automation',
+    description: 'Streamline your business with intelligent automation and AI-enhanced tools.',
+    features: ['Custom Automations', 'AI Career Tools', 'Chat Assistants', 'Workflow Integration']
   },
   {
-    icon: Network,
-    title: 'API Gateway',
-    description: 'Unified API management with intelligent routing and advanced analytics.',
-    features: ['Rate limiting', 'API versioning', 'Real-time monitoring', 'Developer portal']
+    icon: Shield,
+    title: 'IT Infrastructure & Security',
+    description: 'Complete technology setup with enterprise-grade security and protection.',
+    features: ['Security Audits', 'Business Setup', 'Data Storage', 'System Protection']
   },
   {
     icon: BarChart3,
-    title: 'Analytics Engine',
-    description: 'Powerful analytics platform with predictive insights and custom dashboards.',
-    features: ['Predictive analytics', 'Custom dashboards', 'Real-time alerts', 'ML workflows']
+    title: 'Consulting & Strategy',
+    description: 'Expert guidance to help your business grow with strategic planning and development.',
+    features: ['Business Plans', 'Pitch Decks', 'Technology Consulting', 'Grant Applications']
+  },
+  {
+    icon: Database,
+    title: 'Retainer Packages',
+    description: 'Ongoing partnerships for continuous support, maintenance, and growth.',
+    features: ['Monthly Support', 'Priority Access', 'Bundled Services', 'Scalable Solutions']
   }
 ];
 
@@ -48,13 +42,13 @@ const ServicesSection: React.FC = () => {
         {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-foreground">Comprehensive</span>
+            <span className="text-foreground">Modern Technology &</span>
             <br />
-            <span className="bg-gradient-cyber bg-clip-text text-transparent">Cloud Solutions</span>
+            <span className="bg-gradient-cyber bg-clip-text text-transparent">Digital Solutions</span>
           </h2>
           <p className="text-xl text-cyan-soft max-w-3xl mx-auto leading-relaxed">
-            Everything you need to build, deploy, and scale your applications with confidence. 
-            Our integrated platform delivers enterprise-grade capabilities with developer-friendly simplicity.
+            Professional technology, automation, and digital solutions to help your business 
+            scale securely and efficiently with expert guidance every step of the way.
           </p>
         </div>
 
