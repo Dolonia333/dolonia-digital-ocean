@@ -26,10 +26,6 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <div className="min-h-screen flex w-full">
-            <CustomSidebar 
-              isCollapsed={isSidebarCollapsed} 
-              onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
-            />
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -43,6 +39,10 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
+            <CustomSidebar 
+              isCollapsed={isSidebarCollapsed} 
+              onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
+            />
           </div>
         </BrowserRouter>
       </TooltipProvider>

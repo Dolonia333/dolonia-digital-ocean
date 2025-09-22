@@ -31,7 +31,7 @@ interface CustomSidebarProps {
 
 export function CustomSidebar({ isCollapsed, onToggle }: CustomSidebarProps) {
   return (
-    <div className={`${isCollapsed ? 'w-16' : 'w-64'} bg-ocean-deep/95 backdrop-blur-md border-r border-ocean-surface h-screen flex flex-col transition-all duration-300`}>
+    <div className={`${isCollapsed ? 'w-16' : 'w-64'} bg-ocean-deep/95 backdrop-blur-md border-l border-ocean-surface h-screen flex flex-col transition-all duration-300 shadow-2xl`}>
       {/* Logo Section */}
       <div className="p-6 border-b border-ocean-surface">
         <div className="flex items-center justify-center">
@@ -64,15 +64,15 @@ export function CustomSidebar({ isCollapsed, onToggle }: CustomSidebarProps) {
               to={item.url}
               end
               className={({ isActive }) => `
-                flex items-center px-3 py-2 rounded-lg transition-all duration-300
+                flex items-center px-3 py-2 rounded-lg transition-all duration-300 group
                 ${isActive 
-                  ? 'bg-ocean-surface/50 text-cyan-bright border-l-2 border-cyan-bright' 
-                  : 'hover:bg-ocean-surface/30 text-cyan-soft hover:text-cyan-bright'
+                  ? 'bg-ocean-surface/50 text-cyan-bright border-r-2 border-cyan-bright shadow-lg transform scale-105' 
+                  : 'hover:bg-ocean-surface/30 text-cyan-soft hover:text-cyan-bright hover:shadow-md hover:scale-105'
                 }
               `}
             >
-              <item.icon className={`${isCollapsed ? 'w-5 h-5' : 'w-5 h-5 mr-3'} flex-shrink-0`} />
-              {!isCollapsed && <span className="font-medium">{item.title}</span>}
+              <item.icon className={`${isCollapsed ? 'w-5 h-5' : 'w-5 h-5 mr-3'} flex-shrink-0 group-hover:rotate-3 transition-transform duration-300`} />
+              {!isCollapsed && <span className="font-medium group-hover:translate-x-1 transition-transform duration-300">{item.title}</span>}
             </NavLink>
           ))}
         </nav>
@@ -84,10 +84,10 @@ export function CustomSidebar({ isCollapsed, onToggle }: CustomSidebarProps) {
           onClick={onToggle}
           variant="ghost"
           size="sm"
-          className="w-full text-cyan-soft hover:text-cyan-bright hover:bg-ocean-surface/30"
+          className="w-full text-cyan-soft hover:text-cyan-bright hover:bg-ocean-surface/30 hover:scale-105 transition-all duration-300 group"
         >
-          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-          {!isCollapsed && <span className="ml-2">Collapse</span>}
+          {isCollapsed ? <ChevronLeft className="w-4 h-4 group-hover:scale-110 transition-transform" /> : <ChevronRight className="w-4 h-4 group-hover:scale-110 transition-transform" />}
+          {!isCollapsed && <span className="ml-2 group-hover:translate-x-1 transition-transform">Collapse</span>}
         </Button>
       </div>
     </div>
