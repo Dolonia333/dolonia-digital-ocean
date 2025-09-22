@@ -22,6 +22,14 @@ const SearchFunctionality: React.FC = () => {
   const searchData: SearchResult[] = [
     {
       id: '1',
+      title: 'Real-Time Performance Dashboard',
+      description: 'Monitor system metrics with live CPU, memory, and network analytics',
+      category: 'Dashboard',
+      icon: Zap,
+      url: '/#performance'
+    },
+    {
+      id: '2',
       title: 'Cloud Infrastructure Setup',
       description: 'Learn how to set up scalable cloud infrastructure with Dolonia',
       category: 'Documentation',
@@ -29,7 +37,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/docs/infrastructure'
     },
     {
-      id: '2',
+      id: '3',
       title: 'Zero-Trust Security',
       description: 'Implement enterprise-grade security with zero-trust architecture',
       category: 'Security',
@@ -37,7 +45,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/security'
     },
     {
-      id: '3',
+      id: '4',
       title: 'AI Optimization Features',
       description: 'Discover how AI can optimize your cloud performance and costs',
       category: 'Features',
@@ -45,7 +53,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/features/ai'
     },
     {
-      id: '4',
+      id: '5',
       title: 'Contact Support Team',
       description: 'Get help from our expert support engineers',
       category: 'Support',
@@ -53,7 +61,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/contact'
     },
     {
-      id: '5',
+      id: '6',
       title: 'Pricing Plans',
       description: 'View our flexible pricing options for every business size',
       category: 'Pricing',
@@ -61,7 +69,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/pricing'
     },
     {
-      id: '6',
+      id: '7',
       title: 'Migration Guide',
       description: 'Step-by-step guide for migrating your existing infrastructure',
       category: 'Documentation',
@@ -69,7 +77,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/docs/migration'
     },
     {
-      id: '7',
+      id: '8',
       title: 'Performance Monitoring',
       description: 'Real-time monitoring and analytics for your cloud resources',
       category: 'Features',
@@ -77,7 +85,7 @@ const SearchFunctionality: React.FC = () => {
       url: '/features/monitoring'
     },
     {
-      id: '8',
+      id: '9',
       title: 'Multi-Cloud Solutions',
       description: 'Deploy across multiple cloud providers seamlessly',
       category: 'Solutions',
@@ -134,6 +142,7 @@ const SearchFunctionality: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
+      case 'Dashboard': return 'text-cyan-bright bg-cyan-bright/20';
       case 'Documentation': return 'text-blue-400 bg-blue-400/20';
       case 'Security': return 'text-red-400 bg-red-400/20';
       case 'Features': return 'text-green-400 bg-green-400/20';

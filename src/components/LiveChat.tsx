@@ -24,10 +24,10 @@ const LiveChat: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
 
   const quickReplies = [
-    "Tell me about pricing",
-    "Schedule a demo",
-    "Security features",
-    "Migration support"
+    "Website development",
+    "AI automation",
+    "Security services",
+    "Pricing information"
   ];
 
   const handleSendMessage = (text?: string) => {
@@ -58,16 +58,23 @@ const LiveChat: React.FC = () => {
 
   const getBotResponse = (userMessage: string): string => {
     const message = userMessage.toLowerCase();
+    
     if (message.includes('pricing') || message.includes('cost')) {
-      return "Our pricing starts at $99/month for basic cloud infrastructure. Would you like me to connect you with our sales team for a custom quote?";
+      return "Our services range from $1,500 for starter websites to $10,000+ for enterprise solutions. We also offer monthly retainers starting at $1,000. Would you like specific pricing for your project?";
     } else if (message.includes('demo') || message.includes('schedule')) {
-      return "I'd be happy to schedule a demo! Our solutions engineers can show you our platform live. What's the best time for you?";
+      return "I'd be happy to schedule a consultation! Our team can show you our automation solutions and discuss your specific needs. What type of project are you interested in?";
     } else if (message.includes('security')) {
-      return "Security is our top priority! We offer zero-trust architecture, end-to-end encryption, and compliance with SOC2, HIPAA, and GDPR. What specific security concerns do you have?";
+      return "We provide comprehensive security audits, zero-trust implementation, and business protection systems. Our security packages range from $750-$7,500. What's your current security setup?";
     } else if (message.includes('migration')) {
-      return "We provide comprehensive migration support including assessment, planning, and execution. Our team has successfully migrated 500+ enterprise applications. What's your current infrastructure?";
+      return "We offer complete migration support for websites, data, and business systems. Our team handles everything from planning to execution. What are you looking to migrate?";
+    } else if (message.includes('website') || message.includes('web')) {
+      return "We create custom websites from $1,500-$7,500+ with modern design, responsive layouts, and performance optimization. What type of website do you need?";
+    } else if (message.includes('ai') || message.includes('automation')) {
+      return "Our AI and automation services help streamline business processes, from $1,000 for basic workflows to $12,000+ for advanced systems. What tasks would you like to automate?";
+    } else if (message.includes('hosting')) {
+      return "We provide secure hosting starting at $50/month, with full-service packages including updates and security for $250-$500/month. What are your hosting requirements?";
     } else {
-      return "That's a great question! Let me connect you with one of our specialists who can provide detailed information. Would you prefer a call or email?";
+      return "I'm here to help with web development, AI automation, security, hosting, and business consulting. What specific service can I assist you with today?";
     }
   };
 
