@@ -3,7 +3,7 @@ import BinaryRain from '@/components/BinaryRain';
 import HeroSection from '@/components/HeroSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import BlogSection from '@/components/BlogSection';
-import InteractiveDemo from '@/components/InteractiveDemo';
+
 import CostCalculator from '@/components/CostCalculator';
 import Newsletter from '@/components/Newsletter';
 import LiveChat from '@/components/LiveChat';
@@ -21,7 +21,6 @@ const Index = () => {
       <PageTransition>
         <main className="relative z-10">
           <HeroSection />
-          <InteractiveDemo />
           <TestimonialsSection />
           <CostCalculator />
           <BlogSection />
