@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cloud, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import doloniaLogo from '@/assets/dolonia-logo.png';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +13,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="/src/assets/dolonia-logo.png" 
+                src={doloniaLogo} 
                 alt="Dolonia Logo" 
                 className="w-10 h-10"
               />
