@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ interface Message {
 
 const LiveChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -22,6 +23,19 @@ const LiveChat: React.FC = () => {
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
+
+  // Scroll detection for chat button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const threshold = window.innerHeight * 0.8; // Show after scrolling 80% of viewport height
+      
+      setIsVisible(scrollPosition > threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const quickReplies = [
     "Website development",
@@ -87,13 +101,15 @@ const LiveChat: React.FC = () => {
 
   return (
     <>
-      {/* Chat Toggle Button */}
-      <Button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-8 right-8 z-50 w-20 h-20 rounded-full bg-gradient-cyber hover:shadow-glow text-ocean-deep shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-cyan-bright/30"
-      >
-        {isOpen ? <X className="w-8 h-8" /> : <MessageCircle className="w-8 h-8" />}
-      </Button>
+      {/* Chat Toggle Button - Only show when scrolled */}
+      {isVisible && (
+        <Button
+          onClick={() => setIsOpen(!isOpen)}
+          className="fixed bottom-8 right-8 z-50 w-20 h-20 rounded-full bg-gradient-cyber hover:shadow-glow text-ocean-deep shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-cyan-bright/30 animate-fade-in"
+        >
+          {isOpen ? <X className="w-8 h-8" /> : <MessageCircle className="w-8 h-8" />}
+        </Button>
+      )}
 
       {/* Chat Window */}
       {isOpen && (
