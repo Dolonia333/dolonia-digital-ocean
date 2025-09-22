@@ -90,14 +90,14 @@ const LiveChat: React.FC = () => {
       {/* Chat Toggle Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-cyber hover:shadow-glow text-ocean-deep shadow-lg transition-all duration-300 hover:scale-110"
+        className="fixed bottom-8 right-8 z-50 w-20 h-20 rounded-full bg-gradient-cyber hover:shadow-glow text-ocean-deep shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-cyan-bright/30"
       >
-        {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+        {isOpen ? <X className="w-8 h-8" /> : <MessageCircle className="w-8 h-8" />}
       </Button>
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="fixed bottom-24 right-6 z-50 w-96 h-[500px] bg-ocean-surface/95 backdrop-blur-md border-ocean-surface shadow-2xl animate-scale-in">
+        <Card className="fixed bottom-32 right-8 z-50 w-96 h-[500px] bg-ocean-surface/95 backdrop-blur-md border-ocean-surface shadow-2xl animate-scale-in">
           <CardHeader className="bg-gradient-cyber text-ocean-deep p-4">
             <CardTitle className="flex items-center space-x-2">
               <Bot className="w-5 h-5" />

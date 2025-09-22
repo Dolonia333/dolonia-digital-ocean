@@ -13,11 +13,23 @@ interface FeatureCardProps {
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, benefits }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsExpanded(true);
+  };
+
+  const handleClose = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsExpanded(false);
+  };
+
   return (
     <>
       <div 
-        className="flex items-center justify-center space-x-3 bg-ocean-surface/30 backdrop-blur-sm rounded-lg p-4 border border-ocean-surface floating cursor-pointer hover:bg-ocean-surface/50 transition-all duration-300"
-        onClick={() => setIsExpanded(true)}
+        className="flex items-center justify-center space-x-3 bg-ocean-surface/30 backdrop-blur-sm rounded-lg p-4 border border-ocean-surface cursor-pointer hover:bg-ocean-surface/50 transition-all duration-300"
+        onClick={handleClick}
       >
         {icon}
         <span className="text-cyan-soft font-medium">{title}</span>
@@ -36,7 +48,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, ben
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setIsExpanded(false)}
+                  onClick={handleClose}
                   className="text-cyan-soft hover:text-cyan-bright"
                 >
                   <X className="w-4 h-4" />
@@ -74,7 +86,7 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center space-x-2 bg-ocean-surface/50 backdrop-blur-sm border border-cyan-bright/30 rounded-full px-4 py-2 mb-8 cyber-glow">
+          <div className="inline-flex items-center space-x-2 bg-ocean-surface/50 backdrop-blur-sm border border-cyan-bright/30 rounded-full px-4 py-2 mb-8">
             <Zap size={16} className="text-cyan-bright" />
             <span className="text-cyan-soft text-sm font-medium">Next-Generation Cloud Infrastructure</span>
           </div>
