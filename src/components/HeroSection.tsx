@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ArrowRight, Cloud, Shield, Zap, X } from 'lucide-react';
-
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -36,48 +36,31 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, ben
       </div>
 
       {/* Expanded Modal */}
-      {isExpanded && (
-        <div 
-          className="fixed inset-0 z-[9999] bg-ocean-deep/80 backdrop-blur-sm flex items-center justify-center p-6"
-          onClick={handleClose}
-        >
-          <Card 
-            className="w-full max-w-md bg-ocean-surface/95 backdrop-blur-md border-ocean-surface shadow-2xl animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  {icon}
-                  <h3 className="text-xl font-bold text-foreground">{title}</h3>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleClose}
-                  className="text-cyan-soft hover:text-cyan-bright hover:bg-cyan-soft/10"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-              
-              <p className="text-cyan-soft mb-4">{description}</p>
-              
-              <div className="space-y-2">
-                <h4 className="font-semibold text-cyan-bright">Key Benefits:</h4>
-                <ul className="space-y-1">
-                  {benefits.map((benefit, index) => (
-                    <li key={index} className="text-cyan-soft text-sm flex items-center">
-                      <div className="w-1.5 h-1.5 bg-cyan-bright rounded-full mr-2" />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      <Dialog open={isExpanded} onOpenChange={setIsExpanded}>
+        <DialogContent className="bg-ocean-surface/95 border-ocean-surface backdrop-blur-md z-[9999]">
+          <DialogHeader>
+            <div className="flex items-center space-x-3">
+              {icon}
+              <DialogTitle className="text-foreground">{title}</DialogTitle>
+            </div>
+            <DialogDescription className="text-cyan-soft">
+              {description}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-2">
+            <h4 className="font-semibold text-cyan-bright">Key Benefits:</h4>
+            <ul className="space-y-1">
+              {benefits.map((benefit, index) => (
+                <li key={index} className="text-cyan-soft text-sm flex items-center">
+                  <div className="w-1.5 h-1.5 bg-cyan-bright rounded-full mr-2" />
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
