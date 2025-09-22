@@ -8,9 +8,11 @@ const Navigation: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-cyber rounded-lg flex items-center justify-center cyber-glow">
-              <span className="text-ocean-deep font-bold text-lg">D</span>
-            </div>
+            <img 
+              src="/src/assets/dolonia-logo.png" 
+              alt="Dolonia Logo" 
+              className="w-10 h-10 cyber-glow"
+            />
             <span className="text-2xl font-bold bg-gradient-cyber bg-clip-text text-transparent">
               Dolonia.cloud
             </span>
