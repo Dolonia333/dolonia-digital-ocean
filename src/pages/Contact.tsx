@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle } from 'lucide-react';
+import LoadingSpinner from '@/components/LoadingSpinner';
+
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  subject: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+}
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     company: '',
@@ -21,24 +38,70 @@ const Contact = () => {
     message: ''
   });
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = 'Subject is required';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      setIsSubmitted(true);
       toast({
         title: "Message Sent Successfully!",
         description: "We'll get back to you within 24 hours.",
       });
+      
       setFormData({
         name: '',
         email: '',
@@ -46,8 +109,18 @@ const Contact = () => {
         subject: '',
         message: ''
       });
+      
+      // Reset submission state after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const contactInfo = [
@@ -78,11 +151,14 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-ocean text-foreground">
-      <BinaryRain />
-      <Navigation />
+    <Layout>
+      <SEO 
+        title="Contact Us - Get in Touch with Dolonia"
+        description="Ready to transform your business with our cloud solutions? Contact our expert team today. Get cybersecurity solutions tailored to your needs."
+        keywords="contact dolonia, cybersecurity consultation, cloud solutions contact, get quote cybersecurity"
+      />
       
-      <main className="relative z-10 pt-20">
+      <div className="pt-20">
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -103,82 +179,134 @@ const Contact = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {isSubmitted ? (
+                  <div className="text-center py-8">
+                    <CheckCircle className="h-16 w-16 text-cyan-bright mx-auto mb-4 animate-pulse" />
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
+                    <p className="text-cyan-soft mb-4">We'll get back to you within 24 hours.</p>
+                    <Button 
+                      onClick={() => setIsSubmitted(false)}
+                      variant="outline"
+                      className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep"
+                    >
+                      Send Another Message
+                    </Button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name" className="text-foreground">Name *</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className={`bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright ${
+                            errors.name ? 'border-red-400 focus:border-red-400' : ''
+                          }`}
+                          placeholder="Your full name"
+                          disabled={isSubmitting}
+                        />
+                        {errors.name && (
+                          <div className="flex items-center text-red-400 text-sm">
+                            <AlertCircle className="h-4 w-4 mr-1" />
+                            {errors.name}
+                          </div>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email" className="text-foreground">Email *</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright ${
+                            errors.email ? 'border-red-400 focus:border-red-400' : ''
+                          }`}
+                          placeholder="your@email.com"
+                          disabled={isSubmitting}
+                        />
+                        {errors.email && (
+                          <div className="flex items-center text-red-400 text-sm">
+                            <AlertCircle className="h-4 w-4 mr-1" />
+                            {errors.email}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-foreground">Name *</Label>
+                      <Label htmlFor="company" className="text-foreground">Company</Label>
                       <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
+                        id="company"
+                        name="company"
+                        value={formData.company}
                         onChange={handleInputChange}
-                        required
                         className="bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright"
-                        placeholder="Your full name"
+                        placeholder="Your company name"
+                        disabled={isSubmitting}
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-foreground">Email *</Label>
+                      <Label htmlFor="subject" className="text-foreground">Subject *</Label>
                       <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleInputChange}
-                        required
-                        className="bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright"
-                        placeholder="your@email.com"
+                        className={`bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright ${
+                          errors.subject ? 'border-red-400 focus:border-red-400' : ''
+                        }`}
+                        placeholder="What can we help you with?"
+                        disabled={isSubmitting}
                       />
+                      {errors.subject && (
+                        <div className="flex items-center text-red-400 text-sm">
+                          <AlertCircle className="h-4 w-4 mr-1" />
+                          {errors.subject}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="company" className="text-foreground">Company</Label>
-                    <Input
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      className="bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright"
-                      placeholder="Your company name"
-                    />
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-foreground">Subject *</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright"
-                      placeholder="What can we help you with?"
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="message" className="text-foreground">Message *</Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        rows={5}
+                        className={`bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright resize-none ${
+                          errors.message ? 'border-red-400 focus:border-red-400' : ''
+                        }`}
+                        placeholder="Tell us more about your project or requirements..."
+                        disabled={isSubmitting}
+                      />
+                      {errors.message && (
+                        <div className="flex items-center text-red-400 text-sm">
+                          <AlertCircle className="h-4 w-4 mr-1" />
+                          {errors.message}
+                        </div>
+                      )}
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-foreground">Message *</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="bg-ocean-deep/50 border-ocean-surface text-foreground focus:border-cyan-bright resize-none"
-                      placeholder="Tell us more about your project or requirements..."
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold transition-all duration-300"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </form>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold transition-all duration-300 min-h-[48px]"
+                    >
+                      {isSubmitting ? (
+                        <LoadingSpinner size="sm" text="Sending..." />
+                      ) : (
+                        'Send Message'
+                      )}
+                    </Button>
+                  </form>
+                )}
               </CardContent>
             </Card>
 
@@ -227,10 +355,8 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </main>
-      
-      <Footer />
-    </div>
+      </div>
+    </Layout>
   );
 };
 

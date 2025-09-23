@@ -1,24 +1,63 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, CheckCircle } from 'lucide-react';
+import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const Newsletter: React.FC = () => {
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string }>({});
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    
+    // Reset errors
+    setErrors({});
+    
+    // Validation
+    if (!email.trim()) {
+      setErrors({ email: 'Email is required' });
+      return;
+    }
+    
+    if (!validateEmail(email)) {
+      setErrors({ email: 'Please enter a valid email address' });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
       setIsSubscribed(true);
+      setEmail('');
+      
       toast({
         title: "Successfully subscribed!",
         description: "You'll receive our latest updates and insights.",
       });
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 3000);
+      
+      // Reset subscription state after 5 seconds
+      setTimeout(() => setIsSubscribed(false), 5000);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to subscribe. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,25 +83,42 @@ const Newsletter: React.FC = () => {
             </p>
 
             {!isSubscribed ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 bg-ocean-surface border-ocean-surface text-foreground placeholder-cyan-soft/50 focus:border-cyan-bright transition-colors"
-                  required
-                />
-                <Button 
-                  type="submit"
-                  className="bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold px-8 transition-all duration-300"
-                >
-                  Subscribe
-                </Button>
+              <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex-1">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email address" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={`bg-ocean-surface border-ocean-surface text-foreground placeholder-cyan-soft/50 focus:border-cyan-bright transition-colors ${
+                        errors.email ? 'border-red-400 focus:border-red-400' : ''
+                      }`}
+                      disabled={isLoading}
+                    />
+                    {errors.email && (
+                      <div className="flex items-center mt-2 text-red-400 text-sm">
+                        <AlertCircle className="h-4 w-4 mr-1" />
+                        {errors.email}
+                      </div>
+                    )}
+                  </div>
+                  <Button 
+                    type="submit"
+                    disabled={isLoading}
+                    className="bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold px-8 transition-all duration-300 min-w-[120px]"
+                  >
+                    {isLoading ? (
+                      <LoadingSpinner size="sm" text="" />
+                    ) : (
+                      'Subscribe'
+                    )}
+                  </Button>
+                </div>
               </form>
             ) : (
-              <div className="flex items-center justify-center space-x-2 text-cyan-bright">
-                <CheckCircle className="w-6 h-6" />
+              <div className="flex items-center justify-center space-x-2 text-cyan-bright animate-fade-in">
+                <CheckCircle className="w-6 h-6 animate-pulse" />
                 <span className="text-lg font-medium">Thank you for subscribing!</span>
               </div>
             )}

@@ -335,4 +335,128 @@ All colors MUST be HSL.
   .glitch-purple {
     animation: glitch-purple 4s infinite 2s;
   }
+
+  /* Performance and UX Improvements - Phase 2 */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  /* Staggered animations for better UX */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+
+  /* Performance optimizations */
+  .binary-rain {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .binary-digit {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    /* Reduce mobile performance impact */
+    @media (max-width: 768px) {
+      animation-duration: 2s !important;
+      font-size: 12px !important;
+    }
+  }
+
+  /* Improved loading states */
+  .loading-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Enhanced button interactions */
+  .btn-hover-scale {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-hover-scale:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .btn-hover-scale:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Form validation styles */
+  .input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 1px #ef4444;
+  }
+
+  .input-success {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 1px #10b981;
+  }
+
+  /* Mobile-optimized animations */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .animate-fade-in,
+    .cyber-glow,
+    .float,
+    .binary-digit {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* Improved focus styles for accessibility */
+  .focus-visible:focus-visible {
+    outline: 2px solid hsl(var(--cyan-bright));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Loading skeleton for better perceived performance */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--muted) / 0.5) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading-skeleton 1.5s infinite;
+  }
+
+  @keyframes loading-skeleton {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 }

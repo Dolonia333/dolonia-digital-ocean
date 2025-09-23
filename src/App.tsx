@@ -5,16 +5,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { CustomSidebar } from "@/components/CustomSidebar";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { useState } from "react";
-import Index from "./pages/Index";
-import Services from "./pages/Services";
-import Solutions from "./pages/Solutions";
-import Security from "./pages/Security";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Pricing from "./pages/Pricing";
-import ServiceMenu from "./pages/ServiceMenu";
-import NotFound from "./pages/NotFound";
+import { lazy, Suspense, useState } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
+
+// Lazy load all pages for better performance
+const Index = lazy(() => import("./pages/Index"));
+const Services = lazy(() => import("./pages/Services"));
+const Solutions = lazy(() => import("./pages/Solutions"));
+const Security = lazy(() => import("./pages/Security"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const ServiceMenu = lazy(() => import("./pages/ServiceMenu"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -28,18 +31,24 @@ const App = () => {
         <BrowserRouter>
           <div className="min-h-screen flex w-full">
             <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/solutions" element={<Solutions />} />
-                <Route path="/security" element={<Security />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/service-menu" element={<ServiceMenu />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Suspense fallback={
+                <div className="min-h-screen bg-gradient-ocean flex items-center justify-center">
+                  <LoadingSpinner size="lg" text="Loading page..." />
+                </div>
+              }>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/solutions" element={<Solutions />} />
+                  <Route path="/security" element={<Security />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/service-menu" element={<ServiceMenu />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
             </main>
             <CustomSidebar 
               isCollapsed={isSidebarCollapsed} 

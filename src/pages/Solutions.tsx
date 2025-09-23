@@ -1,8 +1,6 @@
 import React from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import PageTransition from '@/components/PageTransition';
+import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cloud, Database, Shield, Zap, Globe, Cpu } from 'lucide-react';
 
@@ -15,7 +13,7 @@ const Solutions = () => {
     },
     {
       icon: Database,
-      title: "Data Lake Solutions",
+      title: "Data Lake Solutions", 
       description: "Store, process, and analyze massive datasets with our scalable data lake platform."
     },
     {
@@ -41,43 +39,42 @@ const Solutions = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-ocean text-foreground">
-      <BinaryRain />
-      <Navigation />
+    <Layout>
+      <SEO 
+        title="Enterprise Solutions - Advanced Cloud & Security Solutions"
+        description="Industry-leading solutions tailored for modern enterprises seeking digital excellence. Multi-cloud architecture, zero-trust security, and AI/ML platforms."
+        keywords="enterprise solutions, multi-cloud architecture, zero trust security, AI ML platform, edge computing, global CDN"
+      />
       
-      <PageTransition>
-        <main className="relative z-10 pt-20">
-          <div className="container mx-auto px-6 py-16">
-            <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                <span className="bg-gradient-cyber bg-clip-text text-transparent">Enterprise Solutions</span>
-              </h1>
-              <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
-                Industry-leading solutions tailored for modern enterprises seeking digital excellence.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {solutions.map((solution, index) => (
-                <Card key={index} className="bg-ocean-surface/50 border-ocean-surface backdrop-blur-sm hover-lift group">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-gradient-cyber rounded-lg flex items-center justify-center mb-4 group-hover:shadow-glow transition-all duration-300">
-                      <solution.icon className="w-6 h-6 text-ocean-deep" />
-                    </div>
-                    <CardTitle className="text-foreground">{solution.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-cyan-soft">{solution.description}</CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+      <div className="pt-20">
+        <div className="container mx-auto px-6 py-16">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-cyber bg-clip-text text-transparent">Enterprise Solutions</span>
+            </h1>
+            <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
+              Industry-leading solutions tailored for modern enterprises seeking digital excellence.
+            </p>
           </div>
-        </main>
-      </PageTransition>
-      
-      <Footer />
-    </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {solutions.map((solution, index) => (
+              <Card key={index} className={`bg-ocean-surface/50 border-ocean-surface backdrop-blur-sm hover-lift group fade-in stagger-${Math.min(index + 1, 5)}`}>
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-cyber rounded-lg flex items-center justify-center mb-4 group-hover:shadow-glow transition-all duration-300">
+                    <solution.icon className="w-6 h-6 text-ocean-deep" />
+                  </div>
+                  <CardTitle className="text-foreground">{solution.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-cyan-soft">{solution.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Layout>
   );
 };
 
