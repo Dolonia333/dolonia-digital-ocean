@@ -1,0 +1,20 @@
+SCREENSHOT PLACEHOLDER
+
+Since I cannot generate images directly for WordPress themes, you'll need to create a screenshot.png file (1200x900 pixels) showing your theme's homepage.
+
+To create the screenshot:
+
+1. Install and activate the theme on a WordPress site
+2. Set up some sample content (testimonials, services, etc.)
+3. Take a screenshot of the homepage at 1200x900 pixels
+4. Save it as "screenshot.png" in the theme root directory
+5. Delete this txt file
+
+The screenshot should show:
+- The hero section with logo and glitch effects
+- Binary rain background effect
+- Feature cards section
+- Part of the testimonials section
+- The overall dark cybersecurity aesthetic
+
+This screenshot will appear in Appearance > Themes as the theme preview image.
