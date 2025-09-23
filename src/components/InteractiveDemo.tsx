@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -9,7 +9,7 @@ const InteractiveDemo: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
-  const demoSteps = [
+  const demoSteps = useMemo(() => [
     {
       title: "Infrastructure Setup",
       description: "Deploying secure cloud infrastructure",
@@ -38,7 +38,7 @@ const InteractiveDemo: React.FC = () => {
       duration: 1500,
       status: "pending"
     }
-  ];
+  ], []);
 
   const [steps, setSteps] = useState(demoSteps);
 
@@ -67,7 +67,7 @@ const InteractiveDemo: React.FC = () => {
     }
 
     return () => clearTimeout(timeout);
-  }, [isRunning, currentStep]);
+  }, [isRunning, currentStep, demoSteps]);
 
   const startDemo = () => {
     setIsRunning(true);
@@ -96,7 +96,7 @@ const InteractiveDemo: React.FC = () => {
     }
   };
 
-  const getStatusIcon = (status: string, IconComponent: any) => {
+  const getStatusIcon = (status: string, IconComponent: React.ComponentType<{ className?: string }>) => {
     if (status === 'completed') return <CheckCircle className="w-6 h-6 text-green-400" />;
     if (status === 'running') return <IconComponent className="w-6 h-6 text-cyan-bright animate-pulse" />;
     return <IconComponent className="w-6 h-6 text-cyan-soft" />;

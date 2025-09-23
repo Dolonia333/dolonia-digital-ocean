@@ -113,10 +113,15 @@ The main content is in index.php. You can modify sections or add new ones as nee
 * Binary rain animation
 * Glitch effects
 * Responsive design
-* Custom post types
+* Custom post types for testimonials and services
+* WordPress Customizer integration
 * Contact forms
 * Cost calculator
 * SEO optimization
+* Complete template structure (page.php, single.php, archive.php, 404.php, search.php, etc.)
+* Custom single and archive templates for testimonials and services
+* Enhanced installation guide
+* Theme preview HTML file
 
 == Support ==
 

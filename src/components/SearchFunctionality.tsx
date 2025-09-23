@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,7 +9,7 @@ interface SearchResult {
   title: string;
   description: string;
   category: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   url: string;
 }
 
@@ -19,7 +19,7 @@ const SearchFunctionality: React.FC = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
-  const searchData: SearchResult[] = [
+  const searchData: SearchResult[] = useMemo(() => [
     {
       id: '1',
       title: 'Real-Time Performance Dashboard',
@@ -92,7 +92,7 @@ const SearchFunctionality: React.FC = () => {
       icon: Cloud,
       url: '/solutions'
     }
-  ];
+  ], []);
 
   useEffect(() => {
     if (query.trim()) {
@@ -106,7 +106,7 @@ const SearchFunctionality: React.FC = () => {
     } else {
       setResults([]);
     }
-  }, [query]);
+  }, [query, searchData]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -74,6 +75,8 @@ export default {
         'float-slow': 'float 8s ease-in-out infinite',
         'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
         'fall': 'fall linear infinite',
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
       transitionTimingFunction: {
         'smooth': 'var(--transition-smooth)',
@@ -102,11 +105,7 @@ export default {
           },
         },
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

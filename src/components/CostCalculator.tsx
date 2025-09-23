@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,15 +29,11 @@ const CostCalculator: React.FC = () => {
     savings: 0
   });
 
-  useEffect(() => {
-    calculateCosts();
-  }, [config]);
-
-  const calculateCosts = () => {
+  const calculateCosts = useCallback(() => {
     const serverCost = config.servers * 89; // $89 per server
     const storageCost = config.storage * 0.25; // $0.25 per GB
     const bandwidthCost = config.bandwidth * 0.12; // $0.12 per GB
-    
+
     let securityCost = 0;
     switch (config.securityLevel) {
       case 'basic': securityCost = 29; break;
@@ -49,7 +45,7 @@ const CostCalculator: React.FC = () => {
     const multiCloudCost = config.multiCloud ? 199 : 0;
 
     const subtotal = serverCost + storageCost + bandwidthCost + securityCost + aiCost + multiCloudCost;
-    
+
     // AI optimization savings
     const aiSavings = config.aiOptimization ? subtotal * 0.25 : 0;
     const total = subtotal - aiSavings;
@@ -64,9 +60,13 @@ const CostCalculator: React.FC = () => {
       total: total,
       savings: aiSavings
     });
-  };
+  }, [config]);
 
-  const handleConfigChange = (key: string, value: any) => {
+  useEffect(() => {
+    calculateCosts();
+  }, [config, calculateCosts]);
+
+  const handleConfigChange = (key: string, value: number | string | boolean) => {
     setConfig(prev => ({ ...prev, [key]: value }));
   };
 

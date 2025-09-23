@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolonia Cybersecurity Theme Screenshot</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0c4a6e 0%, #083344 50%, #0f172a 100%);
+            font-family: 'Inter', sans-serif;
+            color: #e0f2fe;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Binary Rain Background */
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .binary-column {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(14, 165, 233, 0.3);
+            line-height: 1.2;
+            animation: fall 8s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px rgba(14, 165, 233, 0.4);
+        }
+
+        .tagline {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #e0f2fe;
+        }
+
+        .description {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #0ea5e9;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #e0f2fe;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        .cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #0ea5e9, #10b981);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- Binary Rain Background -->
+    <div class="binary-rain" id="binaryRain"></div>
+
+    <div class="content">
+        <div class="logo">DOLONIA</div>
+        <div class="tagline">Cybersecurity Solutions</div>
+        <p class="description">
+            Advanced cybersecurity theme with binary rain effects, glitch animations, and ocean-themed gradients.
+            Perfect for cybersecurity companies and tech businesses.
+        </p>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Security First</div>
+                <div class="feature-desc">Built with security best practices and modern encryption standards.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌊</div>
+                <div class="feature-title">Ocean Theme</div>
+                <div class="feature-desc">Beautiful ocean-inspired gradients and cyberpunk aesthetics.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Fast & Responsive</div>
+                <div class="feature-desc">Optimized performance with responsive design for all devices.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <div class="feature-title">Customizable</div>
+                <div class="feature-desc">Easy customization through WordPress Customizer.</div>
+            </div>
+        </div>
+
+        <a href="#" class="cta">Get Started</a>
+    </div>
+
+    <script>
+        // Generate binary rain columns
+        function initBinaryRain() {
+            const binaryRain = document.getElementById('binaryRain');
+            const windowWidth = window.innerWidth;
+            const columns = Math.floor(windowWidth / 20);
+
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'binary-column';
+                column.style.left = i * 20 + 'px';
+                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                column.style.animationDelay = Math.random() * 2 + 's';
+
+                let content = '';
+                for (let j = 0; j < 50; j++) {
+                    content += Math.random() > 0.5 ? '1' : '0';
+                    if (j % 10 === 9) content += '<br>';
+                }
+                column.innerHTML = content;
+
+                binaryRain.appendChild(column);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initBinaryRain);
+    </script>
+</body>
+</html>

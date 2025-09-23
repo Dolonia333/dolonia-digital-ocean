@@ -16,8 +16,19 @@
            ├── functions.php
            ├── header.php
            ├── footer.php
+           ├── page.php
+           ├── single.php
+           ├── archive.php
+           ├── 404.php
+           ├── search.php
+           ├── searchform.php
+           ├── single-testimonials.php
+           ├── single-services.php
+           ├── archive-testimonials.php
+           ├── archive-services.php
            ├── js/
            │   └── main.js
+           ├── screenshot.html
            └── README.txt
    ```
 
@@ -48,6 +59,171 @@
 
 #### Add Testimonials:
 1. Go to `Testimonials > Add New`
+2. Add testimonial content
+3. Fill in the testimonial details meta box:
+   - Company name
+   - Person's position
+   - Rating (1-5 stars)
+4. Upload a photo (optional)
+5. Publish
+
+#### Add Services:
+1. Go to `Services > Add New`
+2. Add service title and description
+3. Fill in the service details meta box
+4. Upload a featured image
+5. Publish
+
+### 5. Create Essential Pages
+
+Create these pages for full functionality:
+
+#### Contact Page:
+- Create a page called "Contact"
+- Add contact form shortcode or use a contact form plugin
+- The theme has built-in contact styling
+
+#### About Page:
+- Create a page called "About"
+- Add your company information
+
+#### Services Page:
+- Create a page called "Services"
+- Add `[services_archive]` shortcode to display all services
+
+#### Testimonials Page:
+- Create a page called "Testimonials"
+- Add `[testimonials_archive]` shortcode to display all testimonials
+
+### 6. Menu Setup
+
+#### Primary Menu:
+- Go to `Appearance > Menus`
+- Create a new menu called "Primary Menu"
+- Add your main navigation items
+- Assign to "Primary Menu" location
+
+#### Footer Menu:
+- Create a new menu called "Footer Menu"
+- Add footer links (Privacy Policy, Terms, etc.)
+- Assign to "Footer Menu" location
+
+### 7. Theme Features
+
+#### Binary Rain Effect:
+- Automatically enabled on homepage
+- Customizable through theme options (coming in future updates)
+
+#### Glitch Logo Effect:
+- Applied automatically to custom logo
+- Works best with PNG logos with transparent backgrounds
+
+#### Responsive Design:
+- Fully responsive on all devices
+- Mobile-optimized navigation and layouts
+
+#### SEO Optimized:
+- Proper meta tags and structured data
+- Schema.org markup for business information
+- Open Graph and Twitter Card support
+
+### 8. Customization Options
+
+#### Colors:
+- Ocean-themed color scheme
+- CSS custom properties for easy customization
+- Gradient backgrounds and glow effects
+
+#### Typography:
+- Inter font family from Google Fonts
+- Responsive font scaling
+- Proper heading hierarchy
+
+#### Animations:
+- Smooth transitions and hover effects
+- Binary rain background animation
+- Glitch effects on interactive elements
+
+### 9. Performance Optimization
+
+#### Fast Loading:
+- Optimized CSS and JavaScript
+- Lazy loading for images
+- Minimal HTTP requests
+
+#### SEO Ready:
+- Semantic HTML structure
+- Proper heading hierarchy
+- Alt text for images
+- Meta descriptions and titles
+
+### 10. Troubleshooting
+
+#### Theme Not Activating:
+- Check PHP version (requires 7.4+)
+- Check WordPress version (requires 5.0+)
+- Check file permissions
+
+#### Styles Not Loading:
+- Clear browser cache
+- Check if child theme is active
+- Verify theme files are uploaded correctly
+
+#### Custom Post Types Not Showing:
+- Go to `Settings > Permalinks`
+- Click "Save Changes" to flush rewrite rules
+- Check if custom post types are registered
+
+#### Logo Not Showing Glitch Effect:
+- Ensure logo is PNG with transparent background
+- Check logo dimensions (recommended 200x200px)
+- Clear browser cache
+
+### 11. Development
+
+#### Theme Structure:
+```
+dolonia-cybersecurity/
+├── style.css           # Main stylesheet
+├── functions.php       # Theme functions and setup
+├── index.php          # Homepage template
+├── header.php         # Header template
+├── footer.php         # Footer template
+├── page.php           # Page template
+├── single.php         # Single post template
+├── archive.php        # Archive template
+├── 404.php           # 404 error template
+├── search.php         # Search results template
+├── searchform.php     # Search form template
+├── single-testimonials.php    # Testimonial single template
+├── single-services.php        # Service single template
+├── archive-testimonials.php   # Testimonials archive template
+├── archive-services.php       # Services archive template
+├── js/
+│   └── main.js        # JavaScript functionality
+├── screenshot.html    # Theme preview (convert to PNG)
+└── README.txt         # Theme information
+```
+
+#### Customization:
+- Edit `style.css` for visual changes
+- Modify `functions.php` for functionality changes
+- Update `js/main.js` for interactive features
+- Create child theme for major customizations
+
+### 12. Support
+
+For support and updates:
+- Check the theme documentation
+- Visit the theme repository
+- Contact the theme developer
+
+---
+
+**Theme Version:** 1.0
+**Last Updated:** September 2025
+**WordPress Compatibility:** 5.0+
+**PHP Compatibility:** 7.4+
 2. Create testimonials with:
    - Title: Customer name
    - Content: Testimonial quote
