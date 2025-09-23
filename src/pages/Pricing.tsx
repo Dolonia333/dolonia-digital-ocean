@@ -82,12 +82,6 @@ const Pricing = () => {
             </p>
           </div>
 
-          {/* ... keep existing code (pricing plans and FAQ) */}
-        </div>
-      </Layout>
-    </>
-  );
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan, index) => (
               <Card 
@@ -140,7 +134,7 @@ const Pricing = () => {
                     }`}
                     variant={plan.badge === "Most Popular" ? "default" : "outline"}
                   >
-                    {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
+                    Get Started
                   </Button>
                 </CardContent>
               </Card>

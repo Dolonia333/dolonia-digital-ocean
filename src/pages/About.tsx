@@ -47,8 +47,6 @@ const About = () => {
             </p>
           </div>
 
-          {/* ... keep existing code (company stats section) */}
-          
           {/* Company Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat, index) => (
@@ -66,12 +64,6 @@ const About = () => {
             ))}
           </div>
 
-          {/* ... keep existing code (all remaining sections) */}
-        </div>
-      </Layout>
-    </>
-  );
-
           {/* Who We Are */}
           <div className="max-w-4xl mx-auto mb-16">
             <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
@@ -88,8 +80,6 @@ const About = () => {
             </Card>
           </div>
 
-          {/* ... keep existing code (all remaining content sections) */}
-          
           {/* Our Story */}
           <div className="max-w-4xl mx-auto mb-16">
             <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
