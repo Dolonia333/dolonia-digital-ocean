@@ -1,7 +1,6 @@
 import React from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -193,11 +192,14 @@ ${retainerPackages.map(pkg => `
   };
 
   return (
-    <div className="min-h-screen bg-gradient-ocean text-foreground">
-      <BinaryRain />
-      <Navigation />
-      
-      <main className="relative z-10 pt-20">
+    <>
+      <SEO 
+        title="Service Menu & Pricing 2025 - Dolonia Data Tech"
+        description="Complete service menu with pricing for automation, security audits, cloud migration, API development, and retainer packages. Download our 2025 pricing guide."
+        keywords="dolonia services menu 2025, technology services pricing, automation setup, security audit, cloud migration, API development, retainer packages"
+        url="https://dolonia.cloud/service-menu"
+      />
+      <Layout>
         <div className="container mx-auto px-6 py-16">
           {/* Header with Business Info */}
           <div className="text-center mb-16">
@@ -212,7 +214,6 @@ ${retainerPackages.map(pkg => `
               <span className="bg-gradient-cyber bg-clip-text text-transparent">Dolonia Data Tech</span>
             </h1>
             <p className="text-2xl text-cyan-bright mb-4">Services & Pricing Menu (2025)</p>
-            
             {/* Business Contact Card */}
             <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm max-w-2xl mx-auto mb-8">
               <CardContent className="p-6">
@@ -238,6 +239,25 @@ ${retainerPackages.map(pkg => `
             </Card>
 
             <Button 
+              onClick={handleDownload}
+              className="bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold mb-8"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Download Service Menu
+            </Button>
+          </div>
+
+          {/* Service Categories - simplified for now */}
+          <div className="text-center py-8">
+            <p className="text-cyan-soft">Service categories and full menu content available on download.</p>
+          </div>
+        </div>
+      </Layout>
+    </>
+  );
+};
+
+export default ServiceMenu;
               onClick={handleDownload}
               className="bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold mb-8"
             >

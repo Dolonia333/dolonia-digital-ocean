@@ -1,16 +1,18 @@
 import React from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
+import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 import SecuritySection from '@/components/SecuritySection';
-import Footer from '@/components/Footer';
 
 const Security = () => {
   return (
-    <div className="min-h-screen bg-gradient-ocean text-foreground">
-      <BinaryRain />
-      <Navigation />
-      
-      <main className="relative z-10 pt-20">
+    <>
+      <SEO 
+        title="Enterprise Security Solutions - Dolonia Data Tech"
+        description="Military-grade cybersecurity solutions including encryption, threat detection, compliance auditing, and 24/7 monitoring. Protect your business with enterprise-grade security."
+        keywords="enterprise cybersecurity, military grade encryption, threat detection, security compliance, GDPR HIPAA SOC2, cyber security solutions"
+        url="https://dolonia.cloud/security"
+      />
+      <Layout>
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -22,10 +24,8 @@ const Security = () => {
           </div>
         </div>
         <SecuritySection />
-      </main>
-      
-      <Footer />
-    </div>
+      </Layout>
+    </>
   );
 };
 

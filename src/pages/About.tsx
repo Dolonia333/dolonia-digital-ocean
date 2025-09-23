@@ -1,7 +1,6 @@
 import React from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Users, Target, Award, Globe, Heart, Shield, Lightbulb, Handshake, Mail, Phone } from 'lucide-react';
@@ -29,11 +28,14 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-ocean text-foreground">
-      <BinaryRain />
-      <Navigation />
-      
-      <main className="relative z-10 pt-20">
+    <>
+      <SEO 
+        title="About Dolonia Data Tech - Technology Solutions & Cybersecurity"
+        description="Learn about Dolonia Data Tech, a leading technology solutions company based in Oklahoma City. We provide secure, reliable, and future-ready digital systems for business growth."
+        keywords="about dolonia data tech, cybersecurity company oklahoma, technology solutions, web development, automation, IT security"
+        url="https://dolonia.cloud/about"
+      />
+      <Layout>
         <div className="container mx-auto px-6 py-16">
           {/* Hero Section */}
           <div className="text-center mb-16">
@@ -45,6 +47,8 @@ const About = () => {
             </p>
           </div>
 
+          {/* ... keep existing code (company stats section) */}
+          
           {/* Company Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat, index) => (
@@ -62,6 +66,12 @@ const About = () => {
             ))}
           </div>
 
+          {/* ... keep existing code (all remaining sections) */}
+        </div>
+      </Layout>
+    </>
+  );
+
           {/* Who We Are */}
           <div className="max-w-4xl mx-auto mb-16">
             <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
@@ -78,6 +88,8 @@ const About = () => {
             </Card>
           </div>
 
+          {/* ... keep existing code (all remaining content sections) */}
+          
           {/* Our Story */}
           <div className="max-w-4xl mx-auto mb-16">
             <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
@@ -212,10 +224,8 @@ const About = () => {
             </Card>
           </div>
         </div>
-      </main>
-      
-      <Footer />
-    </div>
+      </Layout>
+    </>
   );
 };
 

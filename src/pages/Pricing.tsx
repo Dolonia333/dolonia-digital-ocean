@@ -1,7 +1,6 @@
 import React from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -64,11 +63,14 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-ocean text-foreground">
-      <BinaryRain />
-      <Navigation />
-      
-      <main className="relative z-10 pt-20">
+    <>
+      <SEO 
+        title="Pricing - Dolonia Data Tech Retainer Packages"
+        description="Monthly retainer packages for ongoing technology support, cybersecurity, and business growth. Starter, Business Growth, and Premium Partnership options available."
+        keywords="dolonia pricing, cybersecurity retainer, technology support packages, web development pricing, IT consulting rates"
+        url="https://dolonia.cloud/pricing"
+      />
+      <Layout>
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -79,6 +81,12 @@ const Pricing = () => {
               All packages include priority access and dedicated support.
             </p>
           </div>
+
+          {/* ... keep existing code (pricing plans and FAQ) */}
+        </div>
+      </Layout>
+    </>
+  );
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan, index) => (
@@ -196,10 +204,8 @@ const Pricing = () => {
             </div>
           </div>
         </div>
-      </main>
-      
-      <Footer />
-    </div>
+      </Layout>
+    </>
   );
 };
 
