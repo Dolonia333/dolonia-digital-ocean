@@ -135,7 +135,8 @@ const SearchFunctionality: React.FC = () => {
   }, [results, selectedIndex]);
 
   const handleResultClick = (result: SearchResult) => {
-    console.log('Navigate to:', result.url);
+    // Navigate to the selected result
+    window.location.href = result.url;
     setIsOpen(false);
     setQuery('');
   };
