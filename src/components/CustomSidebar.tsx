@@ -11,9 +11,12 @@ import {
   BookOpen,
   ChevronLeft,
   ChevronRight,
+  LogIn,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import doloniaLogo from "@/assets/dolonia-logo.png";
+import { useAuth } from "@/hooks/useAuth";
 
 const navigation = [
   { title: "Home", url: "/", icon: Home },
@@ -37,6 +40,7 @@ export function CustomSidebar({
   onToggle,
   className,
 }: CustomSidebarProps) {
+  const { user } = useAuth();
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
     null
   );
@@ -202,6 +206,53 @@ export function CustomSidebar({
                 )}
               </NavLink>
             ))}
+
+            {/* Auth Link */}
+            <div className="pt-2 mt-2 border-t border-ocean-surface/30">
+              <NavLink
+                to={user ? "/account" : "/login"}
+                className={({ isActive }) => `
+                flex items-center px-2 md:px-3 py-3 md:py-2 rounded-lg transition-all duration-300 group
+                ${
+                  isActive
+                    ? "bg-ocean-surface/50 text-cyan-bright border-r-2 border-cyan-bright shadow-lg transform scale-105"
+                    : "hover:bg-ocean-surface/30 text-cyan-soft hover:text-cyan-bright hover:shadow-md hover:scale-105"
+                }
+              `}
+              >
+                {user ? (
+                  <>
+                    <User
+                      className={`${
+                        isCollapsed
+                          ? "w-4 h-4 md:w-5 md:h-5"
+                          : "w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3"
+                      } flex-shrink-0 group-hover:rotate-3 transition-transform duration-300`}
+                    />
+                    {!isCollapsed && (
+                      <span className="font-medium text-sm md:text-base group-hover:translate-x-1 transition-transform duration-300">
+                        Account
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <LogIn
+                      className={`${
+                        isCollapsed
+                          ? "w-4 h-4 md:w-5 md:h-5"
+                          : "w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3"
+                      } flex-shrink-0 group-hover:rotate-3 transition-transform duration-300`}
+                    />
+                    {!isCollapsed && (
+                      <span className="font-medium text-sm md:text-base group-hover:translate-x-1 transition-transform duration-300">
+                        Login
+                      </span>
+                    )}
+                  </>
+                )}
+              </NavLink>
+            </div>
           </nav>
         </div>
 

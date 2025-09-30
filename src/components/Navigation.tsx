@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import doloniaLogo from '@/assets/dolonia-logo.png';
-import { useAuth } from '@/hooks/useAuth';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   
@@ -75,27 +73,14 @@ const Navigation: React.FC = () => {
             </Link>
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-            {user ? (
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/account')}
-                className="bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300"
-              >
-                <User className="w-4 h-4 mr-2" />
-                Account
-              </Button>
-            ) : (
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/login')}
-                className="bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300"
-              >
-                Login
-              </Button>
-            )}
-          </div>
+          {/* Desktop CTA Button */}
+          <Button 
+            variant="outline" 
+            onClick={handleGetStarted}
+            className="hidden md:block bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300"
+          >
+            Get Started
+          </Button>
 
           {/* Mobile Menu Button */}
           <button
@@ -160,30 +145,16 @@ const Navigation: React.FC = () => {
               >
                 Contact
               </Link>
-              {user ? (
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    navigate('/account');
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300 mt-4"
-                >
-                  <User className="w-4 h-4 mr-2" />
-                  Account
-                </Button>
-              ) : (
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    navigate('/login');
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300 mt-4"
-                >
-                  Login
-                </Button>
-              )}
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  handleGetStarted();
+                  setIsMenuOpen(false);
+                }}
+                className="w-full bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300 mt-4"
+              >
+                Get Started
+              </Button>
             </div>
           </div>
         )}
