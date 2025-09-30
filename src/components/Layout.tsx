@@ -1,8 +1,7 @@
-import React from 'react';
-import BinaryRain from '@/components/BinaryRain';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import PageTransition from '@/components/PageTransition';
+import React from "react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,26 +9,23 @@ interface LayoutProps {
   showFooter?: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ 
-  children, 
-  showNavigation = true, 
-  showFooter = true 
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  showNavigation = false, // Hide top navigation - using sidebar only
+  showFooter = true,
 }) => {
   return (
     <div className="min-h-screen bg-gradient-ocean text-foreground">
-      {/* Background */}
-      <BinaryRain />
-      
+      {/* Main background */}
+
       {/* Navigation */}
       {showNavigation && <Navigation />}
-      
+
       {/* Main content with page transition */}
       <PageTransition>
-        <main className="relative z-10">
-          {children}
-        </main>
+        <main className="relative z-10">{children}</main>
       </PageTransition>
-      
+
       {/* Footer */}
       {showFooter && <Footer />}
     </div>

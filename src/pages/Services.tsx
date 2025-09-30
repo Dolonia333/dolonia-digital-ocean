@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import ServicesSection from '@/components/ServicesSection';
 import DetailedServicesSection from '@/components/DetailedServicesSection';
+import InteractiveDemo from '@/components/InteractiveDemo';
 
 const Services = () => {
   return (
@@ -26,6 +27,7 @@ const Services = () => {
         </div>
         <ServicesSection />
         <DetailedServicesSection />
+        <InteractiveDemo />
       </div>
     </Layout>
   );

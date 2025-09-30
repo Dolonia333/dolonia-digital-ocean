@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import doloniaLogo from '@/assets/dolonia-logo.png';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  
+  const handleGetStarted = () => {
+    navigate('/contact');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-ocean-deep/80 backdrop-blur-md border-b border-ocean-surface">
@@ -55,6 +60,12 @@ const Navigation: React.FC = () => {
               About
             </Link>
             <Link 
+              to="/blog" 
+              className="text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium"
+            >
+              Blog
+            </Link>
+            <Link 
               to="/contact" 
               className="text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium"
             >
@@ -65,6 +76,7 @@ const Navigation: React.FC = () => {
           {/* Desktop CTA Button */}
           <Button 
             variant="outline" 
+            onClick={handleGetStarted}
             className="hidden md:block bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300"
           >
             Get Started
@@ -120,6 +132,13 @@ const Navigation: React.FC = () => {
                 About
               </Link>
               <Link 
+                to="/blog" 
+                className="block text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link 
                 to="/contact" 
                 className="block text-cyan-soft hover:text-cyan-bright transition-colors duration-300 font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
@@ -128,6 +147,10 @@ const Navigation: React.FC = () => {
               </Link>
               <Button 
                 variant="outline" 
+                onClick={() => {
+                  handleGetStarted();
+                  setIsMenuOpen(false);
+                }}
                 className="w-full bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep cyber-glow transition-all duration-300 mt-4"
               >
                 Get Started

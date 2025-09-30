@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Cloud, Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import doloniaLogo from '@/assets/dolonia-logo.png';
 
@@ -24,25 +25,31 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="#" 
+                href="https://x.com/dolonia3333" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-ocean-surface rounded-lg text-cyan-soft hover:text-cyan-bright hover:bg-ocean-mid transition-all duration-300"
               >
                 <Twitter size={20} />
               </a>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/zion-van-zandt-8231a028a/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-ocean-surface rounded-lg text-cyan-soft hover:text-cyan-bright hover:bg-ocean-mid transition-all duration-300"
               >
                 <Linkedin size={20} />
               </a>
               <a 
-                href="#" 
+                href="https://github.com/Dolonia333" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-ocean-surface rounded-lg text-cyan-soft hover:text-cyan-bright hover:bg-ocean-mid transition-all duration-300"
               >
                 <Github size={20} />
               </a>
               <a 
-                href="#" 
+                href="mailto:zion@royalsocietymanagement.com"
                 className="p-2 bg-ocean-surface rounded-lg text-cyan-soft hover:text-cyan-bright hover:bg-ocean-mid transition-all duration-300"
               >
                 <Mail size={20} />
@@ -55,24 +62,24 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold text-foreground mb-4">Solutions</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/solutions" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Cloud Infrastructure
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/solutions" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Data Analytics
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/security" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Security Suite
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/services" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Edge Computing
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -82,24 +89,24 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold text-foreground mb-4">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/about" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/contact" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Careers
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/about" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Partners
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+                <Link to="/contact" className="text-cyan-soft hover:text-cyan-bright transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -111,15 +118,15 @@ const Footer: React.FC = () => {
             © {currentYear} Dolonia.cloud. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+            <Link to="/privacy-policy" className="text-cyan-soft hover:text-cyan-bright transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+            </Link>
+            <Link to="/terms-of-service" className="text-cyan-soft hover:text-cyan-bright transition-colors">
               Terms of Service
-            </a>
-            <a href="#" className="text-cyan-soft hover:text-cyan-bright transition-colors">
+            </Link>
+            <Link to="/cookie-policy" className="text-cyan-soft hover:text-cyan-bright transition-colors">
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

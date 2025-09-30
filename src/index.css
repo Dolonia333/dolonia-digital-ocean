@@ -49,17 +49,30 @@ All colors MUST be HSL.
     --cyan-bright: 180 100% 50%;
     --cyan-glow: 175 100% 60%;
     --cyan-soft: 180 50% 75%;
-    
+
     /* Gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(210 50% 4%), hsl(210 45% 8%), hsl(210 30% 12%));
-    --gradient-cyber: linear-gradient(135deg, hsl(180 100% 50%), hsl(175 100% 60%));
-    --gradient-surface: linear-gradient(180deg, hsl(210 30% 15%), hsl(210 45% 8%));
-    
+    --gradient-ocean: linear-gradient(
+      135deg,
+      hsl(210 50% 4%),
+      hsl(210 45% 8%),
+      hsl(210 30% 12%)
+    );
+    --gradient-cyber: linear-gradient(
+      135deg,
+      hsl(180 100% 50%),
+      hsl(175 100% 60%)
+    );
+    --gradient-surface: linear-gradient(
+      180deg,
+      hsl(210 30% 15%),
+      hsl(210 45% 8%)
+    );
+
     /* Shadows and glows */
     --shadow-cyber: 0 0 30px hsl(180 100% 50% / 0.3);
     --shadow-glow: 0 0 60px hsl(175 100% 60% / 0.4);
     --shadow-deep: 0 10px 40px hsl(210 50% 2% / 0.8);
-    
+
     /* Animation timing */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -128,33 +141,312 @@ All colors MUST be HSL.
 
   .binary-digit {
     position: absolute;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-weight: bold;
     color: hsl(var(--cyan-bright));
     text-shadow: 0 0 10px hsl(var(--cyan-bright));
     animation: fall linear infinite;
     opacity: 0.7;
+    /* Enhanced hardware acceleration for mobile fluidity */
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    /* Mobile-optimized rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
   @keyframes fall {
     0% {
-      transform: translateY(-100px);
+      transform: translate3d(0, -100px, 0);
       opacity: 0;
+      color: #00ff88;
     }
-    10% {
+    3% {
       opacity: 0.7;
+      color: #00ff88;
     }
-    90% {
-      opacity: 0.7;
+    20% {
+      color: #88ff00;
+    }
+    40% {
+      color: #ffff00;
+    }
+    60% {
+      color: #ff8800;
+    }
+    80% {
+      color: #ff0088;
+      opacity: 0.8;
+    }
+    95% {
+      transform: translate3d(0, 100vh, 0);
+      opacity: 0.6;
+      color: #ff0088;
     }
     100% {
-      transform: translateY(100vh);
+      transform: translate3d(0, calc(100vh + 50px), 0);
       opacity: 0;
+      color: #ff0044;
+    }
+  }
+
+  /* Matrix-style column animation */
+  @keyframes matrix {
+    0% {
+      transform: translate3d(0, -100px, 0);
+      opacity: 0;
+      color: #00ff00;
+    }
+    8% {
+      opacity: 0.9;
+      color: #00ff00;
+    }
+    25% {
+      color: #44ff44;
+    }
+    50% {
+      color: #88ff88;
+    }
+    75% {
+      color: #aaffaa;
+    }
+    95% {
+      transform: translate3d(0, 100vh, 0);
+      opacity: 0.7;
+      color: #aaffaa;
+    }
+    100% {
+      transform: translate3d(0, calc(100vh + 50px), 0);
+      opacity: 0;
+      color: #ccffcc;
+    }
+  }
+
+  /* Wave motion - side to side while falling - optimized for mobile */
+  @keyframes wave {
+    0% {
+      transform: translate3d(0, -100px, 0);
+      opacity: 0;
+      color: #0088ff;
+    }
+    3% {
+      opacity: 0.7;
+      color: #0088ff;
+    }
+    20% {
+      transform: translate3d(20px, 25vh, 0);
+      color: #00aaff;
+    }
+    40% {
+      transform: translate3d(-15px, 50vh, 0);
+      color: #00ccff;
+    }
+    65% {
+      transform: translate3d(25px, 75vh, 0);
+      color: #00eeff;
+    }
+    85% {
+      opacity: 0.8;
+      color: #44ffff;
+    }
+    95% {
+      transform: translate3d(5px, 100vh, 0);
+      opacity: 0.6;
+      color: #44ffff;
+    }
+    100% {
+      transform: translate3d(0, calc(100vh + 50px), 0);
+      opacity: 0;
+      color: #88ffff;
+    }
+  }
+
+  /* Spiral descent */
+  @keyframes spiral {
+    0% {
+      transform: translateY(-100px) translateX(0px) rotate(0deg) translateZ(0);
+      opacity: 0;
+      color: #ff00ff;
+    }
+    5% {
+      opacity: 0.7;
+      color: #ff00ff;
+    }
+    25% {
+      transform: translateY(25vh) translateX(30px) rotate(90deg) translateZ(0);
+      color: #ff44ff;
+    }
+    50% {
+      transform: translateY(50vh) translateX(0px) rotate(180deg) translateZ(0);
+      color: #ff88ff;
+    }
+    75% {
+      transform: translateY(75vh) translateX(-30px) rotate(270deg) translateZ(0);
+      color: #ffaaff;
+    }
+    95% {
+      opacity: 0.7;
+      color: #ffccff;
+    }
+    100% {
+      transform: translateY(100vh) translateX(0px) rotate(360deg) translateZ(0);
+      opacity: 0;
+      color: #ffffff;
+    }
+  }
+
+  /* Glitch effect - teleportation jumps */
+  @keyframes glitch {
+    0% {
+      transform: translateY(-100px) translateX(0px) translateZ(0);
+      opacity: 0;
+      color: #ff0000;
+    }
+    5% {
+      opacity: 1;
+      color: #ff0000;
+    }
+    20% {
+      transform: translateY(20vh) translateX(-10px) translateZ(0);
+      opacity: 0.8;
+      color: #ff4400;
+    }
+    21% {
+      transform: translateY(30vh) translateX(15px) translateZ(0);
+      opacity: 1;
+      color: #ff8800;
+    }
+    40% {
+      transform: translateY(40vh) translateX(5px) translateZ(0);
+      opacity: 0.6;
+      color: #ffcc00;
+    }
+    41% {
+      transform: translateY(60vh) translateX(-20px) translateZ(0);
+      opacity: 1;
+      color: #ccff00;
+    }
+    60% {
+      transform: translateY(70vh) translateX(10px) translateZ(0);
+      opacity: 0.8;
+      color: #88ff00;
+    }
+    61% {
+      transform: translateY(80vh) translateX(-5px) translateZ(0);
+      opacity: 1;
+      color: #44ff00;
+    }
+    95% {
+      opacity: 0.8;
+      color: #00ff44;
+    }
+    100% {
+      transform: translateY(100vh) translateX(0px) translateZ(0);
+      opacity: 0;
+      color: #00ff88;
+    }
+  }
+
+  /* Cascade effect - waterfall style */
+  @keyframes cascade {
+    0% {
+      transform: translateY(-100px) scaleY(0.2) translateZ(0);
+      opacity: 0;
+      color: #0044ff;
+    }
+    10% {
+      opacity: 0.8;
+      transform: translateY(-50px) scaleY(0.6) translateZ(0);
+      color: #0066ff;
+    }
+    20% {
+      transform: translateY(10vh) scaleY(1.2) translateZ(0);
+      color: #0088ff;
+    }
+    40% {
+      color: #00aaff;
+    }
+    60% {
+      color: #00ccff;
+    }
+    80% {
+      transform: translateY(80vh) scaleY(1) translateZ(0);
+      opacity: 0.8;
+      color: #00eeff;
+    }
+    100% {
+      transform: translateY(100vh) scaleY(0.3) translateZ(0);
+      opacity: 0;
+      color: #44ffff;
+    }
+  }
+
+  /* Apply pattern-specific animations with smooth timing */
+  .pattern-fall {
+    animation: fall cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  }
+
+  .pattern-matrix {
+    animation: matrix cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  }
+
+  .pattern-wave {
+    animation: wave cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  }
+
+  .pattern-spiral {
+    animation: spiral cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  }
+
+  .pattern-glitch {
+    animation: glitch cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+  }
+
+  .pattern-cascade {
+    animation: cascade cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) and (hover: none) and (pointer: coarse) {
+    .binary-digit {
+      /* Force GPU compositing on mobile devices */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      /* Optimize mobile rendering */
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      /* Reduce mobile font rendering overhead */
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Smoother easing for mobile touch devices */
+    .pattern-wave {
+      animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pattern-spiral {
+      animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pattern-cascade {
+      animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     }
   }
 
@@ -173,34 +465,35 @@ All colors MUST be HSL.
 
   /* Typography improvements */
   html {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   /* Improved text hierarchy */
-  h1 { 
+  h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
-  
-  h2 { 
+
+  h2 {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.01em;
   }
-  
-  h3 { 
+
+  h3 {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 600;
     line-height: 1.3;
   }
-  
-  h4 { 
+
+  h4 {
     font-size: clamp(1.25rem, 2.5vw, 1.5rem);
     font-weight: 500;
     line-height: 1.4;
@@ -216,18 +509,18 @@ All colors MUST be HSL.
     opacity: 0;
     transform: translateY(20px);
   }
-  
+
   .page-transition-enter-active {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 300ms ease-out, transform 300ms ease-out;
   }
-  
+
   .page-transition-exit {
     opacity: 1;
     transform: translateY(0);
   }
-  
+
   .page-transition-exit-active {
     opacity: 0;
     transform: translateY(-20px);
@@ -281,11 +574,26 @@ All colors MUST be HSL.
   }
 
   /* Staggered animations */
-  .stagger-1 { animation-delay: 0.1s; opacity: 0; }
-  .stagger-2 { animation-delay: 0.2s; opacity: 0; }
-  .stagger-3 { animation-delay: 0.3s; opacity: 0; }
-  .stagger-4 { animation-delay: 0.4s; opacity: 0; }
-  .stagger-5 { animation-delay: 0.5s; opacity: 0; }
+  .stagger-1 {
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
 
   /* Enhanced hover effects */
   .hover-lift {
@@ -307,21 +615,48 @@ All colors MUST be HSL.
 
   /* Glitch effect animations */
   @keyframes glitch-red {
-    0%, 90% { opacity: 0; }
-    91%, 94% { opacity: 0.8; }
-    95%, 100% { opacity: 0; }
+    0%,
+    90% {
+      opacity: 0;
+    }
+    91%,
+    94% {
+      opacity: 0.8;
+    }
+    95%,
+    100% {
+      opacity: 0;
+    }
   }
 
   @keyframes glitch-cyan {
-    0%, 85% { opacity: 0; }
-    86%, 89% { opacity: 0.7; }
-    90%, 100% { opacity: 0; }
+    0%,
+    85% {
+      opacity: 0;
+    }
+    86%,
+    89% {
+      opacity: 0.7;
+    }
+    90%,
+    100% {
+      opacity: 0;
+    }
   }
 
   @keyframes glitch-purple {
-    0%, 80% { opacity: 0; }
-    81%, 84% { opacity: 0.6; }
-    85%, 100% { opacity: 0; }
+    0%,
+    80% {
+      opacity: 0;
+    }
+    81%,
+    84% {
+      opacity: 0.6;
+    }
+    85%,
+    100% {
+      opacity: 0;
+    }
   }
 
   .glitch-red {
@@ -358,28 +693,51 @@ All colors MUST be HSL.
   }
 
   /* Staggered animations for better UX */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+  }
 
-  /* Performance optimizations */
+  /* Performance optimizations for smoother animation */
   .binary-rain {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    /* Enable GPU acceleration */
+    transform: translateZ(0);
+
+    /* Reduce mobile performance impact with optimized settings */
+    @media (max-width: 768px) {
+      /* Slightly reduce intensity on mobile for better performance */
+      filter: opacity(0.8);
+    }
   }
 
   .binary-digit {
-    will-change: transform;
+    will-change: transform, opacity;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    
+
     /* Reduce mobile performance impact */
     @media (max-width: 768px) {
-      animation-duration: 2s !important;
-      font-size: 12px !important;
+      animation-duration: 1.5s !important;
+      font-size: 10px !important;
+    }
+
+    /* High refresh rate displays optimization */
+    @media (min-resolution: 120dpi) {
+      animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
   }
 
@@ -396,8 +754,12 @@ All colors MUST be HSL.
   }
 
   @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 
   /* Enhanced button interactions */
@@ -456,7 +818,11 @@ All colors MUST be HSL.
   }
 
   @keyframes loading-skeleton {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 }

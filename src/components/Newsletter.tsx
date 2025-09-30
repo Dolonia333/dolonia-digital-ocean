@@ -37,25 +37,45 @@ const Newsletter: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Try to submit to backend (if available), otherwise simulate
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setIsSubscribed(true);
+        setEmail('');
+        
+        toast({
+          title: "Successfully subscribed!",
+          description: "You'll receive our latest updates and insights.",
+        });
+      } else {
+        throw new Error('Subscription failed');
+      }
+    } catch (error) {
+      // Fallback to local storage for now
+      const subscribers = JSON.parse(localStorage.getItem('dolonia-newsletter-subscribers') || '[]');
+      subscribers.push({
+        email,
+        subscribedAt: new Date().toISOString()
+      });
+      localStorage.setItem('dolonia-newsletter-subscribers', JSON.stringify(subscribers));
       
       setIsSubscribed(true);
       setEmail('');
       
       toast({
-        title: "Successfully subscribed!",
-        description: "You'll receive our latest updates and insights.",
+        title: "Subscription saved!",
+        description: "We'll contact you once our newsletter service is fully set up.",
       });
       
       // Reset subscription state after 5 seconds
       setTimeout(() => setIsSubscribed(false), 5000);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to subscribe. Please try again.",
-        variant: "destructive",
-      });
     } finally {
       setIsLoading(false);
     }

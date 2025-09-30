@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ArrowRight, Cloud, Shield, Zap, X } from 'lucide-react';
 import doloniaLogo from '@/assets/dolonia-logo.png';
+import BinaryRain from "@/components/BinaryRain";
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -69,6 +70,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, ben
 const HeroSection: React.FC = () => {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      {/* Binary Rain */}
+      <div className="absolute inset-0">
+        <BinaryRain isActive={true} />
+      </div>
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-ocean opacity-80" />
       

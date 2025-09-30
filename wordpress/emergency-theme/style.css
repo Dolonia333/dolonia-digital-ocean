@@ -1,0 +1,11 @@
+/*
+Theme Name: Emergency Theme
+Description: Minimal emergency theme for troubleshooting
+Version: 1.0
+Author: WordPress
+*/
+
+/* Basic styles */
+body { font-family: Arial, sans-serif; margin: 40px; }
+h1 { color: #333; }
+p { line-height: 1.6; }

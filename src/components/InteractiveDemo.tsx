@@ -1,66 +1,83 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Play, Pause, RotateCcw, CheckCircle, AlertTriangle, Server, Shield, Zap } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Play,
+  Pause,
+  RotateCcw,
+  CheckCircle,
+  AlertTriangle,
+  Server,
+  Shield,
+  Zap,
+} from "lucide-react";
 
 const InteractiveDemo: React.FC = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  
   const [isRunning, setIsRunning] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
-  const demoSteps = useMemo(() => [
-    {
-      title: "Infrastructure Setup",
-      description: "Deploying secure cloud infrastructure",
-      icon: Server,
-      duration: 2000,
-      status: "pending"
-    },
-    {
-      title: "Security Configuration",
-      description: "Implementing zero-trust security protocols",
-      icon: Shield,
-      duration: 3000,
-      status: "pending"
-    },
-    {
-      title: "AI Optimization",
-      description: "Applying machine learning optimizations",
-      icon: Zap,
-      duration: 2500,
-      status: "pending"
-    },
-    {
-      title: "Performance Testing",
-      description: "Running comprehensive performance tests",
-      icon: CheckCircle,
-      duration: 1500,
-      status: "pending"
-    }
-  ], []);
+  const demoSteps = useMemo(
+    () => [
+      {
+        title: "Infrastructure Setup",
+        description: "Deploying secure cloud infrastructure",
+        icon: Server,
+        duration: 2000,
+        status: "pending",
+      },
+      {
+        title: "Security Configuration",
+        description: "Implementing zero-trust security protocols",
+        icon: Shield,
+        duration: 3000,
+        status: "pending",
+      },
+      {
+        title: "AI Optimization",
+        description: "Applying machine learning optimizations",
+        icon: Zap,
+        duration: 2500,
+        status: "pending",
+      },
+      {
+        title: "Performance Testing",
+        description: "Running comprehensive performance tests",
+        icon: CheckCircle,
+        duration: 1500,
+        status: "pending",
+      },
+    ],
+    []
+  );
 
   const [steps, setSteps] = useState(demoSteps);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    
+
     if (isRunning && currentStep < demoSteps.length) {
-      setSteps(prev => prev.map((step, index) => 
-        index === currentStep 
-          ? { ...step, status: "running" }
-          : step
-      ));
+      setSteps((prev) =>
+        prev.map((step, index) =>
+          index === currentStep ? { ...step, status: "running" } : step
+        )
+      );
 
       timeout = setTimeout(() => {
-        setSteps(prev => prev.map((step, index) => 
-          index === currentStep 
-            ? { ...step, status: "completed" }
-            : step
-        ));
-        
-        setCompletedSteps(prev => [...prev, currentStep]);
-        setCurrentStep(prev => prev + 1);
+        setSteps((prev) =>
+          prev.map((step, index) =>
+            index === currentStep ? { ...step, status: "completed" } : step
+          )
+        );
+
+        setCompletedSteps((prev) => [...prev, currentStep]);
+        setCurrentStep((prev) => prev + 1);
       }, demoSteps[currentStep].duration);
     } else if (currentStep >= demoSteps.length && isRunning) {
       setIsRunning(false);
@@ -73,7 +90,7 @@ const InteractiveDemo: React.FC = () => {
     setIsRunning(true);
     setCurrentStep(0);
     setCompletedSteps([]);
-    setSteps(demoSteps.map(step => ({ ...step, status: "pending" })));
+    setSteps(demoSteps.map((step) => ({ ...step, status: "pending" })));
   };
 
   const pauseDemo = () => {
@@ -84,21 +101,47 @@ const InteractiveDemo: React.FC = () => {
     setIsRunning(false);
     setCurrentStep(0);
     setCompletedSteps([]);
-    setSteps(demoSteps.map(step => ({ ...step, status: "pending" })));
+    setSteps(demoSteps.map((step) => ({ ...step, status: "pending" })));
+  };
+
+  const handleScheduleDeployment = () => {
+    // Store demo completion for context
+    localStorage.setItem('dolonia-demo-completed', JSON.stringify({
+      completedAt: new Date().toISOString(),
+      demoType: 'interactive-deployment'
+    }));
+    
+    toast({
+      title: "Demo Completed!",
+      description: "Let's discuss implementing this for your infrastructure.",
+    });
+    
+    navigate('/contact?type=deployment');
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-400 border-green-400';
-      case 'running': return 'text-cyan-bright border-cyan-bright';
-      case 'pending': return 'text-cyan-soft border-ocean-surface';
-      default: return 'text-cyan-soft border-ocean-surface';
+      case "completed":
+        return "text-green-400 border-green-400";
+      case "running":
+        return "text-cyan-bright border-cyan-bright";
+      case "pending":
+        return "text-cyan-soft border-ocean-surface";
+      default:
+        return "text-cyan-soft border-ocean-surface";
     }
   };
 
-  const getStatusIcon = (status: string, IconComponent: React.ComponentType<{ className?: string }>) => {
-    if (status === 'completed') return <CheckCircle className="w-6 h-6 text-green-400" />;
-    if (status === 'running') return <IconComponent className="w-6 h-6 text-cyan-bright animate-pulse" />;
+  const getStatusIcon = (
+    status: string,
+    IconComponent: React.ComponentType<{ className?: string }>
+  ) => {
+    if (status === "completed")
+      return <CheckCircle className="w-6 h-6 text-green-400" />;
+    if (status === "running")
+      return (
+        <IconComponent className="w-6 h-6 text-cyan-bright animate-pulse" />
+      );
     return <IconComponent className="w-6 h-6 text-cyan-soft" />;
   };
 
@@ -120,7 +163,9 @@ const InteractiveDemo: React.FC = () => {
           {/* Control Panel */}
           <Card className="mb-8 bg-ocean-surface/50 backdrop-blur-sm border-ocean-surface">
             <CardHeader>
-              <CardTitle className="text-center text-foreground">Demo Control Panel</CardTitle>
+              <CardTitle className="text-center text-foreground">
+                Demo Control Panel
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex justify-center space-x-4">
@@ -156,11 +201,11 @@ const InteractiveDemo: React.FC = () => {
           {/* Demo Steps */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {steps.map((step, index) => (
-              <Card 
-                key={index} 
-                className={`bg-ocean-surface/50 backdrop-blur-sm border transition-all duration-300 ${getStatusColor(step.status)} ${
-                  step.status === 'running' ? 'scale-105 shadow-glow' : ''
-                }`}
+              <Card
+                key={index}
+                className={`bg-ocean-surface/50 backdrop-blur-sm border transition-all duration-300 ${getStatusColor(
+                  step.status
+                )} ${step.status === "running" ? "scale-105 shadow-glow" : ""}`}
               >
                 <CardHeader>
                   <div className="flex items-center justify-between">
@@ -168,9 +213,11 @@ const InteractiveDemo: React.FC = () => {
                       {getStatusIcon(step.status, step.icon)}
                       <span className="text-lg">{step.title}</span>
                     </CardTitle>
-                    <Badge 
-                      variant="outline" 
-                      className={`${getStatusColor(step.status)} bg-transparent capitalize`}
+                    <Badge
+                      variant="outline"
+                      className={`${getStatusColor(
+                        step.status
+                      )} bg-transparent capitalize`}
                     >
                       {step.status}
                     </Badge>
@@ -178,28 +225,28 @@ const InteractiveDemo: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-cyan-soft mb-4">{step.description}</p>
-                  
+
                   {/* Progress Bar */}
                   <div className="w-full bg-ocean-deep rounded-full h-2 overflow-hidden">
-                    <div 
+                    <div
                       className={`h-full transition-all duration-300 ${
-                        step.status === 'completed' 
-                          ? 'w-full bg-green-400' 
-                          : step.status === 'running'
-                          ? 'w-full bg-cyan-bright animate-pulse'
-                          : 'w-0 bg-cyan-soft'
+                        step.status === "completed"
+                          ? "w-full bg-green-400"
+                          : step.status === "running"
+                          ? "w-full bg-cyan-bright animate-pulse"
+                          : "w-0 bg-cyan-soft"
                       }`}
                     />
                   </div>
-                  
-                  {step.status === 'running' && (
+
+                  {step.status === "running" && (
                     <div className="mt-3 flex items-center space-x-2 text-cyan-bright">
                       <div className="w-2 h-2 bg-cyan-bright rounded-full animate-ping"></div>
                       <span className="text-sm">Processing...</span>
                     </div>
                   )}
-                  
-                  {step.status === 'completed' && (
+
+                  {step.status === "completed" && (
                     <div className="mt-3 flex items-center space-x-2 text-green-400">
                       <CheckCircle className="w-4 h-4" />
                       <span className="text-sm">Completed successfully</span>
@@ -221,23 +268,33 @@ const InteractiveDemo: React.FC = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-cyan-soft mb-6">
-                  Your cloud infrastructure has been deployed with enterprise-grade security and AI optimization.
+                  Your cloud infrastructure has been deployed with
+                  enterprise-grade security and AI optimization.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                   <div className="bg-ocean-surface/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-green-400">99.9%</div>
+                    <div className="text-2xl font-bold text-green-400">
+                      99.9%
+                    </div>
                     <div className="text-cyan-soft">Uptime Guaranteed</div>
                   </div>
                   <div className="bg-ocean-surface/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-cyan-bright">&lt; 50ms</div>
+                    <div className="text-2xl font-bold text-cyan-bright">
+                      &lt; 50ms
+                    </div>
                     <div className="text-cyan-soft">Response Time</div>
                   </div>
                   <div className="bg-ocean-surface/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-green-400">Zero</div>
-                    <div className="text-cyan-soft">Security Vulnerabilities</div>
+                    <div className="text-2xl font-bold text-green-400">
+                      Zero
+                    </div>
+                    <div className="text-cyan-soft">
+                      Security Vulnerabilities
+                    </div>
                   </div>
                 </div>
                 <Button 
+                  onClick={handleScheduleDeployment}
                   className="mt-6 bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold transition-all duration-300"
                 >
                   Schedule Your Real Deployment

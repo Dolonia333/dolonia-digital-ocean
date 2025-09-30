@@ -3,7 +3,12 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -61,26 +66,26 @@ export default {
         },
       },
       backgroundImage: {
-        'gradient-ocean': 'var(--gradient-ocean)',
-        'gradient-cyber': 'var(--gradient-cyber)',
-        'gradient-surface': 'var(--gradient-surface)',
+        "gradient-ocean": "var(--gradient-ocean)",
+        "gradient-cyber": "var(--gradient-cyber)",
+        "gradient-surface": "var(--gradient-surface)",
       },
       boxShadow: {
-        'cyber': 'var(--shadow-cyber)',
-        'glow': 'var(--shadow-glow)',
-        'deep': 'var(--shadow-deep)',
+        cyber: "var(--shadow-cyber)",
+        glow: "var(--shadow-glow)",
+        deep: "var(--shadow-deep)",
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'float-slow': 'float 8s ease-in-out infinite',
-        'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
-        'fall': 'fall linear infinite',
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "float 8s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 2s ease-in-out infinite alternate",
+        fall: "fall linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       transitionTimingFunction: {
-        'smooth': 'var(--transition-smooth)',
-        'bounce': 'var(--transition-bounce)',
+        smooth: "var(--transition-smooth)",
+        bounce: "var(--transition-bounce)",
       },
       borderRadius: {
         lg: "var(--radius)",
