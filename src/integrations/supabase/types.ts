@@ -14,16 +14,255 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      api_tokens: {
+        Row: {
+          created_at: string
+          id: number
+          last_used_at: string | null
+          name: string
+          token_hash: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          last_used_at?: string | null
+          name: string
+          token_hash: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          last_used_at?: string | null
+          name?: string
+          token_hash?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_tokens_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          entity: string
+          entity_id: number | null
+          id: number
+          meta: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          entity: string
+          entity_id?: number | null
+          id?: number
+          meta?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          entity?: string
+          entity_id?: number | null
+          id?: number
+          meta?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          company: string
+          created_at: string
+          id: number
+          notes: string | null
+          owner_id: string | null
+          phone: string | null
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          id?: number
+          notes?: string | null
+          owner_id?: string | null
+          phone?: string | null
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          id?: number
+          notes?: string | null
+          owner_id?: string | null
+          phone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clients_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: number
+          message: string | null
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: number
+          message?: string | null
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: number
+          message?: string | null
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          name: string | null
+          role: Database["public"]["Enums"]["user_role"]
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          client_id: number | null
+          created_at: string
+          id: number
+          monthly_fee: number | null
+          name: string
+          next_invoice_on: string | null
+          notes: string | null
+          status: Database["public"]["Enums"]["project_status"]
+        }
+        Insert: {
+          client_id?: number | null
+          created_at?: string
+          id?: number
+          monthly_fee?: number | null
+          name: string
+          next_invoice_on?: string | null
+          notes?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+        }
+        Update: {
+          client_id?: number | null
+          created_at?: string
+          id?: number
+          monthly_fee?: number | null
+          name?: string
+          next_invoice_on?: string | null
+          notes?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          created_at: string
+          current_period_end: string | null
+          id: number
+          plan: Database["public"]["Enums"]["plan_enum"]
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          current_period_end?: string | null
+          id?: number
+          plan: Database["public"]["Enums"]["plan_enum"]
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          current_period_end?: string | null
+          id?: number
+          plan?: Database["public"]["Enums"]["plan_enum"]
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      plan_enum: "starter" | "pro" | "enterprise"
+      project_status: "lead" | "active" | "paused" | "completed"
+      user_role: "admin" | "client"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +389,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      plan_enum: ["starter", "pro", "enterprise"],
+      project_status: ["lead", "active", "paused", "completed"],
+      user_role: ["admin", "client"],
+    },
   },
 } as const
