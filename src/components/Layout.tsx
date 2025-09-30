@@ -11,7 +11,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({
   children,
-  showNavigation = false, // Hide top navigation - using sidebar only
+  showNavigation = true, // Show navigation by default
   showFooter = true,
 }) => {
   return (
