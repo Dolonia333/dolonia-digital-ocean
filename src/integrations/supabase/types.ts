@@ -122,6 +122,41 @@ export type Database = {
           },
         ]
       }
+      invoices: {
+        Row: {
+          amount: number
+          created_at: string | null
+          due_date: string
+          id: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          due_date: string
+          id?: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          due_date?: string
+          id?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           company: string | null
