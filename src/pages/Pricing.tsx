@@ -4,60 +4,59 @@ import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Zap, Crown, Building } from 'lucide-react';
+import { Check, Zap, Crown, Building, TrendingUp, Rocket } from 'lucide-react';
 
 const Pricing = () => {
   const plans = [
     {
-      name: "Starter Retainer",
-      icon: Zap,
-      price: "$1,000 - $2,500",
+      name: "Starter Package",
+      icon: TrendingUp,
+      price: "$500",
       period: "/month",
-      description: "Perfect for small businesses getting started",
-      badge: null,
+      description: "Perfect for small businesses getting online",
+      badge: "Best Value",
       features: [
-        "Web hosting & maintenance",
-        "1 custom automation",
-        "2 hours monthly consulting",
-        "Email support",
-        "Basic security monitoring",
-        "Monthly reports"
+        "Professional WordPress site",
+        "Secure hosting included",
+        "2 automation workflows",
+        "Basic SEO setup",
+        "Monthly maintenance & updates",
+        "Email support (24hr response)"
       ]
     },
     {
       name: "Business Growth",
-      icon: Crown,
-      price: "$3,500 - $5,000",
+      icon: Rocket,
+      price: "$1,200",
       period: "/month",
-      description: "Ideal for growing businesses",
+      description: "Scale your operations with automation",
       badge: "Most Popular",
       features: [
-        "Full website management",
-        "2-3 custom automations",
-        "Ongoing consulting support",
-        "Security monitoring",
-        "Priority support",
-        "Advanced analytics",
-        "Monthly strategy sessions",
-        "Performance optimization"
+        "Custom site design",
+        "Priority hosting with enhanced performance",
+        "5 automation workflows (n8n + AI)",
+        "Advanced SEO & analytics",
+        "Weekly updates & optimizations",
+        "Priority support (4hr response)",
+        "Monthly strategy call"
       ]
     },
     {
-      name: "Premium Partnership",
+      name: "Secure Data Package",
       icon: Building,
-      price: "$7,500 - $10,000+",
-      period: "/month",
-      description: "Full-service partnership for enterprise needs",
-      badge: "Premium",
+      price: "Custom",
+      period: "",
+      description: "Enterprise-grade security and infrastructure",
+      badge: null,
       features: [
-        "Complete web management",
-        "Unlimited automations",
-        "Dedicated consulting",
-        "Advanced security suite",
-        "24/7 priority support",
-        "Custom development",
-        "Strategic planning",
-        "Executive access"
+        "Dedicated NAS storage infrastructure",
+        "Cloudflare Access control",
+        "Automated backup systems",
+        "Docker containerization",
+        "24/7 monitoring & alerts",
+        "Compliance-ready architecture",
+        "White-glove support",
+        "Custom SLA & terms"
       ]
     }
   ];
@@ -77,8 +76,8 @@ const Pricing = () => {
               <span className="bg-gradient-cyber bg-clip-text text-transparent">Retainer Packages</span>
             </h1>
             <p className="text-xl text-cyan-soft max-w-3xl mx-auto">
-              Monthly partnerships for ongoing support, technology, and business growth. 
-              All packages include priority access and dedicated support.
+              Clear, predictable pricing based on your real needs. No hidden fees, no surprises. 
+              Just straightforward monthly retainers that cover everything.
             </p>
           </div>
 
@@ -150,48 +149,48 @@ const Pricing = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg text-foreground">Can I change plans anytime?</CardTitle>
+                  <CardTitle className="text-lg text-foreground">Can I cancel anytime?</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-cyan-soft">
-                    Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, 
-                    and you'll be billed pro-rata for the difference.
+                    Yes. All retainers are month-to-month with 30 days notice to cancel. 
+                    No long-term contracts or cancellation fees.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg text-foreground">Is there a free trial?</CardTitle>
+                  <CardTitle className="text-lg text-foreground">What's included in automation workflows?</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-cyan-soft">
-                    We offer a 14-day free trial for all plans. No credit card required. 
-                    Experience our full feature set before making a commitment.
+                    n8n automation platform with AI integration. We build custom workflows for tasks like 
+                    lead processing, data sync, email automation, and more.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg text-foreground">What payment methods do you accept?</CardTitle>
+                  <CardTitle className="text-lg text-foreground">Do you work with clients outside Oklahoma?</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-cyan-soft">
-                    We accept all major credit cards, PayPal, and bank transfers for annual plans. 
-                    Enterprise customers can also pay via invoice.
+                    Absolutely. While we're based in OKC, we work with clients nationwide. 
+                    All communication is remote-friendly via Slack, Zoom, or email.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="bg-ocean-surface/30 border-ocean-surface backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg text-foreground">Do you offer discounts for annual plans?</CardTitle>
+                  <CardTitle className="text-lg text-foreground">How does hosting work?</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-cyan-soft">
-                    Yes! Save 20% when you pay annually. All annual plans include priority support 
-                    and additional security features at no extra cost.
+                    Sites are hosted on our enterprise infrastructure (Synology NAS + Cloudflare). 
+                    Includes daily backups, SSL, and 99.9% uptime guarantee.
                   </p>
                 </CardContent>
               </Card>

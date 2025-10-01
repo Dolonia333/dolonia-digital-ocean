@@ -83,7 +83,7 @@ const HeroSection: React.FC = () => {
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-ocean-surface/50 backdrop-blur-sm border border-cyan-bright/30 rounded-full px-4 py-2 mb-8">
             <Zap size={16} className="text-cyan-bright" />
-            <span className="text-cyan-soft text-sm font-medium">Next-Generation Cloud Infrastructure</span>
+            <span className="text-cyan-soft text-sm font-medium">Modern Websites · Automation · Secure Hosting</span>
           </div>
 
           {/* Logo */}
@@ -132,21 +132,21 @@ const HeroSection: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             <FeatureCard
               icon={<Cloud className="text-cyan-bright h-6 w-6" />}
-              title="Multi-Cloud"
-              description="Deploy seamlessly across AWS, Azure, and Google Cloud with unified management and automatic failover capabilities."
-              benefits={["Vendor lock-in prevention", "Global redundancy", "Cost optimization"]}
-            />
-            <FeatureCard
-              icon={<Shield className="text-cyan-bright h-6 w-6" />}
-              title="Zero-Trust Security"
-              description="Advanced security model that verifies every user and device before granting access, ensuring maximum protection."
-              benefits={["Enhanced data protection", "Compliance ready", "Threat prevention"]}
+              title="Websites That Work"
+              description="Professional sites built for real businesses. Fast, secure, and designed to convert visitors into customers."
+              benefits={["Modern responsive design", "SEO optimized", "$1,500-$3,000 builds"]}
             />
             <FeatureCard
               icon={<Zap className="text-cyan-bright h-6 w-6" />}
-              title="AI-Powered"
-              description="Intelligent automation that optimizes performance, predicts issues, and reduces operational costs automatically."
-              benefits={["Predictive analytics", "Automated scaling", "Cost reduction"]}
+              title="Smart Automation"
+              description="n8n + AI workflows that handle your repetitive tasks. Save hours every week on busy work."
+              benefits={["Custom workflow setup", "AI-powered tools", "$25-$99/month hosting"]}
+            />
+            <FeatureCard
+              icon={<Shield className="text-cyan-bright h-6 w-6" />}
+              title="Secure Hosting"
+              description="Your site hosted on enterprise-grade infrastructure. Fast, reliable, and backed up daily."
+              benefits={["99.9% uptime guarantee", "Daily backups", "$100/month maintenance"]}
             />
           </div>
         </div>
