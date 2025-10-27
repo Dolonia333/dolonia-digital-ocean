@@ -3,7 +3,6 @@ import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import HeroSection from '@/components/HeroSection';
 import ServicePackages from '@/components/ServicePackages';
-import CaseStudies from '@/components/CaseStudies';
 import RetainerCalculator from '@/components/RetainerCalculator';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Newsletter from '@/components/Newsletter';
@@ -19,8 +18,7 @@ const Index = () => {
       />
       
       <HeroSection />
-      <ServicePackages />
-      <CaseStudies />
+  <ServicePackages />
       <RetainerCalculator />
       <TestimonialsSection />
       <Newsletter />

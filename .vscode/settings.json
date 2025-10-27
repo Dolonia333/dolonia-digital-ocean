@@ -1,6 +1,12 @@
 {
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.endOfLine": "lf",
+
   "eslint.format.enable": true,
   "eslint.codeActionsOnSave.rules": null,
   "editor.codeActionsOnSave": {
@@ -21,5 +27,6 @@
   "search.exclude": {
     "**/node_modules": true,
     "**/dist": true
-  }
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
 }

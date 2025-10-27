@@ -16,11 +16,11 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import {
   Mail,
-  Phone,
   MapPin,
   Clock,
   AlertCircle,
   CheckCircle,
+  MessageCircle,
 } from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
@@ -233,11 +233,10 @@ Please contact me to get started with this setup.`
       link: "mailto:zion@royalsocietymanagementgroup.com",
     },
     {
-      icon: Phone,
-      title: "Call Us",
-      content: "(405) 967-0503",
-      description: "Mon-Fri from 8am to 6pm CST",
-      link: "tel:+14059670503",
+      icon: MessageCircle,
+      title: "Chat With Us",
+      content: "Use the Dolonia assistant for instant support",
+      description: "Available 24/7 right from this page",
     },
     {
       icon: MapPin,

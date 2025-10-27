@@ -218,10 +218,21 @@ const DetailedServicesSection: React.FC = () => {
             </CardHeader>
             <CardContent>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold px-8">
+                <Button
+                  className="bg-gradient-cyber hover:shadow-glow text-ocean-deep font-semibold px-8"
+                  data-engagement="cta_schedule_consultation"
+                  data-engagement-category="cta"
+                  data-engagement-label="detailed_services_schedule"
+                >
                   Schedule Consultation
                 </Button>
-                <Button variant="outline" className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep px-8">
+                <Button
+                  variant="outline"
+                  className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep px-8"
+                  data-engagement="cta_request_quote"
+                  data-engagement-category="cta"
+                  data-engagement-label="detailed_services_quote"
+                >
                   Get Custom Quote
                 </Button>
               </div>

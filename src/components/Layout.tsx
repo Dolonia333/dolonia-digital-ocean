@@ -2,6 +2,7 @@ import React from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import EngagementListener from "@/components/EngagementListener";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <div className="min-h-screen bg-gradient-ocean text-foreground">
+      <EngagementListener />
       {/* Main background */}
 
       {/* Navigation */}

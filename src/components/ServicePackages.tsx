@@ -125,6 +125,10 @@ const ServicePackages: React.FC = () => {
                 <Button 
                   className="w-full bg-cyan-bright hover:bg-cyan-bright/90 text-background font-semibold"
                   onClick={() => navigate('/contact')}
+                  data-engagement="cta_service_package"
+                  data-engagement-package={pkg.name}
+                  data-engagement-category="cta"
+                  data-engagement-label={`package:${pkg.name}`}
                 >
                   Get Started
                 </Button>
@@ -141,6 +145,9 @@ const ServicePackages: React.FC = () => {
             variant="outline" 
             className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright/10"
             onClick={() => navigate('/contact')}
+            data-engagement="cta_schedule_consultation"
+            data-engagement-category="cta"
+            data-engagement-label="footer_schedule_consultation"
           >
             Schedule a Consultation
           </Button>

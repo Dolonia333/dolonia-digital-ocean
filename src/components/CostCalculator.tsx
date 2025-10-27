@@ -7,6 +7,7 @@ import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { trackEngagement } from "@/lib/engagement";
 import {
   Calculator,
   DollarSign,
@@ -123,6 +124,17 @@ const CostCalculator: React.FC = () => {
       title: "Configuration Saved",
       description: "Your configuration has been saved. We'll discuss this setup with you.",
     });
+
+    void trackEngagement('cost_calculator_saved_config', {
+      servers: config.servers,
+      storage_gb: config.storage,
+      bandwidth_gb: config.bandwidth,
+      users: config.users,
+      security_level: config.securityLevel,
+      includes_ai: config.aiOptimization,
+      includes_multicloud: config.multiCloud,
+      estimated_total: costs.total,
+    });
     
     // Navigate to contact page
     navigate('/contact');
@@ -140,6 +152,17 @@ const CostCalculator: React.FC = () => {
     toast({
       title: "Ready for Consultation",
       description: "Your configuration is ready. Let's schedule a consultation to discuss your needs.",
+    });
+
+    void trackEngagement('cost_calculator_schedule_consultation', {
+      servers: config.servers,
+      storage_gb: config.storage,
+      bandwidth_gb: config.bandwidth,
+      users: config.users,
+      security_level: config.securityLevel,
+      includes_ai: config.aiOptimization,
+      includes_multicloud: config.multiCloud,
+      estimated_total: costs.total,
     });
     
     // Navigate to contact page with consultation focus
@@ -305,9 +328,7 @@ const CostCalculator: React.FC = () => {
                     </Button>
                   </div>
                   <div className="flex items-center justify-between">
-                    <Label className="text-foreground">
-                      Multi-Cloud Support
-                    </Label>
+                    <Label className="text-foreground">Multi-Cloud Support</Label>
                     <Button
                       variant={config.multiCloud ? "default" : "outline"}
                       size="sm"

@@ -309,7 +309,7 @@ const LiveChat: React.FC = () => {
       lowerMessage.includes("email") ||
       lowerMessage.includes("phone")
     ) {
-      return "📞 You can reach us through:\n\n• 📧 Email: hello@dolonia.com\n• 📱 Phone: (555) 123-DOLO\n• 💬 This chat (available 24/7)\n• 📅 Schedule a call: Available Mon-Fri 9AM-6PM EST\n\nWhat's the best way to connect with you?";
+      return "� You can reach us through:\n\n• 📧 Email: hello@dolonia.com\n•  This chat (available 24/7)\n• 📅 Contact form: https://dolonia.cloud/contact\n\nWhat's the best way to connect with you?";
     }
 
     if (lowerMessage.includes("thank") || lowerMessage.includes("thanks")) {

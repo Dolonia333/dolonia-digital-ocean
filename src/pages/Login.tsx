@@ -36,8 +36,9 @@ export default function Login() {
         toast.success('Signed in successfully!');
         navigate('/account');
       }
-    } catch (error: any) {
-      toast.error(error.message || 'An error occurred');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'An error occurred';
+      toast.error(message);
     } finally {
       setLoading(false);
     }

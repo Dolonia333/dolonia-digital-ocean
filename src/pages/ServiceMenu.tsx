@@ -4,13 +4,12 @@ import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Mail, Phone, MapPin, Globe, Download, FileText } from 'lucide-react';
+import { Mail, MapPin, Globe, Download, FileText, MessageCircle } from 'lucide-react';
 import doloniaLogo from '@/assets/dolonia-logo.png';
 
 const ServiceMenu = () => {
   const businessInfo = {
     name: "Dolonia Data Tech",
-    phone: "(405) 967-0503",
     email: "zion@royalsocietymanagement.com",
     website: "Dolonia.cloud",
     address: "600 N. Robinson Ave, 6th Floor, Office #680, Oklahoma City, OK 73102"
@@ -20,7 +19,6 @@ const ServiceMenu = () => {
     const content = `DOLONIA DATA TECH - SERVICE MENU 2025
 
 Contact Information:
-• Phone: ${businessInfo.phone}
 • Email: ${businessInfo.email}
 • Website: ${businessInfo.website}
 • Address: ${businessInfo.address}
@@ -73,12 +71,12 @@ For detailed pricing and service descriptions, please contact us directly.`;
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                   <div className="flex items-center space-x-3">
-                    <Phone className="w-5 h-5 text-cyan-bright" />
-                    <span className="text-foreground">{businessInfo.phone}</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
                     <Mail className="w-5 h-5 text-cyan-bright" />
                     <span className="text-foreground">{businessInfo.email}</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <MessageCircle className="w-5 h-5 text-cyan-bright" />
+                    <span className="text-foreground">Live chat available on every page</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Globe className="w-5 h-5 text-cyan-bright" />
@@ -268,10 +266,14 @@ For detailed pricing and service descriptions, please contact us directly.`;
                     <span>Email Us</span>
                   </a>
                 </Button>
-                <Button variant="outline" asChild className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright/10">
-                  <a href={`tel:${businessInfo.phone.replace(/[^\d]/g, '')}`} className="flex items-center space-x-2">
-                    <Phone className="w-5 h-5" />
-                    <span>{businessInfo.phone}</span>
+                <Button
+                  variant="outline"
+                  asChild
+                  className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright/10"
+                >
+                  <a href="/contact" className="flex items-center space-x-2">
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Request a Consultation</span>
                   </a>
                 </Button>
               </div>

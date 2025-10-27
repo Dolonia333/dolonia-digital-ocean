@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  dolonia-web:
+    build: .
+    container_name: dolonia-web
+    ports:
+      - "80:80"        # Change this port if needed (e.g., "8080:80")
+    restart: unless-stopped
+    env_file:
+      - .env           # Your Supabase credentials will be loaded from here
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./logs:/var/log/nginx
+    networks:
+      - dolonia-network
+    
+    # Health check to ensure container is running properly
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost"] 
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  dolonia-network:
+    driver: bridge

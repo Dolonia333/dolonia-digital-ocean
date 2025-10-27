@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import ServicePackages from '@/components/ServicePackages';
-import CaseStudies from '@/components/CaseStudies';
 import InteractiveDemo from '@/components/InteractiveDemo';
 
 const Services = () => {
@@ -26,7 +25,6 @@ const Services = () => {
           </div>
         </div>
         <ServicePackages />
-        <CaseStudies />
         <InteractiveDemo />
       </div>
     </Layout>

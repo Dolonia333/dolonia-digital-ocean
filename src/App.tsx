@@ -24,6 +24,7 @@ const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
 const Login = lazy(() => import("./pages/Login"));
 const Account = lazy(() => import("./pages/Account"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const SupabaseConnectionTest = lazy(() => import("./components/SupabaseConnectionTest"));
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -59,6 +60,7 @@ const App = () => {
                     <Route path="/cookie-policy" element={<CookiePolicy />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/account" element={<Account />} />
+                    <Route path="/test-connection" element={<SupabaseConnectionTest />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>

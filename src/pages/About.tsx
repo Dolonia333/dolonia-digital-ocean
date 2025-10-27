@@ -3,7 +3,7 @@ import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Users, Target, Award, Globe, Heart, Shield, Lightbulb, Handshake, Mail, Phone } from 'lucide-react';
+import { Users, Target, Award, Globe, Heart, Shield, Lightbulb, Handshake, Mail, MessageCircle } from 'lucide-react';
 
 const About = () => {
   const stats = [
@@ -203,10 +203,14 @@ const About = () => {
                       <span>Contact Us Today</span>
                     </a>
                   </Button>
-                  <Button variant="outline" asChild className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright/10">
-                    <a href="tel:4059670503" className="flex items-center space-x-2">
-                      <Phone className="w-5 h-5" />
-                      <span>(405) 967-0503</span>
+                  <Button
+                    variant="outline"
+                    asChild
+                    className="border-cyan-bright text-cyan-bright hover:bg-cyan-bright/10"
+                  >
+                    <a href="/contact" className="flex items-center space-x-2">
+                      <MessageCircle className="w-5 h-5" />
+                      <span>Book a Consultation</span>
                     </a>
                   </Button>
                 </div>
