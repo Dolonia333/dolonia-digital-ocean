@@ -8,7 +8,7 @@ echo.
 echo MANUAL STEPS TO CREATE ZIP:
 echo 1. Select all these files in Windows Explorer:
 echo    - src folder
-echo    - public folder  
+echo    - public folder
 echo    - package.json
 echo    - package-lock.json
 echo    - vite.config.ts

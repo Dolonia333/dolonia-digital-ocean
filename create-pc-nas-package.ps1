@@ -14,7 +14,7 @@ Write-Host "Copying files for PC Supabase + NAS Website setup..." -ForegroundCol
 Copy-Item "src","public" -Destination "pc-nas-temp" -Recurse
 $configFiles = @(
     "package.json", "package-lock.json", "vite.config.ts",
-    "tsconfig.json", "tsconfig.app.json", "tsconfig.node.json", 
+    "tsconfig.json", "tsconfig.app.json", "tsconfig.node.json",
     "tailwind.config.ts", "postcss.config.js", "components.json", "index.html"
 )
 foreach ($file in $configFiles) {
@@ -46,7 +46,7 @@ Write-Host "Size: $([math]::Round($zipSize, 2)) MB" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "DEPLOYMENT ARCHITECTURE:" -ForegroundColor Green
 Write-Host "- PC: Runs Supabase (10.15.20.207:54321)" -ForegroundColor Yellow
-Write-Host "- NAS: Runs Website (Docker container)" -ForegroundColor Yellow  
+Write-Host "- NAS: Runs Website (Docker container)" -ForegroundColor Yellow
 Write-Host "- Connection: NAS website -> PC database" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "NEXT STEPS:" -ForegroundColor Green

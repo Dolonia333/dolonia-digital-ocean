@@ -12,9 +12,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "tailwindCSS.experimental.classRegex": [
-    ["tw`([^`]*)", "tw\\(\"([^)]*)\"\\)"]
-  ],
+  "tailwindCSS.experimental.classRegex": [["tw`([^`]*)", "tw\\(\"([^)]*)\"\\)"]],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.preferences.includePackageJsonAutoImports": "auto",
   "editor.tabSize": 2,

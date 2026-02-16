@@ -4,12 +4,12 @@ Write-Host "Creating Docker deployment package..." -ForegroundColor Green
 # Define files to include
 $filesToInclude = @(
     "src",
-    "public", 
+    "public",
     "package.json",
     "package-lock.json",
     "vite.config.ts",
     "tsconfig.json",
-    "tsconfig.app.json", 
+    "tsconfig.app.json",
     "tsconfig.node.json",
     "tailwind.config.ts",
     "postcss.config.js",
@@ -71,7 +71,7 @@ $($existingFiles -join "`n")
    ```bash
    # Build the image
    docker build -t dolonia-web:latest .
-   
+
    # Run the container
    docker run -d --name dolonia-web -p 80:80 --restart unless-stopped dolonia-web:latest
    ```

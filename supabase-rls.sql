@@ -16,7 +16,7 @@ CREATE OR REPLACE FUNCTION public.is_admin(user_id UUID)
 RETURNS BOOLEAN AS $$
 BEGIN
   RETURN EXISTS (
-    SELECT 1 FROM public.profiles 
+    SELECT 1 FROM public.profiles
     WHERE id = user_id AND role = 'admin'
   );
 END;
@@ -59,7 +59,7 @@ CREATE POLICY "Admins can manage all clients" ON public.clients
 CREATE POLICY "Users can view own projects" ON public.projects
   FOR SELECT USING (
     EXISTS (
-      SELECT 1 FROM public.clients 
+      SELECT 1 FROM public.clients
       WHERE id = client_id AND owner_id = auth.uid()
     )
   );
@@ -67,7 +67,7 @@ CREATE POLICY "Users can view own projects" ON public.projects
 CREATE POLICY "Users can manage own projects" ON public.projects
   FOR ALL USING (
     EXISTS (
-      SELECT 1 FROM public.clients 
+      SELECT 1 FROM public.clients
       WHERE id = client_id AND owner_id = auth.uid()
     )
   );
@@ -79,7 +79,7 @@ CREATE POLICY "Admins can manage all projects" ON public.projects
 CREATE POLICY "Users can view own invoices" ON public.invoices
   FOR SELECT USING (
     EXISTS (
-      SELECT 1 FROM public.clients 
+      SELECT 1 FROM public.clients
       WHERE id = client_id AND owner_id = auth.uid()
     )
   );
@@ -87,7 +87,7 @@ CREATE POLICY "Users can view own invoices" ON public.invoices
 CREATE POLICY "Users can manage own invoices" ON public.invoices
   FOR ALL USING (
     EXISTS (
-      SELECT 1 FROM public.clients 
+      SELECT 1 FROM public.clients
       WHERE id = client_id AND owner_id = auth.uid()
     )
   );
