@@ -2,13 +2,11 @@ version: '3.8'
 
 services:
   dolonia-web:
-    build: .
+    image: dolonia/dolonia-cloud:latest
     container_name: dolonia-web
     ports:
-      - '8080:80' # Expose on port 8080 to match your dev server
+      - '8080:80'
     restart: unless-stopped
-    env_file:
-      - .env # Your Supabase credentials will be loaded from here
     environment:
       - NODE_ENV=production
     volumes:
@@ -23,6 +21,19 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=60
+      - WATCHTOWER_LABEL_ENABLE=false
+    networks:
+      - dolonia-network
 
 networks:
   dolonia-network:

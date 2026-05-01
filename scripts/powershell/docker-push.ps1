@@ -2,7 +2,7 @@
 # Builds and pushes the Docker image to Docker Hub
 
 # Configuration
-$DOCKER_USERNAME = "doloniadatatech"
+$DOCKER_USERNAME = "dolonia"
 $IMAGE_NAME = "dolonia-cloud"
 $VERSION = "1.0.0"
 
@@ -32,9 +32,11 @@ if ($dockerInfo -notmatch "Username: $DOCKER_USERNAME") {
 Write-Host "✅ Logged in as: $DOCKER_USERNAME" -ForegroundColor Green
 Write-Host ""
 
-# Navigate to deployment folder
-Write-Host "📁 Navigating to DEPLOY-TO-NAS folder..." -ForegroundColor Cyan
-Set-Location -Path "DEPLOY-TO-NAS"
+# Navigate to project root
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$ProjectRoot = Resolve-Path "$ScriptDir\..\.."
+Write-Host "📁 Using project root: $ProjectRoot" -ForegroundColor Cyan
+Set-Location -Path $ProjectRoot
 
 # Build the Docker image
 Write-Host ""
@@ -44,6 +46,7 @@ Write-Host "   Tags: latest, $VERSION" -ForegroundColor Gray
 Write-Host ""
 
 docker build `
+    -f deploy/nas/Dockerfile `
     -t "${DOCKER_USERNAME}/${IMAGE_NAME}:latest" `
     -t "${DOCKER_USERNAME}/${IMAGE_NAME}:${VERSION}" `
     .

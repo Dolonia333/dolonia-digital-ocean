@@ -51,7 +51,11 @@ export default function Login() {
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : 'An error occurred'
-      toast.error(message)
+      if (message.toLowerCase().includes('failed to fetch')) {
+        toast.error('Cannot reach Supabase. Confirm local Supabase is running and VITE_SUPABASE_URL is reachable from this browser.')
+      } else {
+        toast.error(message)
+      }
     } finally {
       setLoading(false)
     }

@@ -102,3 +102,10 @@ VITE_SMTP_PASS=...
 - Backend files use ES modules (type: "module" in package.json)
 - Environment files are centralized in config/env/
 - Documentation is organized by category in docs/
+
+## Collaboration And PR Handoff
+
+- Active collaboration branch: `chore/collab-handoff-docs`
+- Primary teammate handoff guide: `docs/project/COLLABORATION_HANDOFF.md`
+
+If you are jumping in to help, start with the handoff guide above. It documents the current feature set, architecture, environment requirements, and a recommended PR split strategy.

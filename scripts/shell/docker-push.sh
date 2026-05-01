@@ -6,7 +6,7 @@
 set -e  # Exit on error
 
 # Configuration
-DOCKER_USERNAME="doloniadatatech"
+DOCKER_USERNAME="dolonia"
 IMAGE_NAME="dolonia-cloud"
 VERSION="1.0.0"
 
@@ -33,9 +33,11 @@ echo "✅ Docker is running"
 echo "✅ Logged in as: $DOCKER_USERNAME"
 echo ""
 
-# Navigate to deployment folder
-echo "📁 Navigating to DEPLOY-TO-NAS folder..."
-cd DEPLOY-TO-NAS
+# Navigate to project root
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+echo "📁 Using project root: $PROJECT_ROOT"
+cd "$PROJECT_ROOT"
 
 # Build the Docker image
 echo ""
@@ -45,6 +47,7 @@ echo "   Tags: latest, $VERSION"
 echo ""
 
 docker build \
+    -f deploy/nas/Dockerfile \
     -t $DOCKER_USERNAME/$IMAGE_NAME:latest \
     -t $DOCKER_USERNAME/$IMAGE_NAME:$VERSION \
     .

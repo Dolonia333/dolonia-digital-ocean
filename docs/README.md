@@ -1,5 +1,10 @@
 # Dolonia Cloud - Complete Deployment Package
 
+## Team Handoff First
+
+For active project collaboration and PR onboarding, read this first:
+- docs/project/COLLABORATION_HANDOFF.md
+
 ## 🎯 Overview
 
 Dolonia Cloud is a modern React-based cybersecurity platform featuring:

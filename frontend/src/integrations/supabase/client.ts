@@ -5,10 +5,30 @@ import type { Database } from './types'
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 
+function resolveSupabaseUrl(url: string) {
+  if (!import.meta.env.DEV || typeof window === 'undefined') return url
+
+  try {
+    const parsed = new URL(url)
+    const appHost = window.location.hostname
+    const isLoopback = parsed.hostname === '127.0.0.1' || parsed.hostname === 'localhost'
+    const appIsLoopback = appHost === '127.0.0.1' || appHost === 'localhost'
+
+    if (isLoopback && !appIsLoopback) {
+      parsed.hostname = appHost
+      return parsed.toString()
+    }
+  } catch {
+    return url
+  }
+
+  return url
+}
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
+export const supabase = createClient<Database>(resolveSupabaseUrl(SUPABASE_URL), SUPABASE_ANON_KEY, {
   auth: {
     storage: localStorage,
     persistSession: true,

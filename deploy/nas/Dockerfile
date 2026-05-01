@@ -4,26 +4,28 @@ FROM node:20-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy root package files
 COPY package*.json ./
 
 # Install dependencies (including devDependencies for TypeScript)
-RUN npm install --legacy-peer-deps
+# Remove package-lock to avoid platform-specific optional dep issues on Alpine
+RUN rm -f package-lock.json && npm install --legacy-peer-deps
 
-# Copy source code
-COPY . .
+# Copy frontend source and config
+COPY frontend/ ./frontend/
+COPY config/env/.env.production ./config/env/.env.production
 
-# Build the application (skip tsc strict checks, use Vite directly)
-RUN npx vite build --config vite.config.ts
+# Build the application from frontend directory
+RUN cd frontend && npx vite build --config vite.config.ts
 
 # Production stage
 FROM nginx:alpine
 
 # Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/frontend/dist /usr/share/nginx/html
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY deploy/nas/nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80
 EXPOSE 80

@@ -1175,78 +1175,108 @@ export default function Account() {
 
     console.log('[Real-time] Setting up subscription for user:', profile.id)
 
-    const channel = supabase
-      .channel('user-profile-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'profiles',
-          filter: `id=eq.${profile.id}`, // Only listen to changes for THIS user
-        },
-        (payload) => {
-          const updatedProfile = payload.new as Profile
-          console.log('[Real-time] Profile updated:', updatedProfile)
+    let channel: ReturnType<typeof supabase.channel> | null = null
 
-          // Update the profile state
-          setProfile(updatedProfile)
+    try {
+      channel = supabase
+        .channel('user-profile-changes')
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'profiles',
+            filter: `id=eq.${profile.id}`, // Only listen to changes for THIS user
+          },
+          (payload) => {
+            const updatedProfile = payload.new as Profile
+            console.log('[Real-time] Profile updated:', updatedProfile)
 
-          // Update localStorage cache
-          localStorage.setItem('userProfile', JSON.stringify(updatedProfile))
+            // Update the profile state
+            setProfile(updatedProfile)
 
-          // Show notification to user
-          toast.info(
-            `Your role has been updated to ${updatedProfile.role === 'team_member' ? 'Team Member' : updatedProfile.role}`,
-          )
+            // Update localStorage cache
+            localStorage.setItem('userProfile', JSON.stringify(updatedProfile))
 
-          // If role changed, reload the page to ensure proper UI/permissions
-          if (updatedProfile.role !== profile.role) {
-            console.log('[Real-time] Role changed, reloading in 1.5s...')
-            setTimeout(() => {
-              window.location.reload()
-            }, 1500) // Give time for toast to show
+            // Show notification to user
+            toast.info(
+              `Your role has been updated to ${updatedProfile.role === 'team_member' ? 'Team Member' : updatedProfile.role}`,
+            )
+
+            // If role changed, reload the page to ensure proper UI/permissions
+            if (updatedProfile.role !== profile.role) {
+              console.log('[Real-time] Role changed, reloading in 1.5s...')
+              setTimeout(() => {
+                window.location.reload()
+              }, 1500) // Give time for toast to show
+            }
+          },
+        )
+        .subscribe((status) => {
+          console.log('[Real-time] Subscription status:', status)
+          // Check for error states - status can be SUBSCRIBED, CHANNEL_ERROR, TIMED_OUT, or CLOSED
+          if (status !== 'SUBSCRIBED') {
+            console.warn('[Real-time] Subscription not active, status:', status)
+            // Only start polling if we haven't already (prevent duplicates)
+            if (!pollIntervalRef.current) {
+              console.log('[Real-time] Starting fallback polling (5s intervals)')
+              // Fallback: poll for changes every 5 seconds
+              pollIntervalRef.current = setInterval(async () => {
+                const { data } = await supabase
+                  .from('profiles')
+                  .select('id, name, role')
+                  .eq('id', profile.id)
+                  .single()
+
+                if (data && data.role !== profile.role) {
+                  console.log('[Polling] Role changed detected:', data.role)
+                  setProfile(data as Profile)
+                  localStorage.setItem('userProfile', JSON.stringify(data))
+                  toast.info(`Your role has been updated to ${data.role}`)
+                  setTimeout(() => window.location.reload(), 1500)
+                }
+              }, 5000)
+            }
+          } else {
+            // If we're successfully subscribed, clear any polling interval
+            if (pollIntervalRef.current) {
+              console.log('[Real-time] Subscription active, clearing fallback polling')
+              clearInterval(pollIntervalRef.current)
+              pollIntervalRef.current = null
+            }
           }
-        },
-      )
-      .subscribe((status) => {
-        console.log('[Real-time] Subscription status:', status)
-        // Check for error states - status can be SUBSCRIBED, CHANNEL_ERROR, TIMED_OUT, or CLOSED
-        if (status !== 'SUBSCRIBED') {
-          console.warn('[Real-time] Subscription not active, status:', status)
-          // Only start polling if we haven't already (prevent duplicates)
-          if (!pollIntervalRef.current) {
-            console.log('[Real-time] Starting fallback polling (5s intervals)')
-            // Fallback: poll for changes every 5 seconds
-            pollIntervalRef.current = setInterval(async () => {
-              const { data } = await supabase
-                .from('profiles')
-                .select('id, name, role')
-                .eq('id', profile.id)
-                .single()
+        })
+    } catch (err) {
+      console.warn('[Real-time] Failed to set up WebSocket subscription, falling back to polling:', err)
+      // Start fallback polling since realtime is unavailable
+      if (!pollIntervalRef.current) {
+        pollIntervalRef.current = setInterval(async () => {
+          const { data } = await supabase
+            .from('profiles')
+            .select('id, name, role')
+            .eq('id', profile.id)
+            .single()
 
-              if (data && data.role !== profile.role) {
-                console.log('[Polling] Role changed detected:', data.role)
-                setProfile(data as Profile)
-                localStorage.setItem('userProfile', JSON.stringify(data))
-                toast.info(`Your role has been updated to ${data.role}`)
-                setTimeout(() => window.location.reload(), 1500)
-              }
-            }, 5000)
+          if (data && data.role !== profile.role) {
+            console.log('[Polling] Role changed detected:', data.role)
+            setProfile(data as Profile)
+            localStorage.setItem('userProfile', JSON.stringify(data))
+            toast.info(`Your role has been updated to ${data.role}`)
+            setTimeout(() => window.location.reload(), 1500)
           }
-        } else {
-          // If we're successfully subscribed, clear any polling interval
-          if (pollIntervalRef.current) {
-            console.log('[Real-time] Subscription active, clearing fallback polling')
-            clearInterval(pollIntervalRef.current)
-            pollIntervalRef.current = null
-          }
-        }
-      })
+        }, 5000)
+      }
+    }
 
     return () => {
       console.log('[Real-time] Unsubscribing from user profile changes')
-      void channel.unsubscribe()
+      if (channel) {
+        try {
+          void channel.unsubscribe()
+        } catch {
+          // Ignore unsubscribe errors
+        }
+      }
       // Clean up polling interval if it exists
       if (pollIntervalRef.current) {
         clearInterval(pollIntervalRef.current)
@@ -1261,35 +1291,47 @@ export default function Account() {
 
     console.log('[Real-time Admin] Setting up profiles subscription')
 
-    const channel = supabase
-      .channel('profiles-changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, (payload) => {
-        console.log('[Real-time Admin] Profile change:', payload.eventType, payload.new)
-        setAllProfiles((prev) => {
-          if (payload.eventType === 'INSERT') {
-            const newProfile = payload.new as Profile
-            // Avoid duplicates
-            if (prev.some((p) => p.id === newProfile.id)) return prev
-            return [...prev, newProfile]
-          }
-          if (payload.eventType === 'UPDATE') {
-            return prev.map((p) =>
-              p.id === (payload.new as Profile).id ? (payload.new as Profile) : p,
-            )
-          }
-          if (payload.eventType === 'DELETE') {
-            return prev.filter((p) => p.id !== (payload.old as { id: string }).id)
-          }
-          return prev
+    let channel: ReturnType<typeof supabase.channel> | null = null
+
+    try {
+      channel = supabase
+        .channel('profiles-changes')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, (payload) => {
+          console.log('[Real-time Admin] Profile change:', payload.eventType, payload.new)
+          setAllProfiles((prev) => {
+            if (payload.eventType === 'INSERT') {
+              const newProfile = payload.new as Profile
+              // Avoid duplicates
+              if (prev.some((p) => p.id === newProfile.id)) return prev
+              return [...prev, newProfile]
+            }
+            if (payload.eventType === 'UPDATE') {
+              return prev.map((p) =>
+                p.id === (payload.new as Profile).id ? (payload.new as Profile) : p,
+              )
+            }
+            if (payload.eventType === 'DELETE') {
+              return prev.filter((p) => p.id !== (payload.old as { id: string }).id)
+            }
+            return prev
+          })
         })
-      })
-      .subscribe((status) => {
-        console.log('[Real-time Admin] Subscription status:', status)
-      })
+        .subscribe((status) => {
+          console.log('[Real-time Admin] Subscription status:', status)
+        })
+    } catch (err) {
+      console.warn('[Real-time Admin] Failed to set up WebSocket subscription:', err)
+    }
 
     return () => {
       console.log('[Real-time Admin] Unsubscribing from profiles changes')
-      void channel.unsubscribe()
+      if (channel) {
+        try {
+          void channel.unsubscribe()
+        } catch {
+          // Ignore unsubscribe errors
+        }
+      }
     }
   }, [profile?.role])
 
