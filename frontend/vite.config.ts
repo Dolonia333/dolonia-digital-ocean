@@ -7,11 +7,11 @@ import { componentTagger } from 'lovable-tagger'
 function paymentMiddleware() {
   return {
     name: 'payment-middleware',
-    configureServer(server) {
-      server.middlewares.use(async (req, res, next) => {
+    configureServer(server: any) {
+      server.middlewares.use(async (req: any, res: any, next: any) => {
         if (req.url === '/api/create-payment-intent' && req.method === 'POST') {
           let body = ''
-          req.on('data', (chunk) => {
+          req.on('data', (chunk: any) => {
             body += chunk.toString()
           })
           req.on('end', async () => {
@@ -20,8 +20,8 @@ function paymentMiddleware() {
 
               // Import Stripe dynamically (server-side only)
               const Stripe = (await import('stripe')).default
-              const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY, {
-                apiVersion: '2024-11-20.acacia',
+              const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY as string, {
+                apiVersion: '2024-11-20.acacia' as any,
               })
 
               const paymentIntent = await stripe.paymentIntents.create({
@@ -41,7 +41,7 @@ function paymentMiddleware() {
             } catch (error) {
               res.statusCode = 500
               res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ error: error.message }))
+              res.end(JSON.stringify({ error: (error as Error).message }))
             }
           })
         } else {

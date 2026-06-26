@@ -184,7 +184,7 @@ Please contact me to get started with this setup.`,
 
     try {
       // Save contact form data to Supabase leads table
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('leads')
         .insert([
           {
