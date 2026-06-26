@@ -21,7 +21,7 @@ function paymentMiddleware() {
               // Import Stripe dynamically (server-side only)
               const Stripe = (await import('stripe')).default
               const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY as string, {
-                apiVersion: '2024-11-20.acacia',
+                apiVersion: '2024-11-20.acacia' as any,
               })
 
               const paymentIntent = await stripe.paymentIntents.create({

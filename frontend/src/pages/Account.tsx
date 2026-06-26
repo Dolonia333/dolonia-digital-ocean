@@ -896,7 +896,7 @@ export default function Account() {
     if (!leadToArchive) return
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('leads')
         .update({
           status: 'archived',
@@ -933,7 +933,7 @@ export default function Account() {
 
   async function unarchiveLead(lead: Lead) {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('leads')
         .update({
           status: 'new',

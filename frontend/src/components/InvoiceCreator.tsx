@@ -839,8 +839,7 @@ export default function InvoiceCreator({ onInvoiceCreated }: InvoiceCreatorProps
       if (clientEmail) {
         try {
           // Find the profile by email
-          // @ts-expect-error - profiles table schema
-          const { data: profileData } = await supabase
+          const { data: profileData } = await (supabase as any)
             .from('profiles')
             .select('id, role')
             .eq('email', clientEmail)
