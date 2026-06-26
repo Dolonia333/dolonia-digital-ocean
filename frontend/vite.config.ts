@@ -75,7 +75,17 @@ export default defineConfig(({ mode }) => ({
     assetsDir: 'assets', // Explicit assets directory
     rollupOptions: {
       output: {
-        manualChunks: undefined, // Disable code splitting to prevent multiple React instances
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined
+          if (id.includes('/react') || id.includes('/scheduler')) return 'react-vendor'
+          if (id.includes('@radix-ui')) return 'radix-ui'
+          if (id.includes('lucide-react')) return 'icons'
+          if (id.includes('recharts') || id.includes('/d3-')) return 'charts'
+          if (id.includes('jspdf') || id.includes('html2canvas') || id.includes('dompurify')) return 'pdf'
+          if (id.includes('@stripe')) return 'payments'
+          if (id.includes('@supabase')) return 'backend'
+          return 'vendor'
+        },
       },
     },
   },
