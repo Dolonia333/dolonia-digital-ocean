@@ -9,7 +9,8 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { ArrowRight, Cloud, Shield, Zap, X } from 'lucide-react'
-import doloniaLogo from '@/assets/dolonia-logo.png'
+import doloniaLogoAsset from '@/assets/dolonia-logo.png.asset.json'
+const doloniaLogo = doloniaLogoAsset.url
 import BinaryRain from '@/components/BinaryRain'
 interface FeatureCardProps {
   icon: React.ReactNode

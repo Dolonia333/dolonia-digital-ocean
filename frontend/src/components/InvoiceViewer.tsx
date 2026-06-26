@@ -17,7 +17,8 @@ import { toast } from 'sonner'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 import { StripePaymentForm } from '@/components/StripePaymentForm'
-import doloniaLogo from '@/assets/dolonia-logo.png'
+import doloniaLogoAsset from '@/assets/dolonia-logo.png.asset.json'
+const doloniaLogo = doloniaLogoAsset.url
 
 type Invoice = {
   id: string

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Cloud, Github, Twitter, Linkedin, Mail } from 'lucide-react'
-import doloniaLogo from '@/assets/dolonia-logo.png'
+import doloniaLogoAsset from '@/assets/dolonia-logo.png.asset.json'
+const doloniaLogo = doloniaLogoAsset.url
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()

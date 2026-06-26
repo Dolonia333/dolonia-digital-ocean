@@ -21,7 +21,8 @@ import {
 import { supabase } from '@/integrations/supabase/client'
 import { toast } from 'sonner'
 import { FileText, Plus, Trash2, Download } from 'lucide-react'
-import doloniaLogo from '@/assets/dolonia-logo.png'
+import doloniaLogoAsset from '@/assets/dolonia-logo.png.asset.json'
+const doloniaLogo = doloniaLogoAsset.url
 import BinaryRain from '@/components/BinaryRain'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'

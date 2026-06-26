@@ -15,7 +15,8 @@ import {
   User,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import doloniaLogo from '@/assets/dolonia-logo.png'
+import doloniaLogoAsset from '@/assets/dolonia-logo.png.asset.json'
+const doloniaLogo = doloniaLogoAsset.url
 import { useAuth } from '@/hooks/useAuth'
 
 const navigation = [
