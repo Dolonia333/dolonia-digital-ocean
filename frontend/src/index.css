@@ -8,63 +8,57 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Ocean depths theme */
-    --background: 210 50% 4%;
-    --foreground: 180 100% 96%;
+    /* Ocean Deep — premium infrastructure palette */
+    /* #0c2340 / #1a4a6e / #2d8a9e / #5cbdb9 */
+    --background: 212 68% 8%;
+    --foreground: 180 40% 96%;
 
-    --card: 210 45% 6%;
-    --card-foreground: 180 100% 96%;
+    --card: 211 62% 12%;
+    --card-foreground: 180 40% 96%;
 
-    --popover: 210 45% 6%;
-    --popover-foreground: 180 100% 96%;
+    --popover: 211 62% 12%;
+    --popover-foreground: 180 40% 96%;
 
-    /* Cyan glow primary */
-    --primary: 180 100% 50%;
-    --primary-foreground: 210 50% 4%;
+    --primary: 189 56% 39%;
+    --primary-foreground: 212 68% 8%;
 
-    /* Deep ocean secondary */
-    --secondary: 210 30% 12%;
-    --secondary-foreground: 180 100% 96%;
+    --secondary: 207 62% 26%;
+    --secondary-foreground: 180 40% 96%;
 
-    --muted: 210 25% 15%;
-    --muted-foreground: 180 30% 70%;
+    --muted: 211 40% 18%;
+    --muted-foreground: 188 35% 72%;
 
-    /* Bright cyan accent */
-    --accent: 175 100% 60%;
-    --accent-foreground: 210 50% 4%;
+    --accent: 177 42% 55%;
+    --accent-foreground: 212 68% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 180 40% 96%;
 
-    --border: 210 30% 18%;
-    --input: 210 30% 12%;
-    --ring: 180 100% 50%;
+    --border: 207 40% 22%;
+    --input: 207 40% 18%;
+    --ring: 177 42% 55%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Custom ocean theme colors */
-    --ocean-deep: 210 50% 4%;
-    --ocean-mid: 210 45% 8%;
-    --ocean-surface: 210 30% 15%;
-    --cyan-bright: 180 100% 50%;
-    --cyan-glow: 175 100% 60%;
-    --cyan-soft: 180 50% 75%;
+    --ocean-deep: 212 68% 8%;
+    --ocean-mid: 207 62% 26%;
+    --ocean-surface: 211 62% 14%;
+    --cyan-bright: 189 56% 45%;
+    --cyan-glow: 177 42% 60%;
+    --cyan-soft: 188 35% 78%;
 
-    /* Gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(210 50% 4%), hsl(210 45% 8%), hsl(210 30% 12%));
-    --gradient-cyber: linear-gradient(135deg, hsl(180 100% 50%), hsl(175 100% 60%));
-    --gradient-surface: linear-gradient(180deg, hsl(210 30% 15%), hsl(210 45% 8%));
+    --gradient-ocean: linear-gradient(135deg, hsl(212 68% 8%) 0%, hsl(207 62% 14%) 60%, hsl(189 50% 22%) 100%);
+    --gradient-cyber: linear-gradient(135deg, hsl(189 56% 45%), hsl(177 42% 60%));
+    --gradient-surface: linear-gradient(180deg, hsl(211 62% 14%), hsl(212 68% 8%));
+    --gradient-glow: radial-gradient(ellipse at top, hsl(189 56% 45% / 0.25), transparent 70%);
 
-    /* Shadows and glows */
-    --shadow-cyber: 0 0 30px hsl(180 100% 50% / 0.3);
-    --shadow-glow: 0 0 60px hsl(175 100% 60% / 0.4);
-    --shadow-deep: 0 10px 40px hsl(210 50% 2% / 0.8);
+    --shadow-cyber: 0 0 40px hsl(189 56% 45% / 0.25);
+    --shadow-glow: 0 0 80px hsl(177 42% 60% / 0.3);
+    --shadow-deep: 0 20px 60px hsl(212 68% 4% / 0.7);
+    --shadow-elegant: 0 10px 40px -10px hsl(189 56% 45% / 0.35);
 
-    /* Animation timing */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,7 +94,11 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-['Inter',sans-serif] overflow-x-hidden;
+    @apply bg-background text-foreground font-sans overflow-x-hidden antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
   }
 
   /* Prevent text overflow globally */

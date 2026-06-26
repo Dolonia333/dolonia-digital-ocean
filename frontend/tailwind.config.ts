@@ -27,12 +27,16 @@ export default {
       '2xl': '1536px', // Large desktops
     },
     extend: {
+      fontFamily: {
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+      },
       maxWidth: {
-        screen: '100vw', // Prevent overflow
-        full: '100%', // Contain within parent
+        screen: '100vw',
+        full: '100%',
       },
       width: {
-        'screen-safe': '100vw', // Full viewport width
+        'screen-safe': '100vw',
       },
       colors: {
         border: 'hsl(var(--border))',
