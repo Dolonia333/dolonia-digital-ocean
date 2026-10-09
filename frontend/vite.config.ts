@@ -59,11 +59,11 @@ export default defineConfig(({ mode }) => ({
   envDir: '../config/env', // Load env files from config/env/
   server: {
     host: 'localhost',
-    port: 8080,
-    strictPort: false,
+    port: 5173,
+    strictPort: true,
     allowedHosts: ['dolonia.cloud', 'Dolonia.cloud', 'www.dolonia.cloud', 'www.Dolonia.cloud', 'localhost', '127.0.0.1'],
     headers: {
-      'Cache-Control': 'max-age=3600, public',
+      'Cache-Control': 'no-cache',
     },
     middlewareMode: false,
   },

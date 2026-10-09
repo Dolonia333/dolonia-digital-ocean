@@ -13,7 +13,7 @@ const Blog = () => {
         keywords="cybersecurity blog, security trends, threat intelligence, cloud security, zero trust, security insights"
       />
 
-      <div className="pt-20">
+      <div>
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">

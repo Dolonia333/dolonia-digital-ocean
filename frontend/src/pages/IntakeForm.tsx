@@ -162,19 +162,16 @@ export default function IntakeForm() {
   return (
     <Layout>
       <SEO
-        title="Get Started - Intake Form | Dolonia"
-        description="Tell us about your project and we'll match you with the right services"
+        title="Intake | Dolonia Data Tech"
+        description="Tell Dolonia what you need built, fixed, or hosted."
+        noIndex
       />
 
       <div className="container mx-auto px-6 py-16 max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-cyber bg-clip-text text-transparent">
-              Let's Get Started
-            </span>
-          </h1>
-          <p className="text-xl" style={{ color: '#1a4d6d' }}>
-            Tell us about your project and we'll create a custom solution
+        <div className="mb-12 text-left">
+          <h1 className="mb-4 text-4xl font-medium text-foreground md:text-5xl">Intake</h1>
+          <p className="text-lg text-cyan-soft">
+            Say what you need. This is the longer form the account uses to scope the work.
           </p>
         </div>
 
@@ -695,7 +692,7 @@ function DivisionDetails({
 
                 <div className="space-y-2">
                   <Label className="text-foreground">
-                    Do you need hosting through DOLONIA DATA TECH?
+                    Do you need hosting through Dolonia Cloud?
                   </Label>
                   <RadioGroup
                     value={(details.needs_hosting as string) || ''}

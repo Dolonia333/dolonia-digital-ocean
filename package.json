@@ -17,7 +17,8 @@
     "fix:eol": "npx eol -l frontend/",
     "fix:format": "prettier --write frontend/",
     "server": "node backend/server.js",
-    "serve-invoice": "node backend/serve-invoice.js"
+    "serve-invoice": "node backend/serve-invoice.js",
+    "sync:hosted": "node scripts/sync-from-nas.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -62,9 +63,11 @@
     "dotenv": "^17.2.3",
     "embla-carousel-react": "^8.6.0",
     "express": "^5.1.0",
+    "gsap": "^3.12.5",
     "html2canvas": "^1.4.1",
     "input-otp": "^1.4.2",
     "jspdf": "^3.0.3",
+    "lenis": "^1.1.0",
     "lovable-tagger": "^1.1.10",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",
@@ -81,6 +84,7 @@
     "stripe": "^19.2.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.170.0",
     "vaul": "^0.9.9",
     "vitest": "^3.2.4",
     "zod": "^3.25.76"

@@ -274,22 +274,14 @@ export default function InvoiceViewer() {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            min-height: 120px;
           }
-          .letterhead-left { 
-            flex: 1;
-            max-width: calc(100% - 160px);
-            min-width: 0;
-          }
+          .letterhead-left { flex: 1; }
           .letterhead-title {
-            font-size: 24px;
+            font-size: 36px;
             font-weight: 900;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             margin-bottom: 5px;
-            line-height: 0.9;
-            word-spacing: 2px;
-            white-space: pre-line;
           }
           .letterhead-subtitle {
             font-size: 12px;
@@ -450,7 +442,7 @@ export default function InvoiceViewer() {
           <!-- Letterhead -->
           <div class="letterhead">
             <div class="letterhead-left">
-              <div class="letterhead-title">DOLONIA<br>DATA TECH</div>
+              <div class="letterhead-title">DOLONIA DATA TECH</div>
               <div class="letterhead-subtitle">Dolonia.cloud</div>
               <div class="letterhead-contact">contact@dolonia.com | www.dolonia.com</div>
             </div>

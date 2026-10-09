@@ -1,30 +1,19 @@
-import React from 'react'
-import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
-import HeroSection from '@/components/HeroSection'
-import ServicePackages from '@/components/ServicePackages'
-import Newsletter from '@/components/Newsletter'
-import LiveChat from '@/components/LiveChat'
-import SearchFunctionality from '@/components/SearchFunctionality'
 
 const Index = () => {
   return (
-    <Layout>
+    <>
       <SEO
-        title="Dolonia Data Tech - Websites, Automation & Secure Hosting"
-        description="Professional websites, smart automation workflows, and secure hosting for Oklahoma businesses. Predictable monthly retainers with no hidden fees. Based in OKC."
+        title="Dolonia Data Tech"
+        description="Dolonia builds websites, databases, automation and private AI for business and government, then hosts and runs them."
+        url="https://dolonia.cloud/"
       />
-
-      <HeroSection />
-      <ServicePackages />
-      <Newsletter />
-
-      {/* Search Functionality */}
-      <SearchFunctionality />
-
-      {/* Live Chat */}
-      <LiveChat />
-    </Layout>
+      <iframe
+        title="Dolonia"
+        src="/ocean/index.html"
+        className="block h-screen w-screen border-0 bg-[#041018]"
+      />
+    </>
   )
 }
 

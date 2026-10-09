@@ -1,18 +1,16 @@
 import { useState } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { useNavigate, Link } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from 'sonner'
 import SEO from '@/components/SEO'
+import OceanIntro from '@/components/OceanIntro'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSignUp, setIsSignUp] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [entered, setEntered] = useState(false)
   const navigate = useNavigate()
 
   async function handleAuth(e: React.FormEvent) {
@@ -51,11 +49,7 @@ export default function Login() {
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : 'An error occurred'
-      if (message.toLowerCase().includes('failed to fetch')) {
-        toast.error('Cannot reach Supabase. Confirm local Supabase is running and VITE_SUPABASE_URL is reachable from this browser.')
-      } else {
-        toast.error(message)
-      }
+      toast.error(message)
     } finally {
       setLoading(false)
     }
@@ -63,81 +57,76 @@ export default function Login() {
 
   return (
     <>
-      <SEO
-        title="Login | DOLONIA DATA TECH"
-        description="Sign in to your DOLONIA DATA TECH account"
-      />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-ocean p-4">
-        <Card className="w-full max-w-md bg-ocean-mid border-ocean-surface">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl text-cyan-bright">
-              {isSignUp ? 'Create Account' : 'Welcome Back'}
-            </CardTitle>
-            <CardDescription className="text-cyan-soft">
-              {isSignUp ? 'Sign up for a new account' : 'Sign in to your account'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleAuth} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-cyan-soft">
-                  Email
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
-                  required
-                  className="bg-ocean-deep border-ocean-surface text-foreground"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-cyan-soft">
-                  Password
-                </Label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
-                  required
-                  minLength={6}
-                  className="bg-ocean-deep border-ocean-surface text-foreground"
-                />
-              </div>
-              <Button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-transparent border-cyan-bright text-cyan-bright hover:bg-cyan-bright hover:text-ocean-deep transition-all"
-              >
-                {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
-              </Button>
-            </form>
-            <div className="mt-4 text-center">
-              <button
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-cyan-soft hover:text-cyan-bright transition-colors text-sm"
-              >
-                {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-              </button>
+      <SEO title="Login | Dolonia Data Tech" description="Sign in to the dashboard." noIndex />
+      {entered ? null : <OceanIntro onDone={() => setEntered(true)} />}
+      <div
+        className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-6 py-16"
+        style={{
+          background:
+            'linear-gradient(180deg, #1b587e 0%, #0e3a5c 28%, #07223d 58%, #041a2c 100%)',
+        }}
+      >
+        <div className="w-full max-w-md border border-[var(--line)] bg-[rgba(4,26,44,0.55)] p-8 backdrop-blur-sm">
+          <p className="ocean-kicker">Tools</p>
+          <h1 className="ocean-display mt-3 text-5xl">
+            {isSignUp ? 'Create an account' : 'Sign in'}
+          </h1>
+          <p className="mt-4 text-[var(--soft)]">
+            {isSignUp
+              ? 'Use this for invoices, bookings, and intake.'
+              : 'Invoices, calendar, intake, and tickets are in here.'}
+          </p>
+          <form onSubmit={handleAuth} className="mt-8 space-y-5">
+            <div>
+              <label className="ocean-label" htmlFor="email">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                required
+                className="ocean-field"
+              />
             </div>
-            <div className="mt-4 text-center">
-              <Link
-                to="/"
-                className="text-cyan-soft hover:text-cyan-bright transition-colors text-sm"
-              >
-                ← Back to Home
-              </Link>
+            <div>
+              <label className="ocean-label" htmlFor="password">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="At least 6 characters"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete={isSignUp ? 'new-password' : 'current-password'}
+                required
+                minLength={6}
+                className="ocean-field"
+              />
             </div>
-          </CardContent>
-        </Card>
+            <button type="submit" disabled={loading} className="ocean-btn w-full">
+              <i className="bc tl" />
+              <i className="bc tr" />
+              <i className="bc br" />
+              <i className="bc bl" />
+              {loading ? 'Loading' : isSignUp ? 'Sign up' : 'Sign in'}
+            </button>
+          </form>
+          <div className="mt-6 flex flex-col gap-3">
+            <button type="button" onClick={() => setIsSignUp(!isSignUp)} className="ocean-link text-left">
+              {isSignUp ? 'Already have an account? Sign in' : 'Need an account? Sign up'}
+            </button>
+            <Link to="/" className="ocean-link">
+              Back to the surface
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   )

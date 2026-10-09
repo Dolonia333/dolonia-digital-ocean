@@ -67,8 +67,9 @@ export default function TicketSubmission() {
   return (
     <Layout>
       <SEO
-        title="Submit Support Ticket - Dolonia Digital Ocean"
-        description="Submit a support ticket and get help from our team"
+        title="Ticket | Dolonia Data Tech"
+        description="Send a ticket to the Dolonia account."
+        noIndex
       />
 
       <div className="min-h-screen bg-gradient-to-br from-ocean-deep via-ocean-deep to-ocean-surface py-12 px-4">
@@ -80,20 +81,18 @@ export default function TicketSubmission() {
             className="mb-6 text-cyan-bright hover:text-cyan-bright/80 hover:bg-cyan-bright/10"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
+            Back to account
           </Button>
 
           {/* Main Card */}
-          <Card className="bg-ocean-surface/60 border-cyan-bright/10 shadow-xl shadow-cyan-bright/10">
-            <CardHeader className="text-center pb-8">
-              <div className="mx-auto w-16 h-16 bg-cyan-bright/10 rounded-full flex items-center justify-center mb-4">
+          <Card className="border-white/15 bg-transparent shadow-none">
+            <CardHeader className="pb-8 text-left">
+              <div className="mb-4 hidden">
                 <HeadphonesIcon className="h-8 w-8 text-cyan-bright" />
               </div>
-              <CardTitle className="text-3xl font-bold text-cyan-bright">
-                Submit Support Ticket
-              </CardTitle>
-              <CardDescription className="text-lg">
-                Get help from our team - we're here to assist you
+              <CardTitle className="text-3xl font-medium text-foreground">Ticket</CardTitle>
+              <CardDescription className="text-base text-cyan-soft">
+                Describe the problem. It shows up in the account.
               </CardDescription>
             </CardHeader>
 

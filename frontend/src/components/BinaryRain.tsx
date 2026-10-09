@@ -245,19 +245,20 @@ const BinaryRain: React.FC<BinaryRainProps> = ({ isActive = true }) => {
       // Pattern-specific colors
       switch (pattern) {
         case 'matrix':
-          digit.style.color = 'hsl(120, 100%, 50%)' // Green Matrix style
-          digit.style.textShadow = '0 0 10px hsl(120, 100%, 50%)'
+          digit.style.color = 'hsl(222, 14%, 28%)'
+          digit.style.opacity = '0.35'
+          digit.style.textShadow = 'none'
           break
         case 'glitch': {
-          const glitchColors = ['#ff0080', '#00ff80', '#8000ff']
-          const color = glitchColors[Math.floor(Math.random() * glitchColors.length)]
-          digit.style.color = color
-          digit.style.textShadow = `0 0 15px ${color}`
+          digit.style.color = 'hsl(222, 14%, 28%)'
+          digit.style.opacity = '0.35'
+          digit.style.textShadow = 'none'
           break
         }
         case 'cascade':
-          digit.style.color = 'hsl(200, 100%, 70%)' // Ocean blue
-          digit.style.textShadow = '0 0 10px hsl(200, 100%, 70%)'
+          digit.style.color = 'hsl(222, 14%, 28%)'
+          digit.style.opacity = '0.28'
+          digit.style.textShadow = 'none'
           break
       }
 

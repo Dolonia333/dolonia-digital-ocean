@@ -1,0 +1,16 @@
+{
+  "name": "dolonia-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "dolonia.cloud: an interactive 3D underwater website for Dolonia Data Tech Solutions",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs && node scripts/copy-preview.mjs",
+    "serve": "node scripts/serve.mjs 8090",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs 8090",
+    "test": "python3 tests/smoke.py"
+  },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED"
+}

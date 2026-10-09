@@ -1,0 +1,24 @@
+/* ---------- Buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.75rem 1.45rem;background:rgba(8,61,99,.18);color:var(--light);text-decoration:none;font-family:var(--hud);font-weight:500;font-size:.95rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:0;backdrop-filter:blur(3px);-webkit-tap-highlight-color:transparent}
+.btn-solid{background:rgba(148,230,251,.14)}
+.btn__t{display:block;overflow:hidden;position:relative;padding:2px 0}
+.btn__t span{display:block;white-space:nowrap;transition:transform .25s var(--snap)}
+.btn__t .a{transition-delay:.18s}
+.btn__t .b{position:absolute;left:0;top:100%;margin-top:-2px;transform:translateY(30%)}
+.btn:hover .btn__t .a,.btn:focus-visible .btn__t .a{transform:translateY(-100%);transition-delay:0s}
+.btn:hover .btn__t .b,.btn:focus-visible .btn__t .b{transform:translateY(-100%);transition-delay:.18s}
+.btn .bc{position:absolute;width:7px;height:7px;border:0 solid var(--ui)}
+.btn .bc.tl{left:1px;top:1px;border-left-width:1px;border-top-width:1px}
+.btn .bc.tr{right:1px;top:1px;border-right-width:1px;border-top-width:1px}
+.btn .bc.br{right:1px;bottom:1px;border-right-width:1px;border-bottom-width:1px}
+.btn .bc.bl{left:1px;bottom:1px;border-left-width:1px;border-bottom-width:1px}
+.btn .bl{position:absolute;width:50%;height:1px;background:var(--ui);transform:scaleX(0);transition:transform .5s var(--snap)}
+.btn .bl.tl{left:1px;top:1px;transform-origin:left}
+.btn .bl.tr{right:1px;top:1px;transform-origin:right}
+.btn .bl.br{right:1px;bottom:1px;transform-origin:right}
+.btn .bl.bl2{left:1px;bottom:1px;transform-origin:left}
+.btn:hover .bl,.btn:focus-visible .bl{transform:scaleX(1)}
+.btn-solid .bl{transform:scaleX(1)}
+.btn-solid:hover{background:rgba(148,230,251,.24)}
+@media (prefers-reduced-motion: reduce){.btn__t span,.btn .bl{transition:none}}
+

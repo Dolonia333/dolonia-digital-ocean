@@ -1,0 +1,318 @@
+/* Dolonia ocean brand kit
+   Taken from the underwater site: deep water, pale ink, one glow.
+   Display: Saira Condensed. Body: IBM Plex Sans. HUD labels: Saira Condensed, wide tracking.
+*/
+
+.brand-ocean {
+  --deep: #041a2c;
+  --navy: #083d63;
+  --ink: #eaf4f9;
+  --soft: #c9dfea;
+  --sea-muted: #8fb0c2;
+  --glow: #94e6fb;
+  --light: #e5faff;
+  --line: rgba(234, 244, 249, 0.26);
+  --line-strong: rgba(234, 244, 249, 0.55);
+  --display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --hud: "Saira Condensed", "Arial Narrow", sans-serif;
+
+  --background: 207 83% 9%;
+  --foreground: 200 56% 95%;
+  --card: 205 85% 14%;
+  --card-foreground: 200 56% 95%;
+  --popover: 205 85% 12%;
+  --popover-foreground: 200 56% 95%;
+  --primary: 192 93% 78%;
+  --primary-foreground: 207 83% 9%;
+  --secondary: 205 70% 18%;
+  --secondary-foreground: 200 56% 95%;
+  --muted: 205 50% 16%;
+  --muted-foreground: 201 30% 66%;
+  --accent: 192 93% 78%;
+  --accent-foreground: 207 83% 9%;
+  --border: 204 32% 32%;
+  --input: 204 32% 32%;
+  --ring: 192 93% 78%;
+  --cyan-bright: 192 93% 78%;
+  --cyan-soft: 201 30% 66%;
+  --cyan-glow: 192 80% 70%;
+  --ocean-deep: 207 83% 9%;
+  --ocean-mid: 205 85% 16%;
+  --ocean-surface: 204 40% 28%;
+
+  background: var(--deep);
+  color: var(--ink);
+  font-family: var(--body);
+}
+
+.brand-ocean h1,
+.brand-ocean h2,
+.brand-ocean h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ocean-kicker {
+  font-family: var(--hud);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sea-muted);
+}
+
+.ocean-display {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.ocean-field {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  background: rgba(4, 26, 44, 0.45);
+  color: var(--ink);
+  padding: 0.7rem 0.9rem;
+  font-family: var(--body);
+  font-size: 1rem;
+  outline: none;
+}
+
+.ocean-field::placeholder {
+  color: rgba(143, 176, 194, 0.7);
+}
+
+.ocean-field:focus {
+  border-color: var(--glow);
+}
+
+.ocean-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--hud);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.ocean-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.75rem 1.45rem;
+  border: 0;
+  background: rgba(148, 230, 251, 0.14);
+  color: var(--light);
+  font-family: var(--hud);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ocean-btn:hover {
+  background: rgba(148, 230, 251, 0.24);
+}
+
+.ocean-btn:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.ocean-btn .bc {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 0 solid var(--glow);
+}
+
+.ocean-btn .bc.tl { left: 1px; top: 1px; border-left-width: 1px; border-top-width: 1px; }
+.ocean-btn .bc.tr { right: 1px; top: 1px; border-right-width: 1px; border-top-width: 1px; }
+.ocean-btn .bc.br { right: 1px; bottom: 1px; border-right-width: 1px; border-bottom-width: 1px; }
+.ocean-btn .bc.bl { left: 1px; bottom: 1px; border-left-width: 1px; border-bottom-width: 1px; }
+
+.ocean-link {
+  color: var(--soft);
+  font-family: var(--hud);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.ocean-link:hover {
+  color: var(--glow);
+}
+
+/* Opening dial. Same screen as the first visit, before the surface. */
+.ocean-intro {
+  --ui: #94e6fb;
+  --light: #e5faff;
+  --sea-muted: #8fb0c2;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  color: var(--light);
+}
+
+.ocean-intro-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 90% 8%, rgba(64, 110, 160, 0.28), rgba(27, 58, 94, 0) 55%),
+    #1b3a5e;
+}
+
+.ocean-intro.is-out .ocean-intro-bg {
+  animation: oceanIntroFade 2.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+}
+
+.ocean-intro.is-out .ocean-intro-legal,
+.ocean-intro.is-out .ocean-intro-corner,
+.ocean-intro.is-out .ocean-intro-telemetry {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes oceanIntroFade {
+  to { opacity: 0; }
+}
+
+.ocean-dial {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(54vw, 270px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+.ocean-dial svg { width: 100%; height: 100%; overflow: visible; display: block; }
+
+.ocean-dial-outer {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: oceanDialSwing 5s cubic-bezier(0.87, 0, 0.13, 1) infinite alternate;
+}
+
+@keyframes oceanDialSwing {
+  0% { transform: rotate(160deg); }
+  25% { transform: rotate(35deg); }
+  50% { transform: rotate(115deg); }
+  75% { transform: rotate(65deg); }
+  100% { transform: rotate(-170deg); }
+}
+
+.ocean-dial-outer .dot { fill: var(--ui); }
+.ocean-dial-outer .guide { stroke: var(--ui); opacity: 0.22; fill: none; stroke-width: 1.5; }
+.ocean-dial .track,
+.ocean-dial .fill { fill: none; stroke-width: 15; stroke-dasharray: 1 3.7; transition: stroke-width 2.5s cubic-bezier(0.87, 0, 0.13, 1); }
+.ocean-dial .track { stroke: var(--light); opacity: 0.3; }
+.ocean-dial .fill { stroke: var(--ui); }
+.ocean-dial.is-thick .track,
+.ocean-dial.is-thick .fill { stroke-width: 20; }
+
+.ocean-dial-n {
+  position: absolute;
+  font-family: "Saira", "IBM Plex Sans", sans-serif;
+  font-size: 0.62rem;
+  color: var(--ui);
+  opacity: 0.35;
+  letter-spacing: 0.06em;
+}
+.ocean-dial-n.n25 { right: -2.2rem; top: 50%; transform: translateY(-50%); }
+.ocean-dial-n.n50 { bottom: -2.3rem; left: 50%; transform: translateX(-50%); }
+.ocean-dial-n.n75 { left: -2.2rem; top: 50%; transform: translateY(-50%); }
+.ocean-dial-n.n100 { top: -2.3rem; left: 50%; transform: translateX(-50%); }
+
+.ocean-dial-c {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Saira", "IBM Plex Sans", sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--light);
+  text-align: center;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.ocean-dial-c > div { display: grid; }
+.ocean-dial-c span { opacity: 0; }
+.ocean-dial-c .dc-b { position: absolute; inset: 0; }
+
+.ocean-intro-telemetry {
+  position: absolute;
+  top: 1.4rem;
+  left: clamp(1.1rem, 3.2vw, 2.6rem);
+  z-index: 2;
+  transform: translateY(-8px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.85;
+  font-family: "Saira", "IBM Plex Sans", sans-serif;
+  font-size: 0.47rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--light);
+}
+.ocean-intro-telemetry .dots { display: inline; margin-left: 0.15em; }
+.ocean-intro-telemetry .dots i { font-style: normal; opacity: 0.5; color: var(--ui); }
+.ocean-intro-telemetry li { min-height: 1.75em; white-space: nowrap; }
+.ocean-intro-telemetry li::before { content: "> "; color: var(--sea-muted); }
+.ocean-intro-telemetry li.wait::before { content: ""; }
+.ocean-intro-telemetry b { font-weight: 400; color: var(--ui); }
+
+.ocean-intro-legal {
+  position: absolute;
+  right: clamp(1.1rem, 3.2vw, 2.6rem);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1.4rem);
+  z-index: 2;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  font-family: "Saira", "IBM Plex Sans", sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ui);
+  text-align: right;
+  line-height: 1.55;
+}
+.ocean-intro-corner {
+  position: absolute;
+  left: clamp(1.1rem, 3.2vw, 2.6rem);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1.4rem);
+  z-index: 2;
+  width: 21px;
+  height: 21px;
+}
+.ocean-intro-corner path,
+.ocean-intro-legal .corner path {
+  stroke: var(--ui);
+  fill: none;
+  stroke-width: 1;
+}
+.ocean-intro-legal .corner { width: 21px; height: 21px; flex: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ocean-dial-outer { animation: none; }
+}

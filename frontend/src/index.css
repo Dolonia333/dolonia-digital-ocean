@@ -8,63 +8,57 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Ocean depths theme */
-    --background: 210 50% 4%;
-    --foreground: 180 100% 96%;
+    /* Paper and ink. One navy for links and buttons. */
+    --background: 40 23% 97%;
+    --foreground: 222 22% 14%;
 
-    --card: 210 45% 6%;
-    --card-foreground: 180 100% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 14%;
 
-    --popover: 210 45% 6%;
-    --popover-foreground: 180 100% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 22% 14%;
 
-    /* Cyan glow primary */
-    --primary: 180 100% 50%;
-    --primary-foreground: 210 50% 4%;
+    --primary: 222 28% 16%;
+    --primary-foreground: 40 23% 97%;
 
-    /* Deep ocean secondary */
-    --secondary: 210 30% 12%;
-    --secondary-foreground: 180 100% 96%;
+    --secondary: 40 14% 93%;
+    --secondary-foreground: 222 22% 14%;
 
-    --muted: 210 25% 15%;
-    --muted-foreground: 180 30% 70%;
+    --muted: 40 12% 92%;
+    --muted-foreground: 220 8% 36%;
 
-    /* Bright cyan accent */
-    --accent: 175 100% 60%;
-    --accent-foreground: 210 50% 4%;
+    --accent: 222 28% 16%;
+    --accent-foreground: 40 23% 97%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 42%;
+    --destructive-foreground: 40 23% 97%;
 
-    --border: 210 30% 18%;
-    --input: 210 30% 12%;
-    --ring: 180 100% 50%;
+    --border: 35 12% 84%;
+    --input: 35 12% 84%;
+    --ring: 222 28% 16%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;
 
-    /* Custom ocean theme colors */
-    --ocean-deep: 210 50% 4%;
-    --ocean-mid: 210 45% 8%;
-    --ocean-surface: 210 30% 15%;
-    --cyan-bright: 180 100% 50%;
-    --cyan-glow: 175 100% 60%;
-    --cyan-soft: 180 50% 75%;
+    --ocean-deep: 40 23% 97%;
+    --ocean-mid: 0 0% 100%;
+    --ocean-surface: 35 12% 86%;
+    --cyan-bright: 222 28% 18%;
+    --cyan-glow: 222 20% 28%;
+    --cyan-soft: 220 8% 34%;
 
-    /* Gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(210 50% 4%), hsl(210 45% 8%), hsl(210 30% 12%));
-    --gradient-cyber: linear-gradient(135deg, hsl(180 100% 50%), hsl(175 100% 60%));
-    --gradient-surface: linear-gradient(180deg, hsl(210 30% 15%), hsl(210 45% 8%));
+    --gradient-ocean: linear-gradient(180deg, hsl(40 23% 97%), hsl(40 18% 95%));
+    --gradient-cyber: linear-gradient(90deg, hsl(222 28% 16%), hsl(222 20% 28%));
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%), hsl(40 14% 95%));
 
-    /* Shadows and glows */
-    --shadow-cyber: 0 0 30px hsl(180 100% 50% / 0.3);
-    --shadow-glow: 0 0 60px hsl(175 100% 60% / 0.4);
-    --shadow-deep: 0 10px 40px hsl(210 50% 2% / 0.8);
+    --shadow-cyber: 0 1px 2px hsl(222 22% 14% / 0.06);
+    --shadow-glow: 0 12px 32px hsl(222 22% 14% / 0.08);
+    --shadow-deep: 0 10px 30px hsl(222 22% 14% / 0.08);
 
     /* Animation timing */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --radius: 0.75rem;
+    --radius: 0.2rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -84,9 +78,8 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Same theme - already dark ocean */
-    --background: 210 50% 4%;
-    --foreground: 180 100% 96%;
+    --background: 40 23% 97%;
+    --foreground: 222 22% 14%;
   }
 }
 
@@ -96,11 +89,62 @@ All colors MUST be HSL.
   }
 
   html {
-    @apply overflow-x-hidden;
+    @apply overflow-x-clip;
   }
 
   body {
-    @apply bg-background text-foreground font-['Inter',sans-serif] overflow-x-hidden;
+    @apply bg-background text-foreground font-sans overflow-x-clip;
+  }
+
+  html,
+  html.lenis,
+  html.lenis body {
+    scroll-behavior: auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-field {
+    background:
+      radial-gradient(
+        560px circle at var(--x, 70%) var(--y, 30%),
+        hsl(72 62% 62% / 0.1),
+        transparent 46%
+      ),
+      linear-gradient(hsl(42 28% 94% / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(42 28% 94% / 0.045) 1px, transparent 1px);
+    background-size: auto, 80px 80px, 80px 80px;
+    mask-image: linear-gradient(to bottom, black 70%, transparent);
+  }
+
+  .brand-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(72 62% 62% / 0.7), transparent);
+    animation: brand-scan 11s linear infinite;
+  }
+
+  @keyframes brand-scan {
+    from {
+      top: 8%;
+    }
+    to {
+      top: 88%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-scan {
+      display: none;
+    }
   }
 
   /* Prevent text overflow globally */
@@ -113,7 +157,7 @@ All colors MUST be HSL.
   body,
   html {
     max-width: 100vw;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* Universal Mobile Reset - Ensure all containers are mobile-safe */
@@ -128,7 +172,7 @@ All colors MUST be HSL.
     #root,
     #root > * {
       max-width: 100vw;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* Ensure flex and grid containers don't overflow */
@@ -137,7 +181,7 @@ All colors MUST be HSL.
     [class*='flex'],
     [class*='grid'] {
       max-width: 100%;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* Force cards and panels to be mobile-friendly */
@@ -162,119 +206,93 @@ All colors MUST be HSL.
       padding: 0.5rem 0.25rem !important;
     }
 
-    select,
-    button {
-      font-size: 10px !important;
-    }
   }
 
-  /* ========================================
-     iPAD = MOBILE (768px - 1024px)
-     Force iPad to use exact same layout as phones
-     ======================================== */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    /* Force ALL grids to use 2 columns (mobile layout) */
-    .grid[class*='grid-cols'],
-    [class*='grid-cols'] {
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 0.5rem;
-      padding: 0.75rem;
-    }
-
-    /* Force mobile padding on all containers */
-    .dashboard,
-    .section,
-    .card,
-    .panel,
-    [class*='Card'],
-    [class*='card'],
-    [class*='space-y'] > div {
-      padding: 0.75rem !important;
-    }
-
-    /* Force mobile text sizes */
-    h1 {
-      font-size: 1.5rem !important;
-    }
-
-    h2 {
-      font-size: 1.25rem !important;
-    }
-
-    h3 {
-      font-size: 1.125rem !important;
-    }
-
-    /* Force mobile button sizes */
-    button,
-    [role='button'] {
-      padding: 0.625rem 0.875rem !important;
-      font-size: 0.875rem !important;
-    }
+  /* Calendar grids keep their columns and stay inside the screen */
+  .admin-calendar,
+  .admin-calendar .calendar-container {
+    width: 100%;
+    max-width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
-  /* ========================================
-     FORCE iPAD TO USE MOBILE LAYOUT
-     iPad should look exactly like phone
-     ======================================== */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    /* Override ALL tablet-specific styles - use mobile instead */
+  .admin-calendar .month-grid,
+  .admin-calendar .week-days {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    width: 100%;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
 
-    /* Force mobile grid columns on iPad */
-    .grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
+  .admin-calendar .schedule-grid-day {
+    display: grid !important;
+    grid-template-columns: minmax(4.75rem, 7.5rem) repeat(12, minmax(0, 1fr)) !important;
+    width: 100%;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
 
-    /* Ensure no md: breakpoint styles apply */
-    [class*='md:grid-cols-3'],
-    [class*='md:grid-cols-4'] {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
+  .admin-calendar .schedule-grid-week {
+    display: grid !important;
+    grid-template-columns: minmax(4.75rem, 7.5rem) repeat(7, minmax(0, 1fr)) !important;
+    width: 100%;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
 
-    /* Force mobile padding */
-    [class*='md:p-'],
-    [class*='md:px-'],
-    [class*='md:py-'] {
-      padding: 0.75rem !important;
-    }
+  .admin-calendar .time-slots {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(4.25rem, 1fr)) !important;
+    width: 100%;
+    min-width: 0 !important;
+  }
 
-    /* Force mobile text sizes */
-    [class*='md:text-'] {
-      font-size: inherit !important;
-    }
+  .admin-calendar .day-cell {
+    height: 2.5rem;
+    aspect-ratio: auto !important;
+    min-width: 0;
+    max-width: 100%;
+    padding: 0 !important;
+    font-size: 0.75rem !important;
+    line-height: 1;
+    overflow: hidden;
+  }
 
-    /* Calendar: force mobile width */
-    .admin-calendar,
-    .calendar-container,
-    [class*='max-w-7xl'] {
-      max-width: 100% !important;
-      padding: 0.75rem !important;
-    }
+  .admin-calendar .slot-btn {
+    min-width: 0;
+    max-width: 100%;
+    padding: 0.2rem !important;
+    font-size: 0.7rem !important;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
-    /* Calendar cards: mobile padding */
-    .calendar-card,
-    [class*='rounded-3xl'] {
-      padding: 1rem !important;
-    }
+  .admin-calendar .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 !important;
+    overflow: visible;
+  }
 
-    /* Calendar header: mobile text size */
-    .calendar-header h1,
-    .calendar-header h2,
-    [class*='calendar'] h1,
-    [class*='calendar'] h2 {
-      font-size: 1.5rem !important;
-    }
+  .admin-calendar .room-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
 
-    /* Timeline grids: use mobile min-width */
-    [class*='grid'][class*='min-w-'] {
-      min-width: 600px !important;
-    }
-
-    /* Buttons: mobile size */
-    button,
-    [role='button'] {
+  @media (min-width: 640px) {
+    .admin-calendar .day-cell {
+      height: 3rem;
       font-size: 0.875rem !important;
-      padding: 0.625rem 1rem !important;
     }
   }
 
@@ -295,7 +313,7 @@ All colors MUST be HSL.
   }
 
   .binary-rain {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -303,6 +321,12 @@ All colors MUST be HSL.
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
+  }
+
+  .binary-digit {
+    color: hsl(222 14% 28%) !important;
+    text-shadow: none !important;
+    opacity: 0.35 !important;
   }
 
   .binary-digit {

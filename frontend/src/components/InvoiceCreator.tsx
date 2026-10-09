@@ -149,9 +149,9 @@ const DOLONIA_SERVICES = [
 type NotePresetValue = 'standard' | 'net15' | 'dueOnReceipt' | 'custom'
 
 const DEFAULT_NOTES_TEXT = `Payment Terms
-Payment is due within 30 days of invoice date. Please make checks payable to DOLONIA DATA TECH or pay via bank transfer. Late payments may incur a 1.5% monthly interest charge.
+Payment is due within 30 days of invoice date. Please make checks payable to Dolonia Data Tech or pay via bank transfer. Late payments may incur a 1.5% monthly interest charge.
 
-Thank you for choosing DOLONIA DATA TECH for your business needs!`
+Thank you for choosing Dolonia Data Tech for your business needs!`
 
 const NOTE_PRESETS: Array<{ value: NotePresetValue; label: string; text: string }> = [
   { value: 'standard', label: 'Net 30 (Default)', text: DEFAULT_NOTES_TEXT },
@@ -169,7 +169,7 @@ We appreciate your prompt attention and continued partnership.`,
     text: `Payment Terms
 Payment is due upon receipt of this invoice. Please submit payment via the secure client portal link provided separately. A late fee of 3% will be applied every 15 days past due.
 
-Thank you for your business with DOLONIA DATA TECH.`,
+Thank you for your business with Dolonia Data Tech.`,
   },
   { value: 'custom', label: 'Custom', text: '' },
 ]
@@ -379,22 +379,17 @@ export default function InvoiceCreator({ onInvoiceCreated }: InvoiceCreatorProps
     }
     .logo-section-left {
       flex: 1;
-      max-width: calc(100% - 160px);
-      min-width: 0;
     }
     .logo-section-image {
       width: 120px;
       height: auto;
     }
     .logo {
-      font-size: 32px;
+      font-size: 48px;
       font-weight: 900;
       color: white;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-      line-height: 0.9;
-      word-spacing: 2px;
-      white-space: pre-line;
     }
     .company-tagline {
       font-size: 14px;
@@ -590,7 +585,7 @@ export default function InvoiceCreator({ onInvoiceCreated }: InvoiceCreatorProps
     <div class="letterhead">
       <div class="logo-section">
         <div class="logo-section-left">
-          <div class="logo">DOLONIA<br>DATA TECH</div>
+          <div class="logo">DOLONIA DATA TECH</div>
           <div class="company-tagline">Dolonia.cloud</div>
         </div>
         <img src="${doloniaLogo}" alt="Dolonia Logo" class="logo-section-image" />

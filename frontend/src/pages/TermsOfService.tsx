@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
+import DraftBanner from '@/components/marketing/DraftBanner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const TermsOfService = () => {
@@ -9,9 +10,11 @@ const TermsOfService = () => {
       <SEO
         title="Terms of Service - Dolonia"
         description="Read Dolonia's Terms of Service and understand the conditions for using our cybersecurity solutions."
+        noIndex
       />
+      <DraftBanner />
 
-      <div className="pt-20">
+      <div>
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">

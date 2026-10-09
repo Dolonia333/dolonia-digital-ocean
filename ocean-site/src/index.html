@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en" class="on-home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dolonia Data Tech</title>
+<meta name="description" content="Dolonia builds websites, databases, automation and private AI for business and government, then hosts and runs them.">
+<link rel="canonical" href="https://dolonia.cloud/">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Dolonia Data Tech">
+<meta property="og:description" content="Dolonia builds websites, databases, automation and private AI for business and government, then hosts and runs them.">
+<meta property="og:url" content="https://dolonia.cloud/">
+<meta property="og:image" content="https://dolonia.cloud/og-image.png">
+<meta name="theme-color" content="#083d63">
+<link rel="icon" type="image/png" href="@asset:favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;500;600&family=Saira:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>/*@styles*/</style>
+</head>
+<body>
+<canvas id="sea" aria-hidden="true"></canvas>
+<div id="lvh" aria-hidden="true"></div>
+<div class="edge edge-t" aria-hidden="true"></div><div class="edge edge-b" aria-hidden="true"></div>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-bg" id="intro-bg"></div>
+  <div class="dial" id="dial">
+    <svg viewBox="0 0 400 400">
+      <defs>
+        <mask id="m-wipe" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="400"><circle id="wipe" cx="200" cy="200" r="154" fill="none" stroke="#fff" stroke-width="44" transform="rotate(-90 200 200)"/></mask>
+        <mask id="m-prog" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="400"><circle id="progm" cx="200" cy="200" r="154" fill="none" stroke="#fff" stroke-width="44" transform="rotate(-90 200 200)"/></mask>
+      </defs>
+      <g class="dial-outer">
+        <circle class="dot" cx="200" cy="64" r="3.5"/><circle class="dot" cx="200" cy="336" r="3.5"/>
+        <circle class="guide" cx="200" cy="200" r="163"/>
+        <path class="guide" d="M200 0V34M200 366V400M0 200H34M366 200H400"/>
+      </g>
+      <g mask="url(#m-wipe)">
+        <circle class="track" cx="200" cy="200" r="150"/>
+        <circle class="fill" cx="200" cy="200" r="150" mask="url(#m-prog)"/>
+      </g>
+    </svg>
+    <span class="dial-n n25">25</span><span class="dial-n n50">50</span><span class="dial-n n75">75</span><span class="dial-n n100">100</span>
+    <div class="dial-c"><div class="dc-a"><span>Loading</span><span>Experience</span></div><div class="dc-b"><span>Connection</span><span>Established</span></div></div>
+  </div>
+  <svg class="corner corner-bl" viewBox="0 0 24 24"><path d="M.5 .5H23.5V23.5H.5Z M.5 .5L23.5 23.5"/></svg>
+  <div class="legal"><span><span class="lg" data-text="Dolonia Data Tech Solutions"></span><br><span class="lg" data-text="A DBA of 1921 Holding Co. LLC"></span><br><span class="lg" data-text="All rights reserved 2026"></span></span><svg class="corner" viewBox="0 0 24 24"><path d="M.5 .5H23.5V23.5H.5Z M.5 .5L23.5 23.5 M.5 23.5L23.5 .5"/></svg></div>
+</div>
+
+<header class="hud hud-top">
+  <div>
+    <a class="mark" href="#home" data-go="home" aria-label="Dolonia, back to the surface"><img src="@asset:logo.png" alt="" width="40" height="40"></a>
+    <ul class="telemetry" aria-hidden="true">
+      <li class="wait" data-k="Detail: " data-v="Connecting" data-r="Connected"></li>
+      <li class="wait" data-k="Location: " data-v="Searching" data-r="Oklahoma City, OK"></li>
+      <li class="wait" data-k="Coordinates: " data-v="Searching" data-r="35.4676° N / 97.5164° W"></li>
+    </ul>
+  </div>
+  <div class="hud-right later">
+    <a class="hud-btn book" href="#work" data-go="work">Book a call</a>
+    <button class="round menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<div class="hud-loc" aria-hidden="true">
+  <span class="zone"><canvas class="hud-globe" id="hud-globe" width="64" height="64" aria-hidden="true"></canvas><span id="r-zone">Surface</span></span>
+  <span class="disc">Discovery progress: <span id="r-disc">0%</span></span>
+  <span class="bar"><i id="r-bar"></i></span>
+  <span class="dt">Depth: <i id="r-depth">0 m</i><em></em>Temp: <i id="r-temp">20.0°C</i></span>
+</div>
+<p class="hud-hint" aria-hidden="true"><span class="hint-mouse">Click the jellyfish to ask it a question. Click the water to feed it.</span><span class="hint-touch">Tap the jellyfish to ask it a question. Tap the water to feed it.</span></p>
+<button class="round snd-round" id="audio" type="button" aria-pressed="false" aria-label="Turn sound on"><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
+<div class="scroll-cue" aria-hidden="true">Scroll to dive</div>
+
+<div class="vig" aria-hidden="true"></div>
+<nav class="jprog" id="jprog" aria-label="Dive progress"><svg viewBox="0 0 60 400" preserveAspectRatio="none" aria-hidden="true"><path id="jprog-path" d="M30 6 C 6 90, 54 150, 30 200 S 6 310, 30 394"/><path id="jprog-done" d="M30 6 C 6 90, 54 150, 30 200 S 6 310, 30 394"/></svg><div class="jprog-arrow" id="jprog-arrow"></div></nav>
+<div class="sprompt" id="sprompt" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" class="sp-dash"/><path d="M24 22l8 6 8-6M24 30l8 6 8-6M24 38l8 6 8-6" class="sp-arrows"/></svg><span class="sp-text">Scroll to explore</span></div>
+<p class="dives-prompt" aria-hidden="true">Select a current to begin the dive</p>
+<div class="modal-wrap" id="modal-wrap" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="g-close modal-x" id="modal-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+<template id="m-storefront"><p class="sub">Project spotlight</p><h2 id="modal-title" class="m-title"><span>A health-tech</span> <span>storefront</span></h2>
+  <div class="m-grid"><div class="carousel"><div class="car-track"><svg viewBox="0 0 320 200"><rect width="320" height="200" fill="#06263f"/><rect x="16" y="18" width="150" height="12" fill="#e5faff"/><rect x="16" y="38" width="200" height="6" fill="#8fb0c2"/><rect x="16" y="64" width="90" height="110" fill="#0b3556"/><rect x="116" y="64" width="90" height="110" fill="#0b3556"/><rect x="216" y="64" width="90" height="110" fill="#0b3556"/><rect x="26" y="150" width="70" height="14" fill="#94e6fb"/><rect x="126" y="150" width="70" height="14" fill="#94e6fb"/><rect x="226" y="150" width="70" height="14" fill="#94e6fb"/></svg><svg viewBox="0 0 320 200"><rect width="320" height="200" fill="#06263f"/><rect x="16" y="18" width="120" height="12" fill="#e5faff"/><g fill="#0b3556" stroke="#94e6fb" stroke-opacity=".4"><rect x="16" y="46" width="288" height="26"/><rect x="16" y="80" width="288" height="26"/><rect x="16" y="114" width="288" height="26"/></g><rect x="16" y="154" width="100" height="26" fill="#94e6fb"/></svg></div><div class="car-nav"><button type="button" class="car-prev" aria-label="Previous image">‹</button><button type="button" class="car-next" aria-label="Next image">›</button></div></div>
+  <div class="m-copy"><p>A storefront with booking and intake, wired to a real database from the first day.</p><p>It went from first call to a working demo in two days, reviewed with the client as it came together.</p>
+  <dl class="m-stats"><div><dt>First call to demo</dt><dd>2 days</dd></div></dl>
+  <p class="m-links"><a href="#work" data-go="work" data-to="contact">Start a project like this</a></p></div></div></template>
+<template id="m-federal"><p class="sub">Project spotlight</p><h2 id="modal-title" class="m-title"><span>Ready for</span> <span>federal work</span></h2>
+  <div class="m-grid"><div class="m-globe"><canvas class="m-globe-c" width="240" height="240"></canvas><p class="m-loc">Oklahoma City, OK</p></div>
+  <div class="m-copy"><p>Dolonia Data Tech Solutions is a DBA of 1921 Holding Co. LLC, a SAM.gov-registered federal prime contractor working out of The Verge OKC.</p>
+  <dl class="m-stats"><div><dt>CAGE</dt><dd>9T6Y5</dd></div><div><dt>UEI</dt><dd>YMP7Z9T1WVX5</dd></div><div><dt>NAICS</dt><dd>541511, 541330</dd></div><div><dt>Certified</dt><dd>WOSB, MBE, SDB, WBE, AABE</dd></div></dl>
+  <p class="m-links"><a href="#work" data-go="work" data-to="contact">Talk to us about a contract</a></p></div></div></template>
+<template id="m-ai"><p class="sub">Project spotlight</p><h2 id="modal-title" class="m-title"><span>Private AI on</span> <span>our own hardware</span></h2>
+  <div class="m-grid"><div class="m-globe"><canvas class="m-globe-c" width="240" height="240"></canvas><p class="m-loc">Runs in Oklahoma City</p></div>
+  <div class="m-copy"><p>Language models run on infrastructure Dolonia operates and connect to your own documents.</p><p>Teams use it for answers from their files with the source shown, first drafts and summaries, and sorting incoming requests into the right workflow.</p>
+  <p class="m-links"><a href="#work" data-go="work" data-to="contact">Ask about private AI</a></p></div></div></template>
+<button class="round guide-btn" id="guide-btn" type="button" aria-expanded="false" aria-controls="guide" aria-label="Ask the Dolonia guide">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 11.5a7.5 7.5 0 0 1 15 0c0 .6-.4 1-1 1h-13c-.6 0-1-.4-1-1Z"/><path d="M7.5 13v3.5M10.5 13v5.5M13.5 13v5.5M16.5 13v3.5"/></svg>
+</button>
+<section class="guide" id="guide" aria-label="Dolonia guide" hidden>
+  <header class="g-head">
+    <div><h2 class="g-title">Ask the jellyfish</h2><p class="g-sub">Questions about what we build, how a project works, or where to find something.</p></div>
+    <button class="g-close" id="g-close" type="button" aria-label="Close the guide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+  <div class="g-log" id="g-log" role="log" aria-live="polite"></div>
+  <div class="g-chips" id="g-chips"></div>
+  <form class="g-form" id="g-form">
+    <label class="hp" for="g-in">Your question</label>
+    <input class="g-in" id="g-in" autocomplete="off" maxlength="400" placeholder="Ask a question">
+    <button class="g-send" type="submit" aria-label="Send question"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+  </form>
+</section>
+<nav class="menu" id="menu" aria-label="Site">
+  <ul>
+    <li><a href="#home" data-go="home" style="--d:.05s"><b>Surface</b><small>0 m</small></a></li>
+    <li><a href="#dives" data-go="dives" style="--d:.11s"><b>Choose a dive</b><small>Sunlight zone</small></a></li>
+    <li><a href="#interfaces" data-go="interfaces" style="--d:.17s"><b>Interfaces</b><small>Sunlight zone</small></a></li>
+    <li><a href="#systems" data-go="systems" style="--d:.23s"><b>Data and automation</b><small>Twilight zone</small></a></li>
+    <li><a href="#ai" data-go="ai" style="--d:.29s"><b>Private AI</b><small>Midnight zone</small></a></li>
+    <li><a href="#work" data-go="work" style="--d:.35s"><b>Work with us</b><small>Abyssal plain</small></a></li>
+    <li><a href="/login" target="_top" style="--d:.41s"><b>Tools</b><small>Login and account</small></a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- SURFACE -->
+  <section class="page" data-page="home" aria-label="Surface">
+    <div class="content">
+      <div class="panel center hero">
+        <div class="inner">
+          <h1 class="title" aria-label="What runs beneath"><span class="line"><span class="outline">What runs</span></span><span class="line"><span>Beneath</span></span></h1>
+          <p class="hero-sub wl">Websites, data, automation and private AI for business and government. Built, hosted and run by Dolonia.</p>
+          <div class="actions fade"><a class="btn btn-solid" href="#dives" data-go="dives">Dive in</a><a class="btn" href="#work" data-go="work">Book a call</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHOOSE A DIVE -->
+  <section class="page" data-page="dives" aria-label="Choose a dive">
+    <div class="content">
+      <div class="panel center">
+        <div class="inner">
+          <h1 class="title sm" aria-label="Choose your dive"><span class="line"><span class="outline">Choose</span></span><span class="line"><span class="solid-ui">your dive</span></span></h1>
+          <p class="wl">Everything we build sits in layers, from the screens your customers see down to the private AI underneath. Choose a dive to see what we build at each depth.</p>
+          <div class="dives">
+            <div class="dive fade">
+              <span class="orb" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="1"/><path d="M8 20h8M12 17v3"/></svg></span>
+              <h3><span>The part your</span> <span>customers touch</span></h3>
+              <a class="cut" href="#interfaces" data-go="interfaces" aria-label="Dive in: the part your customers touch"><span class="fill"></span>Dive in</a>
+            </div>
+            <div class="dive fade">
+              <span class="orb" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></svg></span>
+              <h3><span>The part that</span> <span>keeps it running</span></h3>
+              <a class="cut" href="#systems" data-go="systems" aria-label="Dive in: the part that keeps it running"><span class="fill"></span>Dive in</a>
+            </div>
+            <div class="dive fade">
+              <span class="orb" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span>
+              <h3><span>AI that stays on</span> <span>our own hardware</span></h3>
+              <a class="cut" href="#ai" data-go="ai" aria-label="Dive in: AI that stays on our own hardware"><span class="fill"></span>Dive in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERFACES -->
+  <section class="page stage" data-page="interfaces" aria-label="Interfaces">
+    <div class="content">
+      <div class="stop" data-type="title" data-side="center" data-env="bright" data-loc="Sunlight zone">
+        <div class="stop-in">
+          <a class="back" href="#dives" data-go="dives">All dives</a>
+          <p class="kicker scr">First dive</p>
+          <h2 class="st-title"><span class="line"><span class="outline">The part your</span></span><span class="line"><span class="solid-ui">customers touch</span></span></h2>
+          <p class="wl lead">Websites, client portals, intake forms and booking pages, designed to your brand and wired to real data from the first day.</p>
+        </div>
+      </div>
+      <div class="stop" data-type="statement" data-side="center" data-env="bright" data-loc="Sunlight zone">
+        <div class="stop-in"><p class="statement">Your website is often the first place a customer meets you.</p></div>
+      </div>
+      <div class="stop" data-type="textimage" data-side="left" data-env="teal" data-loc="Sunlight zone">
+        <div class="stop-in ti">
+          <div class="ti-text">
+            <span class="mk" aria-hidden="true"></span>
+            <h3 class="h-wipe">What we build</h3>
+            <p class="rot">Fast, on-brand sites that are easy to update. A logged-in space for your clients. Forms that land straight in your database instead of your inbox. Live calendars your clients can book without a back-and-forth.</p>
+            <button class="cut" type="button" data-modal="m-storefront"><span class="fill"></span>Learn more</button>
+          </div>
+          <figure class="card" aria-hidden="true">
+            <svg viewBox="0 0 320 210"><rect x="0" y="0" width="320" height="210" fill="#06263f"/><rect x="0" y="0" width="320" height="22" fill="#0b3556"/><circle cx="12" cy="11" r="3" fill="#94e6fb"/><circle cx="22" cy="11" r="3" fill="#5f8fa8"/><circle cx="32" cy="11" r="3" fill="#5f8fa8"/><rect x="18" y="40" width="140" height="12" fill="#e5faff"/><rect x="18" y="60" width="110" height="7" fill="#8fb0c2"/><rect x="18" y="72" width="124" height="7" fill="#8fb0c2"/><rect x="18" y="94" width="66" height="20" fill="#94e6fb"/><rect x="178" y="38" width="124" height="96" fill="#0b3556" stroke="#94e6fb" stroke-opacity=".4"/><g fill="#94e6fb" fill-opacity=".85"><rect x="190" y="52" width="16" height="12"/><rect x="212" y="52" width="16" height="12"/><rect x="234" y="52" width="16" height="12"/><rect x="256" y="52" width="16" height="12"/><rect x="278" y="52" width="16" height="12"/></g><g fill="#5f8fa8"><rect x="190" y="72" width="16" height="12"/><rect x="212" y="72" width="16" height="12"/><rect x="234" y="72" width="16" height="12"/><rect x="256" y="72" width="16" height="12"/><rect x="278" y="72" width="16" height="12"/><rect x="190" y="92" width="16" height="12"/><rect x="212" y="92" width="16" height="12"/></g><rect x="234" y="92" width="16" height="12" fill="#e5faff"/><rect x="18" y="150" width="284" height="40" fill="#0b3556"/><rect x="30" y="163" width="120" height="7" fill="#8fb0c2"/><rect x="232" y="158" width="58" height="22" fill="#94e6fb"/></svg>
+            <figcaption class="cap" data-scramble="A booking page"></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="stop" data-type="fact" data-side="left" data-env="teal" data-loc="Sunlight zone">
+        <div class="stop-in fact"><svg class="ring" viewBox="0 0 90 90" aria-hidden="true"><circle class="r1" cx="45" cy="45" r="40"/><circle class="r2" cx="45" cy="45" r="30"/></svg>
+          <div><p class="sub scr">Here's a fact</p><h3 class="big h-wipe">A recent health-tech storefront went from first call to <em>working demo in two days.</em></h3></div></div>
+      </div>
+      <div class="stop" data-type="species" data-side="right" data-env="bright" data-loc="Sunlight zone">
+        <div class="stop-in species"><svg class="ring" viewBox="0 0 90 90" aria-hidden="true"><circle class="r1" cx="45" cy="45" r="40"/><circle class="r2" cx="45" cy="45" r="30"/></svg>
+          <div><p class="sub scr">Scomber scombrus</p><h3 class="big h-wipe">Atlantic mackerel</h3>
+            <div class="depthbar"><span>Sunlight zone</span></div>
+            <p class="rot">The school you swam through on the way down. A mackerel speeds up by beating its tail faster, not wider.</p></div></div>
+      </div>
+      <div class="stop" data-type="slider" data-side="center" data-env="teal" data-loc="Sunlight zone">
+        <div class="stop-in ba">
+          <p class="sub scr">Before and after</p>
+          <h3 class="h-wipe">Drag to see what changes</h3>
+          <div class="ba-frame" aria-label="Before and after comparison">
+            <svg class="ba-before" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#1a2430"/><rect x="14" y="14" width="292" height="16" fill="#3a4654"/><rect x="14" y="40" width="90" height="126" fill="#2c3642"/><rect x="114" y="40" width="192" height="10" fill="#4a5562"/><rect x="114" y="58" width="150" height="6" fill="#4a5562"/><rect x="114" y="70" width="170" height="6" fill="#4a5562"/><rect x="114" y="82" width="120" height="6" fill="#4a5562"/><rect x="114" y="100" width="192" height="66" fill="#2c3642"/><text x="210" y="138" fill="#8a96a3" font-size="11" text-anchor="middle" font-family="sans-serif">Call us to book</text></svg>
+            <div class="ba-after"><svg viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#06263f"/><rect x="14" y="14" width="120" height="12" fill="#e5faff"/><rect x="14" y="34" width="180" height="6" fill="#8fb0c2"/><rect x="14" y="58" width="70" height="18" fill="#94e6fb"/><rect x="176" y="56" width="130" height="110" fill="#0b3556" stroke="#94e6fb" stroke-opacity=".5"/><g fill="#94e6fb"><rect x="188" y="70" width="18" height="14"/><rect x="212" y="70" width="18" height="14"/><rect x="236" y="70" width="18" height="14"/><rect x="260" y="70" width="18" height="14"/><rect x="188" y="92" width="18" height="14"/><rect x="236" y="92" width="18" height="14"/></g><rect x="188" y="124" width="106" height="26" fill="#94e6fb"/><text x="241" y="141" fill="#06263f" font-size="11" text-anchor="middle" font-family="sans-serif">Book now</text></svg></div>
+            <button class="ba-handle" type="button" aria-label="Drag to compare before and after"><span></span></button>
+          </div>
+          <p class="ba-labels"><span>Before: a page you call to use</span><span>After: book and pay online</span></p>
+        </div>
+      </div>
+      <div class="stop" data-type="quiz" data-side="left" data-env="bright" data-loc="Sunlight zone" data-answer="2">
+        <div class="stop-in quiz">
+          <p class="sub scr">See if you can get this one</p>
+          <h3 class="h-wipe">Where should a booking form send its answers?</h3>
+          <div class="qz"><button type="button">Your inbox</button><button type="button">A spreadsheet you update by hand</button><button type="button">Straight into your database</button><button type="button">A sticky note</button></div>
+          <p class="qz-out" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="stop" data-type="end" data-side="center" data-env="bright" data-loc="Sunlight zone">
+        <div class="stop-in end">
+          <p class="sub scr">End of this dive</p>
+          <h3 class="h-wipe end-t">Built in days, not months</h3>
+          <ul class="points"><li><i></i>Designed to your brand</li><li><i></i>Wired to real data from day one</li><li><i></i>Reviewed with you as it comes together</li></ul>
+          <div class="actions"><button class="cut" type="button" data-modal="m-storefront"><span class="fill"></span>Project spotlight</button><a class="btn" href="#work" data-go="work" data-to="contact">Start a project</a></div>
+        </div>
+        <a class="side-dive left" href="#ai" data-go="ai"><span class="orb-mini"></span><b>AI that stays on our hardware</b><small>Dive in</small></a>
+        <a class="side-dive right" href="#systems" data-go="systems"><span class="orb-mini"></span><b>The part that keeps it running</b><small>Next dive</small></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA AND AUTOMATION -->
+  <section class="page stage" data-page="systems" aria-label="Data and automation">
+    <div class="content">
+      <div class="stop" data-type="title" data-side="center" data-env="teal" data-loc="Twilight zone">
+        <div class="stop-in">
+          <a class="back" href="#dives" data-go="dives">All dives</a>
+          <p class="kicker scr">Second dive</p>
+          <h2 class="st-title"><span class="line"><span class="outline">The part that</span></span><span class="line"><span class="solid-ui">keeps it running</span></span></h2>
+          <p class="wl lead">Every build sits on a real database and an automation layer, so records, scheduling, payments and follow-ups move on their own.</p>
+        </div>
+      </div>
+      <div class="stop" data-type="statement" data-side="center" data-env="dusk" data-loc="Twilight zone">
+        <div class="stop-in"><p class="statement">Most of what keeps a business running happens out of view.</p></div>
+      </div>
+      <div class="stop" data-type="textimage" data-side="right" data-env="dusk" data-loc="Twilight zone">
+        <div class="stop-in ti rev">
+          <div class="ti-text">
+            <span class="mk" aria-hidden="true"></span>
+            <h3 class="h-wipe">Underneath every build</h3>
+            <p class="rot">Supabase holds your records, with logins and permissions built in. n8n workflows move data between your tools and handle the repetitive steps. Payments, calendars and email connect to the software you already use.</p>
+          </div>
+          <figure class="card" aria-hidden="true">
+            <svg viewBox="0 0 320 210"><rect width="320" height="210" fill="#06263f"/><g fill="#0b3556" stroke="#94e6fb" stroke-opacity=".55"><rect x="18" y="30" width="78" height="40"/><rect x="122" y="30" width="78" height="40"/><rect x="226" y="30" width="78" height="40"/><rect x="70" y="130" width="78" height="40"/><rect x="174" y="130" width="78" height="40"/></g><g stroke="#94e6fb" stroke-width="1.5" fill="none"><path d="M96 50h26M200 50h26M161 70v30H109v30M161 100h52v30"/></g><g fill="#e5faff"><rect x="28" y="44" width="48" height="6"/><rect x="132" y="44" width="48" height="6"/><rect x="236" y="44" width="48" height="6"/><rect x="80" y="144" width="48" height="6"/><rect x="184" y="144" width="48" height="6"/></g><g fill="#8fb0c2"><rect x="28" y="56" width="32" height="4"/><rect x="132" y="56" width="32" height="4"/><rect x="236" y="56" width="32" height="4"/><rect x="80" y="156" width="32" height="4"/><rect x="184" y="156" width="32" height="4"/></g></svg>
+            <figcaption class="cap" data-scramble="An automated workflow"></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="stop" data-type="narrated" data-side="center" data-env="dusk" data-loc="Twilight zone">
+        <div class="stop-in narr">
+          <p class="narr-line">Records live in one database, not in ten spreadsheets.</p>
+          <p class="narr-line">Workflows move data between your tools on their own.</p>
+          <p class="narr-line">Scheduling, payments and follow-ups happen without anyone copying and pasting.</p>
+          <button class="btn narr-skip" type="button">Skip</button>
+        </div>
+      </div>
+      <div class="stop" data-type="species" data-side="left" data-env="dusk" data-loc="Twilight zone">
+        <div class="stop-in species"><svg class="ring" viewBox="0 0 90 90" aria-hidden="true"><circle class="r1" cx="45" cy="45" r="40"/><circle class="r2" cx="45" cy="45" r="30"/></svg>
+          <div><p class="sub scr">Family Myctophidae</p><h3 class="big h-wipe">Lanternfish</h3>
+            <div class="depthbar"><span>Twilight zone</span></div>
+            <p class="rot">Small dark fish with rows of light organs along the belly. Look for the blue dots in the school around you.</p></div></div>
+      </div>
+      <div class="stop" data-type="quiz" data-side="right" data-env="dusk" data-loc="Twilight zone" data-answer="1">
+        <div class="stop-in quiz">
+          <p class="sub scr">See if you can get this one</p>
+          <h3 class="h-wipe">A client books online. What should happen next?</h3>
+          <div class="qz"><button type="button">Someone copies it into the calendar</button><button type="button">The calendar, invoice and reminder update on their own</button><button type="button">It waits in an inbox</button><button type="button">Nothing until Monday</button></div>
+          <p class="qz-out" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="stop" data-type="end" data-side="center" data-env="teal" data-loc="Twilight zone">
+        <div class="stop-in end">
+          <p class="sub scr">End of this dive</p>
+          <h3 class="h-wipe end-t">One team to call</h3>
+          <ul class="points"><li><i></i>One database for your records</li><li><i></i>Workflows that run on their own</li><li><i></i>Hosted and watched by the team that built it</li></ul>
+          <div class="actions"><button class="cut" type="button" data-modal="m-federal"><span class="fill"></span>Project spotlight</button><a class="btn" href="#work" data-go="work" data-to="contact">Start a project</a></div>
+        </div>
+        <a class="side-dive left" href="#interfaces" data-go="interfaces"><span class="orb-mini"></span><b>The part your customers touch</b><small>Dive in</small></a>
+        <a class="side-dive right" href="#ai" data-go="ai"><span class="orb-mini"></span><b>AI that stays on our hardware</b><small>Next dive</small></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE AI -->
+  <section class="page stage" data-page="ai" aria-label="Private AI">
+    <div class="content">
+      <div class="stop" data-type="title" data-side="center" data-env="dark" data-loc="Midnight zone">
+        <div class="stop-in">
+          <a class="back" href="#dives" data-go="dives">All dives</a>
+          <p class="kicker scr">Third dive</p>
+          <h2 class="st-title"><span class="line"><span class="outline">AI that stays</span></span><span class="line"><span class="solid-ui">on our hardware</span></span></h2>
+          <p class="wl lead">Language models running on Dolonia infrastructure and connected to your own documents.</p>
+        </div>
+      </div>
+      <div class="stop" data-type="textimage" data-side="left" data-env="dark" data-loc="Midnight zone">
+        <div class="stop-in ti">
+          <div class="ti-text">
+            <span class="mk" aria-hidden="true"></span>
+            <h3 class="h-wipe">Where teams use it</h3>
+            <p class="rot">Ask questions of your own files and get the source with the answer. First drafts of routine writing and summaries of long threads. Incoming messages sorted and handed to the right workflow.</p>
+            <button class="cut" type="button" data-modal="m-ai"><span class="fill"></span>Learn more</button>
+          </div>
+          <figure class="card" aria-hidden="true">
+            <svg viewBox="0 0 320 210"><rect width="320" height="210" fill="#041a2c"/><rect x="18" y="20" width="190" height="34" rx="2" fill="#0b3556"/><rect x="28" y="30" width="150" height="6" fill="#e5faff"/><rect x="28" y="41" width="100" height="5" fill="#8fb0c2"/><rect x="112" y="66" width="190" height="62" rx="2" fill="#0e3a5c" stroke="#94e6fb" stroke-opacity=".5"/><rect x="122" y="78" width="160" height="6" fill="#e5faff"/><rect x="122" y="90" width="170" height="6" fill="#e5faff"/><rect x="122" y="102" width="120" height="6" fill="#e5faff"/><rect x="122" y="114" width="70" height="7" fill="#94e6fb"/><rect x="18" y="160" width="250" height="28" fill="#0b3556"/><rect x="274" y="160" width="28" height="28" fill="#94e6fb"/></svg>
+            <figcaption class="cap" data-scramble="Answers with sources"></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="stop" data-type="species" data-side="left" data-env="abyss" data-loc="Midnight zone">
+        <div class="stop-in species"><svg class="ring" viewBox="0 0 90 90" aria-hidden="true"><circle class="r1" cx="45" cy="45" r="40"/><circle class="r2" cx="45" cy="45" r="30"/></svg>
+          <div><p class="sub scr">Melanocetus johnsonii</p><h3 class="big h-wipe">Humpback anglerfish</h3>
+            <div class="depthbar"><span>Usually 200 to 2,000 m</span></div>
+            <p class="rot">She waits in the dark and twitches a lure lit by living bacteria. Watch what happens to the small fish that come too close.</p></div></div>
+      </div>
+      <div class="stop" data-type="narrated" data-side="center" data-env="dark" data-loc="Midnight zone">
+        <div class="stop-in narr">
+          <p class="narr-line">Your documents stay inside systems we control.</p>
+          <p class="narr-line">The model answers from your files and shows where the answer came from.</p>
+          <p class="narr-line">Nothing is sent out to be useful.</p>
+          <button class="btn narr-skip" type="button">Skip</button>
+        </div>
+      </div>
+      <div class="stop" data-type="quiz" data-side="right" data-env="dark" data-loc="Midnight zone" data-answer="3">
+        <div class="stop-in quiz">
+          <p class="sub scr">See if you can get this one</p>
+          <h3 class="h-wipe">With private AI, where do your documents stay?</h3>
+          <div class="qz"><button type="button">On a public chatbot's servers</button><button type="button">In an email thread</button><button type="button">On a shared drive anyone can open</button><button type="button">On hardware Dolonia runs</button></div>
+          <p class="qz-out" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="stop" data-type="end" data-side="center" data-env="abyss" data-loc="Midnight zone">
+        <div class="stop-in end">
+          <p class="sub scr">End of this dive</p>
+          <h3 class="h-wipe end-t">AI on your terms</h3>
+          <ul class="points"><li><i></i>Answers from your own documents</li><li><i></i>Drafts and summaries in seconds</li><li><i></i>Requests routed to the right workflow</li></ul>
+          <div class="actions"><button class="cut" type="button" data-modal="m-ai"><span class="fill"></span>Project spotlight</button><a class="btn" href="#work" data-go="work" data-to="contact">Start a project</a></div>
+        </div>
+        <a class="side-dive left" href="#systems" data-go="systems"><span class="orb-mini"></span><b>The part that keeps it running</b><small>Dive in</small></a>
+        <a class="side-dive right" href="#work" data-go="work"><span class="orb-mini"></span><b>Work with us</b><small>Next</small></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK WITH US -->
+  <section class="page stage" data-page="work" aria-label="Work with us">
+    <div class="content">
+      <div class="stop" data-type="textimage" data-side="left" data-env="abyss" data-loc="Abyssal plain">
+        <div class="stop-in">
+          <a class="back" href="#dives" data-go="dives">All dives</a>
+          <span class="mk" aria-hidden="true"></span>
+          <h3 class="h-wipe">How a build goes</h3>
+          <ol class="steps">
+            <li style="--d:.25s"><strong>Scope it</strong><span>A short call and an intake form, then a fixed quote.</span></li>
+            <li style="--d:.37s"><strong>Build it</strong><span>The interface comes together in days, reviewed with you as it does.</span></li>
+            <li style="--d:.49s"><strong>Connect it</strong><span>Database, logins, automations and integrations go in underneath.</span></li>
+            <li style="--d:.61s"><strong>Run it</strong><span>We deploy, host and watch it. A monthly retainer covers changes.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="stop" data-type="textimage" data-side="right" data-env="abyss" data-loc="Abyssal plain">
+        <div class="stop-in">
+          <span class="mk" aria-hidden="true"></span>
+          <h3 class="h-wipe">Ready for government work</h3>
+          <p class="rot">Dolonia Data Tech Solutions is a DBA of 1921 Holding Co. LLC, a SAM.gov-registered federal prime contractor.</p>
+          <dl class="stats">
+            <div style="--d:.3s"><dt>CAGE</dt><dd>9T6Y5</dd></div>
+            <div style="--d:.42s"><dt>UEI</dt><dd>YMP7Z9T1WVX5</dd></div>
+            <div style="--d:.54s"><dt>NAICS</dt><dd>541511, 541330</dd></div>
+            <div style="--d:.66s"><dt>Certified</dt><dd>WOSB, MBE, SDB, WBE, AABE</dd></div>
+          </dl>
+          <button class="cut" type="button" data-modal="m-federal"><span class="fill"></span>Learn more</button>
+        </div>
+      </div>
+      <div class="stop" data-type="species" data-side="left" data-env="abyss" data-loc="Abyssal plain">
+        <div class="stop-in species"><svg class="ring" viewBox="0 0 90 90" aria-hidden="true"><circle class="r1" cx="45" cy="45" r="40"/><circle class="r2" cx="45" cy="45" r="30"/></svg>
+          <div><p class="sub scr">Class Hexactinellida</p><h3 class="big h-wipe">Glass sponge</h3>
+            <div class="depthbar"><span>Abyssal plain</span></div>
+            <p class="rot">The lattice vases on the seafloor below you. Glass sponges build their skeletons from silica, the stuff of glass.</p></div></div>
+      </div>
+      <div class="stop" data-type="contact" data-side="center" data-env="abyss" data-loc="Abyssal plain" id="contact">
+        <div class="stop-in contact stop-scroll">
+          <h2 class="st-title sm"><span class="line"><span class="outline">Tell us what</span></span><span class="line"><span>you're building</span></span></h2>
+          <p class="note wl">Answer a few questions and we'll come back with times for a 30-minute call. It takes about two minutes.</p>
+          <div class="intake" id="intake">
+            <form novalidate>
+              <div class="ik-top"><span class="ik-count" id="ik-count" aria-live="polite">Step 1 of 3</span></div>
+              <div class="ik-bars" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+              <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
+
+              <div class="ik-step is-on" data-step="1">
+                <h3>What are you building?</h3>
+                <p class="ik-help">Pick everything that applies. You can change it on the call.</p>
+                <fieldset class="ik-field" data-req="build">
+                  <legend>The project</legend>
+                  <div class="chips">
+                    <label class="chip"><input type="checkbox" name="build" value="Website"><span>Website</span></label>
+                    <label class="chip"><input type="checkbox" name="build" value="Client portal"><span>Client portal</span></label>
+                    <label class="chip"><input type="checkbox" name="build" value="Intake or booking"><span>Intake or booking</span></label>
+                    <label class="chip"><input type="checkbox" name="build" value="Database and automation"><span>Database and automation</span></label>
+                    <label class="chip"><input type="checkbox" name="build" value="Private AI"><span>Private AI</span></label>
+                    <label class="chip"><input type="checkbox" name="build" value="Something else"><span>Something else</span></label>
+                  </div>
+                  <p class="ik-err" role="alert">Choose at least one.</p>
+                </fieldset>
+                <fieldset class="ik-field" data-req="org">
+                  <legend>Who it's for</legend>
+                  <div class="chips">
+                    <label class="chip"><input type="radio" name="org" value="Small business"><span>Small business</span></label>
+                    <label class="chip"><input type="radio" name="org" value="Nonprofit"><span>Nonprofit</span></label>
+                    <label class="chip"><input type="radio" name="org" value="Government agency"><span>Government agency</span></label>
+                    <label class="chip"><input type="radio" name="org" value="Larger company"><span>Larger company</span></label>
+                  </div>
+                  <p class="ik-err" role="alert">Choose one.</p>
+                </fieldset>
+              </div>
+
+              <div class="ik-step" data-step="2">
+                <h3>Tell us about it</h3>
+                <p class="ik-help">A few sentences is plenty: what it should do, who uses it, what you use today.</p>
+                <div class="ik-row" data-req="about">
+                  <label class="ik-label" for="ik-about">Project details</label>
+                  <textarea class="ik-in" id="ik-about" name="about" placeholder="We take bookings by phone and want clients to book and pay online…"></textarea>
+                  <p class="ik-err" role="alert">Add a sentence or two so we can prepare for the call.</p>
+                </div>
+                <fieldset class="ik-field">
+                  <legend>Timeline <small>optional</small></legend>
+                  <div class="chips">
+                    <label class="chip"><input type="radio" name="timeline" value="As soon as possible"><span>As soon as possible</span></label>
+                    <label class="chip"><input type="radio" name="timeline" value="Within 1 to 3 months"><span>Within 1 to 3 months</span></label>
+                    <label class="chip"><input type="radio" name="timeline" value="Just exploring"><span>Just exploring</span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="ik-field">
+                  <legend>Budget <small>optional</small></legend>
+                  <div class="chips">
+                    <label class="chip"><input type="radio" name="budget" value="Under $5k"><span>Under $5k</span></label>
+                    <label class="chip"><input type="radio" name="budget" value="$5k to $15k"><span>$5k to $15k</span></label>
+                    <label class="chip"><input type="radio" name="budget" value="$15k to $50k"><span>$15k to $50k</span></label>
+                    <label class="chip"><input type="radio" name="budget" value="Over $50k"><span>Over $50k</span></label>
+                    <label class="chip"><input type="radio" name="budget" value="Not sure yet"><span>Not sure yet</span></label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="ik-step" data-step="3">
+                <h3>How do we reach you?</h3>
+                <p class="ik-help">We'll reply with a few times for a call.</p>
+                <div class="ik-grid">
+                  <div class="ik-row" data-req="name"><label class="ik-label" for="ik-name">Name</label><input class="ik-in" id="ik-name" name="name" autocomplete="name"><p class="ik-err" role="alert">Add your name.</p></div>
+                  <div class="ik-row" data-req="email"><label class="ik-label" for="ik-email">Email</label><input class="ik-in" id="ik-email" name="email" type="email" autocomplete="email" inputmode="email"><p class="ik-err" role="alert">Add an email we can reply to, like name@company.com.</p></div>
+                  <div class="ik-row"><label class="ik-label" for="ik-company">Organization <small>optional</small></label><input class="ik-in" id="ik-company" name="company" autocomplete="organization"></div>
+                  <div class="ik-row"><label class="ik-label" for="ik-phone">Phone <small>optional</small></label><input class="ik-in" id="ik-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+                </div>
+                <dl class="ik-review" id="ik-review"></dl>
+              </div>
+
+              <div class="ik-nav">
+                <button class="ik-back" type="button" id="ik-back" hidden>Back</button>
+                <button class="cut" type="submit" id="ik-next"><span class="fill"></span><span id="ik-next-t">Continue</span></button>
+              </div>
+            </form>
+            <div class="ik-done" role="status">
+              <h3 id="ik-done-h">Thanks. Your details are ready.</h3>
+              <p id="ik-done-p"></p>
+              <button class="ik-back" type="button" id="ik-again">Start a new request</button>
+            </div>
+          </div>
+          <p class="ik-direct">Prefer to reach out directly? <a href="mailto:zionvanzandt@gmail.com?subject=Project%20inquiry">zionvanzandt@gmail.com</a><a href="tel:+14059379610">(405) 937-9610</a></p>
+          <div class="actions"><a class="cut" href="#home" data-go="home"><span class="fill"></span>Back to the surface</a></div>
+          <p class="foot">Dolonia Data Tech Solutions<br>A DBA of 1921 Holding Co. LLC<br>The Verge OKC, 600 N Robinson Ave, Oklahoma City</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/*@engine:jellyfish.js*/
+</script>
+<script>
+/*@engine:ocean.js*/
+</script>
+<script>
+/*@engine:fish-school.js*/
+</script>
+<script>
+/*@engine:anglerfish.js*/
+</script>
+<script>
+/*@engine:sea-life.js*/
+</script>
+<script>
+/*@site*/
+</script>
+</body>
+</html>

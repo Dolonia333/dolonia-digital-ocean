@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import { generateUUID } from '@/lib/uuid'
 import { Calendar, Clock, Check, X, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface TimeSlot {
@@ -140,7 +139,7 @@ const AppointmentBookingCalendar: React.FC<AppointmentBookingCalendarProps> = ({
     if (!clientName || !clientEmail || !purpose || !selectedTime) return
 
     const newAppointment: Appointment = {
-      id: generateUUID(),
+      id: crypto.randomUUID(),
       date: formatDate(selectedDate),
       time: selectedTime,
       clientName,

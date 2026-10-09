@@ -1079,7 +1079,7 @@ export default function Account() {
       // Auto-promote specific email addresses to admin (whitelist approach)
       const adminEmails = [
         'zionvanzandt@gmail.com',
-        'zion@Dolonia.cloud',
+        'zion@dolonia.cloud',
         // Add other admin emails here
       ]
 
@@ -1175,108 +1175,78 @@ export default function Account() {
 
     console.log('[Real-time] Setting up subscription for user:', profile.id)
 
-    let channel: ReturnType<typeof supabase.channel> | null = null
+    const channel = supabase
+      .channel('user-profile-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'profiles',
+          filter: `id=eq.${profile.id}`, // Only listen to changes for THIS user
+        },
+        (payload) => {
+          const updatedProfile = payload.new as Profile
+          console.log('[Real-time] Profile updated:', updatedProfile)
 
-    try {
-      channel = supabase
-        .channel('user-profile-changes')
-        .on(
-          'postgres_changes',
-          {
-            event: 'UPDATE',
-            schema: 'public',
-            table: 'profiles',
-            filter: `id=eq.${profile.id}`, // Only listen to changes for THIS user
-          },
-          (payload) => {
-            const updatedProfile = payload.new as Profile
-            console.log('[Real-time] Profile updated:', updatedProfile)
+          // Update the profile state
+          setProfile(updatedProfile)
 
-            // Update the profile state
-            setProfile(updatedProfile)
+          // Update localStorage cache
+          localStorage.setItem('userProfile', JSON.stringify(updatedProfile))
 
-            // Update localStorage cache
-            localStorage.setItem('userProfile', JSON.stringify(updatedProfile))
+          // Show notification to user
+          toast.info(
+            `Your role has been updated to ${updatedProfile.role === 'team_member' ? 'Team Member' : updatedProfile.role}`,
+          )
 
-            // Show notification to user
-            toast.info(
-              `Your role has been updated to ${updatedProfile.role === 'team_member' ? 'Team Member' : updatedProfile.role}`,
-            )
-
-            // If role changed, reload the page to ensure proper UI/permissions
-            if (updatedProfile.role !== profile.role) {
-              console.log('[Real-time] Role changed, reloading in 1.5s...')
-              setTimeout(() => {
-                window.location.reload()
-              }, 1500) // Give time for toast to show
-            }
-          },
-        )
-        .subscribe((status) => {
-          console.log('[Real-time] Subscription status:', status)
-          // Check for error states - status can be SUBSCRIBED, CHANNEL_ERROR, TIMED_OUT, or CLOSED
-          if (status !== 'SUBSCRIBED') {
-            console.warn('[Real-time] Subscription not active, status:', status)
-            // Only start polling if we haven't already (prevent duplicates)
-            if (!pollIntervalRef.current) {
-              console.log('[Real-time] Starting fallback polling (5s intervals)')
-              // Fallback: poll for changes every 5 seconds
-              pollIntervalRef.current = setInterval(async () => {
-                const { data } = await supabase
-                  .from('profiles')
-                  .select('id, name, role')
-                  .eq('id', profile.id)
-                  .single()
-
-                if (data && data.role !== profile.role) {
-                  console.log('[Polling] Role changed detected:', data.role)
-                  setProfile(data as Profile)
-                  localStorage.setItem('userProfile', JSON.stringify(data))
-                  toast.info(`Your role has been updated to ${data.role}`)
-                  setTimeout(() => window.location.reload(), 1500)
-                }
-              }, 5000)
-            }
-          } else {
-            // If we're successfully subscribed, clear any polling interval
-            if (pollIntervalRef.current) {
-              console.log('[Real-time] Subscription active, clearing fallback polling')
-              clearInterval(pollIntervalRef.current)
-              pollIntervalRef.current = null
-            }
+          // If role changed, reload the page to ensure proper UI/permissions
+          if (updatedProfile.role !== profile.role) {
+            console.log('[Real-time] Role changed, reloading in 1.5s...')
+            setTimeout(() => {
+              window.location.reload()
+            }, 1500) // Give time for toast to show
           }
-        })
-    } catch (err) {
-      console.warn('[Real-time] Failed to set up WebSocket subscription, falling back to polling:', err)
-      // Start fallback polling since realtime is unavailable
-      if (!pollIntervalRef.current) {
-        pollIntervalRef.current = setInterval(async () => {
-          const { data } = await supabase
-            .from('profiles')
-            .select('id, name, role')
-            .eq('id', profile.id)
-            .single()
+        },
+      )
+      .subscribe((status) => {
+        console.log('[Real-time] Subscription status:', status)
+        // Check for error states - status can be SUBSCRIBED, CHANNEL_ERROR, TIMED_OUT, or CLOSED
+        if (status !== 'SUBSCRIBED') {
+          console.warn('[Real-time] Subscription not active, status:', status)
+          // Only start polling if we haven't already (prevent duplicates)
+          if (!pollIntervalRef.current) {
+            console.log('[Real-time] Starting fallback polling (5s intervals)')
+            // Fallback: poll for changes every 5 seconds
+            pollIntervalRef.current = setInterval(async () => {
+              const { data } = await supabase
+                .from('profiles')
+                .select('id, name, role')
+                .eq('id', profile.id)
+                .single()
 
-          if (data && data.role !== profile.role) {
-            console.log('[Polling] Role changed detected:', data.role)
-            setProfile(data as Profile)
-            localStorage.setItem('userProfile', JSON.stringify(data))
-            toast.info(`Your role has been updated to ${data.role}`)
-            setTimeout(() => window.location.reload(), 1500)
+              if (data && data.role !== profile.role) {
+                console.log('[Polling] Role changed detected:', data.role)
+                setProfile(data as Profile)
+                localStorage.setItem('userProfile', JSON.stringify(data))
+                toast.info(`Your role has been updated to ${data.role}`)
+                setTimeout(() => window.location.reload(), 1500)
+              }
+            }, 5000)
           }
-        }, 5000)
-      }
-    }
+        } else {
+          // If we're successfully subscribed, clear any polling interval
+          if (pollIntervalRef.current) {
+            console.log('[Real-time] Subscription active, clearing fallback polling')
+            clearInterval(pollIntervalRef.current)
+            pollIntervalRef.current = null
+          }
+        }
+      })
 
     return () => {
       console.log('[Real-time] Unsubscribing from user profile changes')
-      if (channel) {
-        try {
-          void channel.unsubscribe()
-        } catch {
-          // Ignore unsubscribe errors
-        }
-      }
+      void channel.unsubscribe()
       // Clean up polling interval if it exists
       if (pollIntervalRef.current) {
         clearInterval(pollIntervalRef.current)
@@ -1291,47 +1261,35 @@ export default function Account() {
 
     console.log('[Real-time Admin] Setting up profiles subscription')
 
-    let channel: ReturnType<typeof supabase.channel> | null = null
-
-    try {
-      channel = supabase
-        .channel('profiles-changes')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, (payload) => {
-          console.log('[Real-time Admin] Profile change:', payload.eventType, payload.new)
-          setAllProfiles((prev) => {
-            if (payload.eventType === 'INSERT') {
-              const newProfile = payload.new as Profile
-              // Avoid duplicates
-              if (prev.some((p) => p.id === newProfile.id)) return prev
-              return [...prev, newProfile]
-            }
-            if (payload.eventType === 'UPDATE') {
-              return prev.map((p) =>
-                p.id === (payload.new as Profile).id ? (payload.new as Profile) : p,
-              )
-            }
-            if (payload.eventType === 'DELETE') {
-              return prev.filter((p) => p.id !== (payload.old as { id: string }).id)
-            }
-            return prev
-          })
+    const channel = supabase
+      .channel('profiles-changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, (payload) => {
+        console.log('[Real-time Admin] Profile change:', payload.eventType, payload.new)
+        setAllProfiles((prev) => {
+          if (payload.eventType === 'INSERT') {
+            const newProfile = payload.new as Profile
+            // Avoid duplicates
+            if (prev.some((p) => p.id === newProfile.id)) return prev
+            return [...prev, newProfile]
+          }
+          if (payload.eventType === 'UPDATE') {
+            return prev.map((p) =>
+              p.id === (payload.new as Profile).id ? (payload.new as Profile) : p,
+            )
+          }
+          if (payload.eventType === 'DELETE') {
+            return prev.filter((p) => p.id !== (payload.old as { id: string }).id)
+          }
+          return prev
         })
-        .subscribe((status) => {
-          console.log('[Real-time Admin] Subscription status:', status)
-        })
-    } catch (err) {
-      console.warn('[Real-time Admin] Failed to set up WebSocket subscription:', err)
-    }
+      })
+      .subscribe((status) => {
+        console.log('[Real-time Admin] Subscription status:', status)
+      })
 
     return () => {
       console.log('[Real-time Admin] Unsubscribing from profiles changes')
-      if (channel) {
-        try {
-          void channel.unsubscribe()
-        } catch {
-          // Ignore unsubscribe errors
-        }
-      }
+      void channel.unsubscribe()
     }
   }, [profile?.role])
 
@@ -1693,29 +1651,19 @@ export default function Account() {
 
   return (
     <Layout>
-      <SEO
-        title="Account | DOLONIA DATA TECH"
-        description="Manage your DOLONIA DATA TECH account"
-      />
+      <SEO title="Dashboard | Dolonia Data Tech" description="Invoices, clients, intake, and tickets." noIndex />
       <div className="w-full max-w-[1920px] mx-auto px-3 sm:px-6 md:px-8 py-4 sm:py-8 md:py-16 space-y-4 sm:space-y-6 md:space-y-8 overflow-x-hidden min-w-0">
-        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl border border-cyan-bright/20 bg-gradient-to-r from-ocean-deep/90 via-ocean-surface/30 to-ocean-deep/90 p-3 sm:p-5 md:p-6 shadow-2xl shadow-cyan-bright/10 max-w-full w-full min-w-0">
-          <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-cyan-bright/20 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-16 h-72 w-72 rounded-full bg-ocean-surface/40 blur-3xl pointer-events-none" />
-
-          <div className="relative flex flex-col gap-2 xs:gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between max-w-full min-w-0">
+        <div className="border-b border-white/15 pb-6 max-w-full w-full min-w-0">
+          <div className="relative flex flex-col gap-2 xs:gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between max-w-full min-w-0">
             <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-bright/30 bg-ocean-deep/70 px-2 xs:px-2.5 sm:px-3 py-1 text-[10px] xs:text-xs text-cyan-soft shadow-inner">
-                <span className="rounded-full bg-cyan-bright/20 p-0.5 xs:p-1">
-                  <Users className="h-2.5 w-2.5 xs:h-3 xs:w-3 text-cyan-bright" />
-                </span>
-                <span className="truncate">Welcome back, {profile.name || 'Explorer'}!</span>
-              </div>
-              <h1 className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-                Account Command Center
+              <p className="text-sm text-cyan-soft">
+                {profile.name || 'Signed in'}
+              </p>
+              <h1 className="text-3xl md:text-4xl font-medium text-foreground leading-tight">
+                Account
               </h1>
-              <p className="max-w-xl text-[11px] xs:text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Monitor your cloud presence, track subscriptions, and stay ahead of what’s next for
-                your Dolonia experience.
+              <p className="max-w-xl text-sm text-cyan-soft leading-relaxed">
+                Invoices, clients, intake forms, and tickets. The same tools, quieter screen.
               </p>
             </div>
             <div className="flex flex-col items-stretch sm:items-start gap-2 md:items-end w-full sm:w-auto min-w-0">

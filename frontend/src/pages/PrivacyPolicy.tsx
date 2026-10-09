@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
+import DraftBanner from '@/components/marketing/DraftBanner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const PrivacyPolicy = () => {
@@ -9,9 +10,11 @@ const PrivacyPolicy = () => {
       <SEO
         title="Privacy Policy - Dolonia"
         description="Learn how Dolonia protects your privacy and handles your personal information."
+        noIndex
       />
+      <DraftBanner />
 
-      <div className="pt-20">
+      <div>
         <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">

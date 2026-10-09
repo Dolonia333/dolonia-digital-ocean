@@ -102,6 +102,12 @@ export default {
         smooth: 'var(--transition-smooth)',
         bounce: 'var(--transition-bounce)',
       },
+      fontFamily: {
+        sans: ['IBM Plex Sans', 'Source Sans 3', 'sans-serif'],
+        display: ['Saira Condensed', 'Arial Narrow', 'sans-serif'],
+        hud: ['Saira Condensed', 'Arial Narrow', 'sans-serif'],
+        mono: ['ui-monospace', 'monospace'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

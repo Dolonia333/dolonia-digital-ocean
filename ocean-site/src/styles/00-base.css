@@ -1,0 +1,32 @@
+
+:root{
+  --navy:#083d63; --deep:#041a2c;
+  --ink:#eaf4f9; --soft:#c9dfea; --muted:#8fb0c2;
+  --line:rgba(234,244,249,.26); --line-strong:rgba(234,244,249,.55);
+  --glow:#94e6fb; --ui:#94e6fb; --light:#e5faff;
+  --expo-out:cubic-bezier(.16,1,.3,1); --expo-in:cubic-bezier(.7,0,.84,0); --expo-io:cubic-bezier(.87,0,.13,1); --snap:cubic-bezier(.76,0,.24,1);
+  --display:"Saira Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --hud:"Saira Condensed","Arial Narrow",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#eaf4f9}}
+:root[data-theme="dark"]{--ink:#eaf4f9}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);overflow-x:hidden;overflow-x:clip}
+body{overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none}
+main,.page{max-width:100vw;overflow-x:clip}
+.edge{position:fixed;left:0;right:0;z-index:50;pointer-events:none;opacity:0;transition:opacity 1s var(--expo-out)}
+.edge-t{top:0;height:calc(env(safe-area-inset-top,0px) + 7.5rem);background:linear-gradient(rgba(3,15,28,.9),rgba(3,15,28,.55) 55%,rgba(3,15,28,0))}
+.edge-b{bottom:0;height:calc(env(safe-area-inset-bottom,0px) + 11rem);background:linear-gradient(rgba(3,15,28,0),rgba(3,15,28,.6) 45%,rgba(3,15,28,.92))}
+html.is-live:not(.on-home) .edge{opacity:1}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.94rem + .25vw,1.125rem);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html.no-webgl body{background:linear-gradient(180deg,#5d86a6 0%,#2a6f92 7%,#1b587e 14%,#0e3a5c 32%,#07223d 55%,#040f22 78%,#01060e 100%)}
+#sea{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;display:block;z-index:0}
+#lvh{position:fixed;left:0;top:0;width:0;height:100vh;height:100lvh;visibility:hidden;pointer-events:none}
+a{color:var(--ink)}
+:focus-visible{outline:1px solid var(--glow);outline-offset:4px}
+

@@ -1,0 +1,23 @@
+/* ---------- Intro: loading dial ---------- */
+.intro{position:fixed;inset:0;z-index:50;pointer-events:none}
+.intro-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 90% 8%,rgba(64,110,160,.28),rgba(27,58,94,0) 55%),#1b3a5e}
+.dial{position:absolute;left:50%;top:50%;width:min(54vw,270px);aspect-ratio:1;transform:translate(-50%,-50%) scale(0);opacity:0}
+.dial svg{width:100%;height:100%;overflow:visible;display:block}
+.dial-outer{transform-box:view-box;transform-origin:50% 50%;animation:dialSwing 5s var(--expo-io) infinite alternate}
+@keyframes dialSwing{0%{transform:rotate(160deg)}25%{transform:rotate(35deg)}50%{transform:rotate(115deg)}75%{transform:rotate(65deg)}100%{transform:rotate(-170deg)}}
+.dial-outer .dot{fill:var(--ui)}
+.dial-outer .guide{stroke:var(--ui);opacity:.22;fill:none;stroke-width:1.5}
+.dial .track,.dial .fill{fill:none;stroke-width:15;stroke-dasharray:1 3.7;transition:stroke-width 2.5s var(--expo-io)}
+.dial .track{stroke:var(--light);opacity:.3}
+.dial .fill{stroke:var(--ui)}
+.dial.is-thick .track,.dial.is-thick .fill{stroke-width:20}
+.dial-n{position:absolute;font-family:"Saira",var(--body);font-weight:400;font-size:.62rem;color:var(--ui);opacity:.35;letter-spacing:.06em}
+.dial-n.n25{right:-2.2rem;top:50%;transform:translateY(-50%)}
+.dial-n.n50{bottom:-2.3rem;left:50%;transform:translateX(-50%)}
+.dial-n.n75{left:-2.2rem;top:50%;transform:translateY(-50%)}
+.dial-n.n100{top:-2.3rem;left:50%;transform:translateX(-50%)}
+.dial-c{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:"Saira",var(--body);font-weight:400;font-size:.92rem;letter-spacing:.03em;text-transform:uppercase;color:var(--light);text-align:center;line-height:1.5;white-space:nowrap}
+.dial-c > div{display:grid}
+.dial-c span{opacity:0}
+.dial-c .dc-b{position:absolute;inset:0}
+

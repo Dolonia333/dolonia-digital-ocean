@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
-import { generateUUID } from '@/lib/uuid'
 import {
   Calendar,
   Clock,
@@ -107,6 +106,12 @@ const ROOMS = [
     layoutDesc: 'Small desk setup, quiet zone',
   },
 ]
+
+const shortTime = (time: string): string => {
+  const [clock, period] = time.split(' ')
+  const hour = String(Number(clock.split(':')[0]))
+  return `${hour}${period === 'PM' ? 'p' : 'a'}`
+}
 
 const TIME_SLOTS = [
   '08:00 AM',
@@ -254,7 +259,7 @@ const RoomBookingDashboard: React.FC = () => {
   const [userId] = useState(() => {
     let id = localStorage.getItem('local_user_id')
     if (!id) {
-      id = generateUUID()
+      id = crypto.randomUUID()
       localStorage.setItem('local_user_id', id)
     }
     return id
@@ -552,7 +557,7 @@ const RoomBookingDashboard: React.FC = () => {
     if (!room) return
 
     const newBooking: Booking = {
-      id: generateUUID(),
+      id: crypto.randomUUID(),
       room: room.name,
       roomId: selectedRoomId,
       date: formatDate(selectedDate),
@@ -592,33 +597,23 @@ const RoomBookingDashboard: React.FC = () => {
 
   return (
     <div
-      className={`admin-calendar min-h-screen p-3 sm:p-4 transition-colors duration-300 font-sans overflow-x-hidden ${
-        darkMode
-          ? 'bg-gradient-to-br from-[#222222] to-[#2a2a2a]'
-          : 'bg-gradient-to-br from-[#d5cdcb] to-[#e0dcdb]'
-      }`}
+      className="admin-calendar box-border min-h-screen w-full min-w-0 max-w-full overflow-x-hidden bg-background p-3 font-sans text-foreground sm:p-4"
     >
       <div className="calendar-container max-w-7xl mx-auto overflow-x-hidden w-full min-w-0">
         {/* Header */}
         <div className="calendar-header mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1
-              className={`text-2xl sm:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r ${
-                darkMode ? 'from-white to-[#06fff2]' : 'from-[#222222] to-black'
-              } bg-clip-text text-transparent mb-2`}
-            >
-              Admin Calendar Manager
-            </h1>
-            <p className={`text-sm sm:text-base ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Track all website bookings and appointments in one place
+            <h1 className="mb-2 text-3xl font-medium text-foreground sm:text-4xl">Calendar</h1>
+            <p className="text-sm text-cyan-soft sm:text-base">
+              Room bookings and client appointments.
             </p>
           </div>
-          <div className="calendar-controls flex gap-2 items-center flex-wrap">
+          <div className="calendar-controls flex w-full min-w-0 flex-wrap items-center gap-2 sm:w-auto">
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-3 rounded-xl transition-all ${
+              className={`nav-btn shrink-0 rounded-xl p-2.5 transition-all ${
                 darkMode
-                  ? 'bg-[#79698c]/50 text-[#06fff2] hover:bg-[#79698c]/80'
+                  ? 'bg-[#79698c]/50 text-cyan-bright hover:bg-[#79698c]/80'
                   : 'bg-white text-gray-600 hover:bg-gray-50'
               } shadow-lg`}
             >
@@ -626,9 +621,9 @@ const RoomBookingDashboard: React.FC = () => {
             </button>
             <button
               onClick={() => setView('book')}
-              className={`px-6 py-2.5 rounded-full font-bold ${
+              className={`toolbar-btn rounded-full px-3 py-2 text-sm font-bold sm:px-5 ${
                 view === 'book'
-                  ? 'bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black shadow-lg'
+                  ? 'bg-foreground text-background shadow-lg'
                   : darkMode
                     ? 'bg-[#79698c]/50 text-gray-300'
                     : 'bg-white text-gray-600'
@@ -638,9 +633,9 @@ const RoomBookingDashboard: React.FC = () => {
             </button>
             <button
               onClick={() => setView('mybookings')}
-              className={`px-6 py-2.5 rounded-full font-bold relative ${
+              className={`toolbar-btn inline-flex items-center rounded-full px-3 py-2 text-sm font-bold sm:px-5 ${
                 view === 'mybookings'
-                  ? 'bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black shadow-lg'
+                  ? 'bg-foreground text-background shadow-lg'
                   : darkMode
                     ? 'bg-[#79698c]/50 text-gray-300'
                     : 'bg-white text-gray-600'
@@ -648,16 +643,16 @@ const RoomBookingDashboard: React.FC = () => {
             >
               My Bookings
               {myBookings.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-600 px-1 text-xs text-white">
                   {myBookings.length}
                 </span>
               )}
             </button>
             <button
               onClick={() => setView('analytics')}
-              className={`px-6 py-2.5 rounded-full font-bold ${
+              className={`toolbar-btn rounded-full px-3 py-2 text-sm font-bold sm:px-5 ${
                 view === 'analytics'
-                  ? 'bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black shadow-lg'
+                  ? 'bg-foreground text-background shadow-lg'
                   : darkMode
                     ? 'bg-[#79698c]/50 text-gray-300'
                     : 'bg-white text-gray-600'
@@ -667,9 +662,9 @@ const RoomBookingDashboard: React.FC = () => {
             </button>
             <button
               onClick={() => setView('tracker')}
-              className={`px-6 py-2.5 rounded-full font-bold ${
+              className={`toolbar-btn rounded-full px-3 py-2 text-sm font-bold sm:px-5 ${
                 view === 'tracker'
-                  ? 'bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black shadow-lg'
+                  ? 'bg-foreground text-background shadow-lg'
                   : darkMode
                     ? 'bg-[#79698c]/50 text-gray-300'
                     : 'bg-white text-gray-600'
@@ -687,22 +682,22 @@ const RoomBookingDashboard: React.FC = () => {
             <div
               className={`calendar-card rounded-3xl shadow-xl p-4 sm:p-6 mb-6 overflow-x-hidden max-w-full ${darkMode ? 'bg-[#2d2d2d]/90 border border-[#79698c]' : 'bg-[#f8f6f5]/80 border border-white/20'}`}
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="mb-4 flex items-center justify-between gap-3">
                 <h2
-                  className={`text-xl sm:text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#222222]'}`}
+                  className={`min-w-0 truncate text-lg font-bold sm:text-2xl ${darkMode ? 'text-white' : 'text-[#222222]'}`}
                 >
                   {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </h2>
-                <div className="flex gap-2">
+                <div className="flex shrink-0 gap-2">
                   <button
                     onClick={() => changeMonth('prev')}
-                    className={`p-2 rounded-lg ${darkMode ? 'bg-[#79698c]/50 text-white hover:bg-[#79698c]/80' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                    className={`nav-btn rounded-lg p-2 ${darkMode ? 'bg-[#79698c]/50 text-white hover:bg-[#79698c]/80' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
                   >
                     <ChevronLeft size={20} />
                   </button>
                   <button
                     onClick={() => changeMonth('next')}
-                    className={`p-2 rounded-lg ${darkMode ? 'bg-[#79698c]/50 text-white hover:bg-[#79698c]/80' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                    className={`nav-btn rounded-lg p-2 ${darkMode ? 'bg-[#79698c]/50 text-white hover:bg-[#79698c]/80' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
                   >
                     <ChevronRight size={20} />
                   </button>
@@ -710,18 +705,19 @@ const RoomBookingDashboard: React.FC = () => {
               </div>
 
               {/* Calendar Grid */}
-              <div className="grid grid-cols-7 gap-2 mb-4">
+              <div className="month-grid mb-2 gap-1">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
                   <div
                     key={day}
-                    className={`text-center text-sm font-semibold py-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}
+                    className={`truncate py-1 text-center text-[10px] font-semibold sm:text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}
                   >
-                    {day}
+                    <span className="sm:hidden">{day.slice(0, 1)}</span>
+                    <span className="hidden sm:inline">{day}</span>
                   </div>
                 ))}
                 {getDaysInMonth(currentMonth).map((date, index) => {
                   if (!date) {
-                    return <div key={`empty-${index}`} className="aspect-square"></div>
+                    return <div key={`empty-${index}`} className="day-cell"></div>
                   }
                   const isSelected = date.toDateString() === selectedDate.toDateString()
                   const isToday = date.toDateString() === new Date().toDateString()
@@ -733,35 +729,29 @@ const RoomBookingDashboard: React.FC = () => {
                       key={index}
                       onClick={() => setSelectedDate(date)}
                       disabled={isFullyBooked}
-                      className={`aspect-square rounded-xl flex flex-col items-center justify-center relative transition-all ${
+                      className={`day-cell relative flex flex-col items-center justify-center rounded-lg transition-colors sm:rounded-xl ${
                         isFullyBooked
                           ? darkMode
                             ? 'bg-gray-800 text-gray-600 cursor-not-allowed opacity-50'
                             : 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50'
                           : isSelected
-                            ? 'bg-gradient-to-br from-[#06fff2] to-[#05ded5] text-black font-bold shadow-lg scale-105'
+                            ? 'bg-foreground text-background font-semibold'
                             : isToday
                               ? darkMode
-                                ? 'bg-[#79698c]/50 text-white border-2 border-[#06fff2]'
-                                : 'bg-[#ffb8b8]/50 text-[#222222] border-2 border-[#06fff2]'
+                                ? 'bg-[#79698c]/50 text-white border-2 border-cyan-bright'
+                                : 'bg-[#ffb8b8]/50 text-[#222222] border-2 border-cyan-bright'
                               : darkMode
                                 ? 'bg-[#222222] text-gray-300 hover:bg-[#79698c]/30'
                                 : 'bg-white text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <span className="text-sm">{date.getDate()}</span>
+                      <span className="text-xs leading-none sm:text-sm">{date.getDate()}</span>
                       {bookingCount > 0 && (
                         <span
-                          className={`text-xs mt-1 px-1.5 py-0.5 rounded-full ${
-                            isFullyBooked
-                              ? 'bg-gray-600/30 text-gray-500'
-                              : isSelected
-                                ? 'bg-black/20'
-                                : 'bg-[#06fff2]/30'
+                          className={`absolute bottom-1 h-1 w-1 rounded-full ${
+                            isSelected ? 'bg-black' : 'bg-cyan-bright'
                           }`}
-                        >
-                          {bookingCount}
-                        </span>
+                        />
                       )}
                     </button>
                   )
@@ -773,9 +763,9 @@ const RoomBookingDashboard: React.FC = () => {
             <div
               className={`calendar-card rounded-3xl shadow-xl p-4 sm:p-6 overflow-x-hidden max-w-full ${darkMode ? 'bg-[#2d2d2d]/90 border border-[#79698c]' : 'bg-[#f8f6f5]/80 border border-white/20'}`}
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
                 <h2
-                  className={`text-xl sm:text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#222222]'}`}
+                  className={`min-w-0 text-lg font-bold sm:text-2xl ${darkMode ? 'text-white' : 'text-[#222222]'}`}
                 >
                   {calendarView === 'day'
                     ? selectedDate.toLocaleDateString('en-US', {
@@ -785,12 +775,12 @@ const RoomBookingDashboard: React.FC = () => {
                       })
                     : `Week of ${selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`}
                 </h2>
-                <div className="flex gap-2">
+                <div className="flex shrink-0 gap-2">
                   <button
                     onClick={() => setCalendarView('day')}
                     className={`px-4 py-2 rounded-lg font-semibold ${
                       calendarView === 'day'
-                        ? 'bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black'
+                        ? 'bg-foreground text-background'
                         : darkMode
                           ? 'bg-[#79698c]/50 text-gray-300'
                           : 'bg-white text-gray-600'
@@ -802,7 +792,7 @@ const RoomBookingDashboard: React.FC = () => {
                     onClick={() => setCalendarView('week')}
                     className={`px-4 py-2 rounded-lg font-semibold ${
                       calendarView === 'week'
-                        ? 'bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black'
+                        ? 'bg-foreground text-background'
                         : darkMode
                           ? 'bg-[#79698c]/50 text-gray-300'
                           : 'bg-white text-gray-600'
@@ -814,86 +804,113 @@ const RoomBookingDashboard: React.FC = () => {
               </div>
 
               {calendarView === 'day' ? (
-                // Day View - Timeline Grid
-                <div className="overflow-x-auto -mx-4 sm:mx-0">
-                  <div
-                    className="grid min-w-[600px] sm:min-w-[800px] lg:min-w-[1000px]"
-                    style={{
-                      gridTemplateColumns: `minmax(120px, 150px) repeat(${TIME_SLOTS.length}, minmax(80px, 1fr))`,
-                    }}
-                  >
-                    <div className="p-3"></div>
-                    {TIME_SLOTS.map((time) => (
-                      <div
-                        key={time}
-                        className={`p-3 text-center font-semibold text-sm ${darkMode ? 'text-[#79698c]' : 'text-gray-500'}`}
-                      >
-                        {time}
+                <>
+                  <div className="hidden w-full min-w-0 lg:block">
+                    <div className="schedule-grid-day">
+                      <div />
+                      {TIME_SLOTS.map((time) => (
+                        <div
+                          key={time}
+                          title={time}
+                          className={`room-label px-0.5 py-2 text-center text-[10px] font-semibold xl:text-xs ${darkMode ? 'text-[#79698c]' : 'text-gray-500'}`}
+                        >
+                          {shortTime(time)}
+                        </div>
+                      ))}
+
+                      {ROOMS.map((room) => (
+                        <React.Fragment key={room.id}>
+                          <div
+                            title={room.name}
+                            className={`room-label border-t px-1 py-2 text-xs font-bold xl:text-sm ${darkMode ? 'border-[#79698c] text-white' : 'border-gray-200 text-[#222222]'}`}
+                          >
+                            <span className="mr-1">{room.image}</span>
+                            {room.name}
+                          </div>
+                          {TIME_SLOTS.map((time) => {
+                            const booking = bookingsMap[formatDate(selectedDate)]?.[room.id]?.[time]
+                            return (
+                              <div
+                                key={`${room.id}-${time}`}
+                                className={`min-w-0 border-t p-0.5 ${darkMode ? 'border-[#79698c]' : 'border-gray-200'}`}
+                              >
+                                {booking ? (
+                                  <div
+                                    title={`${booking.title} · ${booking.bookedByName}`}
+                                    className={`flex h-full min-h-8 flex-col justify-center overflow-hidden rounded px-0.5 ${darkMode ? 'border-t-2 border-cyan-bright/50 bg-[#79698c]/30' : 'border-t-2 border-cyan-bright bg-[#ffb8b8]/50'}`}
+                                  >
+                                    <span
+                                      className={`room-label text-[10px] font-semibold ${darkMode ? 'text-white' : 'text-[#222222]'}`}
+                                    >
+                                      {booking.title}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <button
+                                    onClick={() => handleOpenBookingModal(time, room.id)}
+                                    title={`Book ${room.name} at ${time}`}
+                                    className={`slot-btn h-full min-h-8 w-full rounded bg-cyan-bright/10 text-[10px] font-semibold ${darkMode ? 'text-cyan-bright/80 hover:bg-[#79698c]/40' : 'text-[#222222]/60 hover:bg-[#ffb8b8]/70'}`}
+                                  >
+                                    Book
+                                  </button>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 lg:hidden">
+                    {ROOMS.map((room) => (
+                      <div key={room.id} className="min-w-0">
+                        <div
+                          className={`mb-2 flex min-w-0 items-center gap-2 text-sm font-bold ${darkMode ? 'text-white' : 'text-[#222222]'}`}
+                        >
+                          <span className="shrink-0">{room.image}</span>
+                          <span className="room-label">{room.name}</span>
+                        </div>
+                        <div className="time-slots gap-1.5">
+                          {TIME_SLOTS.map((time) => {
+                            const booking = bookingsMap[formatDate(selectedDate)]?.[room.id]?.[time]
+                            return booking ? (
+                              <div
+                                key={`${room.id}-${time}`}
+                                title={`${time} · ${booking.title}`}
+                                className={`min-w-0 overflow-hidden rounded-lg px-1 py-2 text-center text-[10px] font-semibold ${darkMode ? 'border-t-2 border-cyan-bright/50 bg-[#79698c]/30 text-white' : 'border-t-2 border-cyan-bright bg-[#ffb8b8]/50 text-[#222222]'}`}
+                              >
+                                <div>{shortTime(time)}</div>
+                                <div className="room-label">{booking.title}</div>
+                              </div>
+                            ) : (
+                              <button
+                                key={`${room.id}-${time}`}
+                                onClick={() => handleOpenBookingModal(time, room.id)}
+                                className={`slot-btn min-h-10 rounded-lg bg-cyan-bright/10 px-1 py-2 text-xs font-semibold ${darkMode ? 'text-cyan-bright/80' : 'text-[#222222]/70'}`}
+                              >
+                                {shortTime(time)}
+                              </button>
+                            )
+                          })}
+                        </div>
                       </div>
                     ))}
-
-                    {ROOMS.map((room) => (
-                      <React.Fragment key={room.id}>
-                        <div
-                          className={`p-3 font-bold ${darkMode ? 'text-white' : 'text-[#222222]'} border-t ${darkMode ? 'border-[#79698c]' : 'border-gray-200'}`}
-                        >
-                          <span className="mr-2">{room.image}</span> {room.name}
-                        </div>
-                        {TIME_SLOTS.map((time) => {
-                          const booking = bookingsMap[formatDate(selectedDate)]?.[room.id]?.[time]
-                          return (
-                            <div
-                              key={`${room.id}-${time}`}
-                              className={`p-1.5 border-t ${darkMode ? 'border-[#79698c]' : 'border-gray-200'}`}
-                            >
-                              {booking ? (
-                                <div
-                                  className={`rounded-lg p-2 h-full flex flex-col ${darkMode ? 'bg-[#79698c]/30 border-t-2 border-[#06fff2]/50' : 'bg-[#ffb8b8]/50 border-t-2 border-[#06fff2]'}`}
-                                >
-                                  <span
-                                    className={`font-semibold text-xs ${darkMode ? 'text-white' : 'text-[#222222]'}`}
-                                  >
-                                    {booking.title}
-                                  </span>
-                                  <span
-                                    className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}
-                                  >
-                                    {booking.bookedByName}
-                                  </span>
-                                </div>
-                              ) : (
-                                <button
-                                  onClick={() => handleOpenBookingModal(time, room.id)}
-                                  className={`w-full h-full rounded-lg text-sm font-semibold bg-[#06fff2]/10 ${darkMode ? 'text-[#06fff2]/80 hover:bg-[#79698c]/40' : 'text-[#222222]/60 hover:bg-[#ffb8b8]/70'}`}
-                                >
-                                  Book
-                                </button>
-                              )}
-                            </div>
-                          )
-                        })}
-                      </React.Fragment>
-                    ))}
                   </div>
-                </div>
+                </>
               ) : (
-                // Week View - Grid by Room
-                <div className="overflow-x-auto -mx-4 sm:mx-0">
-                  <div
-                    className="grid min-w-[600px] sm:min-w-[800px] lg:min-w-[1000px]"
-                    style={{
-                      gridTemplateColumns: `minmax(120px, 150px) repeat(7, minmax(100px, 1fr))`,
-                    }}
-                  >
-                    <div className="p-3"></div>
+                <>
+                <div className="hidden w-full min-w-0 lg:block">
+                  <div className="schedule-grid-week">
+                    <div />
                     {getWeekDays(selectedDate).map((day, i) => {
                       const isToday = day.toDateString() === new Date().toDateString()
                       return (
                         <div
                           key={i}
-                          className={`p-3 text-center ${darkMode ? 'text-white' : 'text-[#222222]'}`}
+                          className={`min-w-0 px-0.5 py-2 text-center text-xs ${darkMode ? 'text-white' : 'text-[#222222]'}`}
                         >
-                          <div className={`font-semibold ${isToday ? 'text-[#06fff2]' : ''}`}>
+                          <div className={`font-semibold ${isToday ? 'text-cyan-bright' : ''}`}>
                             {day.toLocaleDateString('en-US', { weekday: 'short' })}
                           </div>
                           <div
@@ -908,9 +925,11 @@ const RoomBookingDashboard: React.FC = () => {
                     {ROOMS.map((room) => (
                       <React.Fragment key={room.id}>
                         <div
-                          className={`p-3 font-bold ${darkMode ? 'text-white' : 'text-[#222222]'} border-t ${darkMode ? 'border-[#79698c]' : 'border-gray-200'}`}
+                          title={room.name}
+                          className={`room-label border-t px-1 py-2 text-xs font-bold ${darkMode ? 'border-[#79698c] text-white' : 'border-gray-200 text-[#222222]'}`}
                         >
-                          <span className="mr-2">{room.image}</span> {room.name}
+                          <span className="mr-1">{room.image}</span>
+                          {room.name}
                         </div>
                         {getWeekDays(selectedDate).map((day, dayIndex) => {
                           const dayBookings = allBookings.filter(
@@ -919,14 +938,14 @@ const RoomBookingDashboard: React.FC = () => {
                           return (
                             <div
                               key={`${room.id}-${dayIndex}`}
-                              className={`p-2 border-t ${darkMode ? 'border-[#79698c]' : 'border-gray-200'} min-h-[80px]`}
+                              className={`min-h-16 min-w-0 overflow-hidden border-t p-1 text-[10px] ${darkMode ? 'border-[#79698c]' : 'border-gray-200'}`}
                             >
                               {dayBookings.length > 0 ? (
                                 <div className="space-y-1">
                                   {dayBookings.slice(0, 3).map((booking) => (
                                     <div
                                       key={booking.id}
-                                      className={`rounded p-1.5 text-xs ${darkMode ? 'bg-[#79698c]/30 border-l-2 border-[#06fff2]' : 'bg-[#ffb8b8]/50 border-l-2 border-[#06fff2]'}`}
+                                      className={`rounded p-1.5 text-xs ${darkMode ? 'bg-[#79698c]/30 border-l-2 border-cyan-bright' : 'bg-[#ffb8b8]/50 border-l-2 border-cyan-bright'}`}
                                     >
                                       <div
                                         className={`font-semibold ${darkMode ? 'text-white' : 'text-[#222222]'}`}
@@ -962,6 +981,47 @@ const RoomBookingDashboard: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                <div className="space-y-4 lg:hidden">
+                  {ROOMS.map((room) => (
+                    <div key={`week-${room.id}`} className="min-w-0">
+                      <div
+                        className={`mb-2 flex min-w-0 items-center gap-2 text-sm font-bold ${darkMode ? 'text-white' : 'text-[#222222]'}`}
+                      >
+                        <span className="shrink-0">{room.image}</span>
+                        <span className="room-label">{room.name}</span>
+                      </div>
+                      <div className="week-days gap-1">
+                        {getWeekDays(selectedDate).map((day, dayIndex) => {
+                          const dayBookings = allBookings.filter(
+                            (b) => b.date === formatDate(day) && b.roomId === room.id,
+                          )
+                          const isToday = day.toDateString() === new Date().toDateString()
+                          return (
+                            <div key={`${room.id}-${dayIndex}`} className="min-w-0">
+                              <div
+                                className={`mb-1 text-center text-[10px] font-semibold ${isToday ? 'text-cyan-bright' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}
+                              >
+                                {day.toLocaleDateString('en-US', { weekday: 'narrow' })} {day.getDate()}
+                              </div>
+                              {dayBookings.length > 0 ? (
+                                <div
+                                  className={`rounded p-1 text-[10px] ${darkMode ? 'border-l-2 border-cyan-bright bg-[#79698c]/30 text-white' : 'border-l-2 border-cyan-bright bg-[#ffb8b8]/50 text-[#222222]'}`}
+                                >
+                                  {dayBookings.length}
+                                </div>
+                              ) : (
+                                <div className={`text-center text-[10px] ${darkMode ? 'text-gray-600' : 'text-gray-400'}`}>
+                                  —
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                </>
               )}
             </div>
           </>
@@ -981,7 +1041,7 @@ const RoomBookingDashboard: React.FC = () => {
                 {myBookings.map((booking) => (
                   <div
                     key={booking.id}
-                    className={`flex items-center justify-between p-4 rounded-2xl border-2 ${darkMode ? 'bg-[#79698c]/30 border-[#06fff2]' : 'bg-[#ffb8b8]/30 border-[#06fff2]'}`}
+                    className={`flex flex-col items-start gap-3 rounded-2xl border-2 p-4 sm:flex-row sm:items-center sm:justify-between ${darkMode ? 'bg-[#79698c]/30 border-cyan-bright' : 'bg-[#ffb8b8]/30 border-cyan-bright'}`}
                   >
                     <div>
                       <div className={`font-bold ${darkMode ? 'text-white' : 'text-[#222222]'}`}>
@@ -991,7 +1051,7 @@ const RoomBookingDashboard: React.FC = () => {
                         {booking.room}
                       </div>
                       <div
-                        className={`text-sm flex gap-3 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}
+                        className={`mt-1 flex flex-wrap gap-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}
                       >
                         <span className="flex items-center gap-1">
                           <Calendar size={14} /> {booking.date}
@@ -1030,7 +1090,7 @@ const RoomBookingDashboard: React.FC = () => {
                 className={`p-5 rounded-2xl ${darkMode ? 'bg-[#222222] border border-[#79698c]' : 'bg-white border border-gray-200'}`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <Calendar className="text-[#06fff2]" size={24} />
+                  <Calendar className="text-cyan-bright" size={24} />
                   <h3 className={`font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     Total Bookings
                   </h3>
@@ -1047,7 +1107,7 @@ const RoomBookingDashboard: React.FC = () => {
                 className={`p-5 rounded-2xl ${darkMode ? 'bg-[#222222] border border-[#79698c]' : 'bg-white border border-gray-200'}`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <UsersRound className="text-[#06fff2]" size={24} />
+                  <UsersRound className="text-cyan-bright" size={24} />
                   <h3 className={`font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     Client Appointments
                   </h3>
@@ -1064,7 +1124,7 @@ const RoomBookingDashboard: React.FC = () => {
                 className={`p-5 rounded-2xl ${darkMode ? 'bg-[#222222] border border-[#79698c]' : 'bg-white border border-gray-200'}`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <TrendingUp className="text-[#06fff2]" size={24} />
+                  <TrendingUp className="text-cyan-bright" size={24} />
                   <h3 className={`font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     Upcoming
                   </h3>
@@ -1081,7 +1141,7 @@ const RoomBookingDashboard: React.FC = () => {
                 className={`p-5 rounded-2xl ${darkMode ? 'bg-[#222222] border border-[#79698c]' : 'bg-white border border-gray-200'}`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <BarChart className="text-[#06fff2]" size={24} />
+                  <BarChart className="text-cyan-bright" size={24} />
                   <h3 className={`font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     Utilization
                   </h3>
@@ -1110,7 +1170,7 @@ const RoomBookingDashboard: React.FC = () => {
                   <h4
                     className={`font-semibold mb-3 flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                   >
-                    <MapPin size={18} className="text-[#06fff2]" />
+                    <MapPin size={18} className="text-cyan-bright" />
                     Booking Sources
                   </h4>
                   <div className="space-y-2">
@@ -1148,7 +1208,7 @@ const RoomBookingDashboard: React.FC = () => {
                   <h4
                     className={`font-semibold mb-3 flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                   >
-                    <Book size={18} className="text-[#06fff2]" />
+                    <Book size={18} className="text-cyan-bright" />
                     Booking Types
                   </h4>
                   <div className="space-y-2">
@@ -1186,7 +1246,7 @@ const RoomBookingDashboard: React.FC = () => {
                   <h4
                     className={`font-semibold mb-3 flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                   >
-                    <AlertCircle size={18} className="text-[#06fff2]" />
+                    <AlertCircle size={18} className="text-cyan-bright" />
                     Booking Status
                   </h4>
                   <div className="space-y-2">
@@ -1227,7 +1287,7 @@ const RoomBookingDashboard: React.FC = () => {
                 <h3
                   className={`text-lg font-bold mb-4 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-[#222222]'}`}
                 >
-                  <Star className="text-[#06fff2]" size={20} />
+                  <Star className="text-cyan-bright" size={20} />
                   Most Popular Room
                 </h3>
                 {analytics.mostPopularRoom ? (
@@ -1267,7 +1327,7 @@ const RoomBookingDashboard: React.FC = () => {
                 <h3
                   className={`text-lg font-bold mb-4 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-[#222222]'}`}
                 >
-                  <Clock className="text-[#06fff2]" size={20} />
+                  <Clock className="text-cyan-bright" size={20} />
                   Peak Booking Time
                 </h3>
                 {analytics.peakTime ? (
@@ -1319,7 +1379,7 @@ const RoomBookingDashboard: React.FC = () => {
                         className={`w-full h-2 rounded-full ${darkMode ? 'bg-[#79698c]/30' : 'bg-gray-200'}`}
                       >
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#06fff2] to-[#05ded5]"
+                          className="h-full rounded-full bg-gradient-to-r from-cyan-bright to-accent"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
@@ -1357,7 +1417,7 @@ const RoomBookingDashboard: React.FC = () => {
                 </p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
+              <div className="w-full min-w-0 max-w-full overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr
@@ -1440,7 +1500,7 @@ const RoomBookingDashboard: React.FC = () => {
                                   ? 'bg-[#222222]/50'
                                   : 'bg-gray-50/50'
                                 : ''
-                            } hover:${darkMode ? 'bg-[#79698c]/20' : 'bg-[#06fff2]/5'} transition-colors`}
+                            } hover:${darkMode ? 'bg-[#79698c]/20' : 'bg-cyan-bright/5'} transition-colors`}
                           >
                             <td className={`p-3 ${darkMode ? 'text-white' : 'text-[#222222]'}`}>
                               <div className="flex items-center gap-2">
@@ -1462,19 +1522,19 @@ const RoomBookingDashboard: React.FC = () => {
                             </td>
                             <td className={`p-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               <div className="flex items-center gap-2">
-                                <Users size={14} className="text-[#06fff2]" />
+                                <Users size={14} className="text-cyan-bright" />
                                 {booking.bookedByName}
                               </div>
                             </td>
                             <td className={`p-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               <div className="flex items-center gap-1">
-                                <Calendar size={14} className="text-[#06fff2]" />
+                                <Calendar size={14} className="text-cyan-bright" />
                                 {booking.date}
                               </div>
                             </td>
                             <td className={`p-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               <div className="flex items-center gap-1">
-                                <Clock size={14} className="text-[#06fff2]" />
+                                <Clock size={14} className="text-cyan-bright" />
                                 {booking.time}
                               </div>
                             </td>
@@ -1498,7 +1558,7 @@ const RoomBookingDashboard: React.FC = () => {
                             <td className={`p-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               {booking.attendees && booking.attendees.length > 0 ? (
                                 <div className="flex items-center gap-1">
-                                  <UsersRound size={14} className="text-[#06fff2]" />
+                                  <UsersRound size={14} className="text-cyan-bright" />
                                   <span className="text-sm">{booking.attendees.length}</span>
                                 </div>
                               ) : (
@@ -1573,7 +1633,7 @@ const RoomBookingDashboard: React.FC = () => {
                                   Completed
                                 </span>
                               ) : isToday ? (
-                                <span className="px-2 py-1 rounded-full text-xs font-medium bg-[#06fff2]/20 text-[#06fff2] border border-[#06fff2]/30">
+                                <span className="px-2 py-1 rounded-full text-xs font-medium bg-cyan-bright/20 text-cyan-bright border border-cyan-bright/30">
                                   Today
                                 </span>
                               ) : isFuture ? (
@@ -1619,7 +1679,7 @@ const RoomBookingDashboard: React.FC = () => {
                   <div className={`text-sm mb-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     Today
                   </div>
-                  <div className={`text-2xl font-bold text-[#06fff2]`}>
+                  <div className={`text-2xl font-bold text-cyan-bright`}>
                     {
                       allBookings.filter(
                         (b) => new Date(b.dateObj).toDateString() === new Date().toDateString(),
@@ -1646,7 +1706,7 @@ const RoomBookingDashboard: React.FC = () => {
 
         {/* Success Message */}
         <div
-          className={`fixed top-6 right-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all ${isSuccess ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`fixed bottom-4 left-4 z-[60] flex max-w-[calc(100vw-2rem)] items-center gap-3 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 px-5 py-3 text-white shadow-2xl transition-all ${isSuccess ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
         >
           <Check size={20} />
           <div className="font-bold">Success!</div>
@@ -1656,11 +1716,11 @@ const RoomBookingDashboard: React.FC = () => {
         {showBookingModal && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 overflow-y-auto">
             <div
-              className={`rounded-3xl shadow-2xl border relative w-full max-w-md my-8 ${darkMode ? 'bg-[#2d2d2d] border-[#79698c]' : 'bg-[#f8f6f5] border-white/20'}`}
+              className={`relative my-4 w-full max-w-md rounded-3xl border shadow-2xl ${darkMode ? 'bg-[#2d2d2d] border-[#79698c]' : 'bg-[#f8f6f5] border-white/20'}`}
             >
               <button
                 onClick={handleCloseBookingModal}
-                className="absolute -top-3 -right-3 w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-lg hover:bg-gray-100 transition-colors"
+                className="nav-btn absolute right-3 top-3 rounded-full bg-white shadow-lg hover:bg-gray-100"
               >
                 <X size={20} />
               </button>
@@ -1669,7 +1729,7 @@ const RoomBookingDashboard: React.FC = () => {
                 <h2
                   className={`text-2xl font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-[#222222]'}`}
                 >
-                  <Book size={24} className="text-[#06fff2]" />
+                  <Book size={24} className="text-cyan-bright" />
                   Confirm Booking
                 </h2>
                 <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -1682,13 +1742,13 @@ const RoomBookingDashboard: React.FC = () => {
                   <div
                     className={`flex items-center gap-2 text-sm ${darkMode ? 'text-gray-300' : 'text-[#222222]'}`}
                   >
-                    <Calendar size={16} className="text-[#06fff2]" />
+                    <Calendar size={16} className="text-cyan-bright" />
                     {selectedDate.toLocaleDateString()}
                   </div>
                   <div
                     className={`flex items-center gap-2 text-sm mt-2 ${darkMode ? 'text-gray-300' : 'text-[#222222]'}`}
                   >
-                    <Clock size={16} className="text-[#06fff2]" />
+                    <Clock size={16} className="text-cyan-bright" />
                     {selectedTime}
                   </div>
                 </div>
@@ -1704,7 +1764,7 @@ const RoomBookingDashboard: React.FC = () => {
                     value={meetingTitle}
                     onChange={(e) => setMeetingTitle(e.target.value)}
                     placeholder="e.g., 'Weekly Team Sync'"
-                    className={`w-full px-4 py-2.5 rounded-xl border-0 focus:ring-2 focus:ring-[#06fff2] ${darkMode ? 'bg-[#222222] text-white' : 'bg-white text-[#222222]'}`}
+                    className={`w-full px-4 py-2.5 rounded-xl border-0 focus:ring-2 focus:ring-cyan-bright ${darkMode ? 'bg-[#222222] text-white' : 'bg-white text-[#222222]'}`}
                   />
                 </div>
 
@@ -1719,7 +1779,7 @@ const RoomBookingDashboard: React.FC = () => {
                     value={attendees}
                     onChange={(e) => setAttendees(e.target.value)}
                     placeholder="e.g., John, Jane"
-                    className={`w-full px-4 py-2.5 rounded-xl border-0 focus:ring-2 focus:ring-[#06fff2] ${darkMode ? 'bg-[#222222] text-white' : 'bg-white text-[#222222]'}`}
+                    className={`w-full px-4 py-2.5 rounded-xl border-0 focus:ring-2 focus:ring-cyan-bright ${darkMode ? 'bg-[#222222] text-white' : 'bg-white text-[#222222]'}`}
                   />
                 </div>
               </div>
@@ -1733,7 +1793,7 @@ const RoomBookingDashboard: React.FC = () => {
                 </button>
                 <button
                   onClick={handleConfirmBooking}
-                  className="flex-1 bg-gradient-to-r from-[#06fff2] to-[#05ded5] text-black px-5 py-2.5 rounded-full font-bold hover:opacity-90 shadow-lg transition-opacity"
+                  className="flex-1 bg-foreground text-background px-5 py-2.5 rounded-full font-bold hover:opacity-90 shadow-lg transition-opacity"
                 >
                   Confirm Booking
                 </button>
